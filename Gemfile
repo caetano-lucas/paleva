@@ -21,7 +21,11 @@ gem "jbuilder"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
+gem "ostruct"
 
+gem "bootstrap"
+
+gem "sassc-rails"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -34,6 +38,10 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
+  gem "rspec-rails"
+
+  gem "capybara"
 end
 
 group :development do
