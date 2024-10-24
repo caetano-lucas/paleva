@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    users:
+      user: 'Usuário'
+    attributes:
+      user:
+        first_name: "Nome"
+        last_name: "Sobrenome"

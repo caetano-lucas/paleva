@@ -20,7 +20,13 @@
   <body>
     <header>
       <nav>
-
+        <%= link_to 'Palevá', root_path%>
+        <% if user_signed_in? %>
+          <%= link_to 'Sair',  destroy_user_session_path, method: :delete%>
+          <p>Olá, <%= current_user.email %> </p>
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path%>
+        <% end %>
       </nav>
     </header>
     <main>
