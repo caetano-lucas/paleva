@@ -21,4 +21,25 @@ describe 'Usuário se autentica' do
     user = User.last
     expect(user.first_name).to eq 'userone'
   end
+  it 'sem sucesso' do
+    visit root_path
+    click_on 'Entrar'
+    click_on 'Cadastrar-se'
+    within('form') do
+      fill_in 'Nome', with: ''
+      fill_in 'Sobrenome', with: ''
+      fill_in 'E-mail', with: ''
+      fill_in 'Senha', with: ''
+      fill_in 'Confirme sua senha', with: ''
+      click_on 'Cadastrar-se'
+    end
+    expect(page).to have_content 'Entrar'
+    expect(current_path).to eq user_registration_path
+    expect(page).to have_content 'Não foi possível salvar usuário'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Sobrenome não pode ficar em branco'
+    expect(page).to have_content 'E-mail não pode ficar em branco'
+    expect(page).to have_content 'Senha não pode ficar em branco'
+    expect(page).not_to have_link 'Sair'
+  end
 end
