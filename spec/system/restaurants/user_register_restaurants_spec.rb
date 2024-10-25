@@ -21,7 +21,7 @@ describe 'Usuário registra um restaurante' do
     end
     fill_in 'Nome Fantasia', with: 'NomeFantasiaTeste'
     fill_in 'Razão Social', with: 'RazãoSocialTeste LTDA'
-    fill_in 'Telefone', with: 'NomeFantasiaTeste'
+    fill_in 'Telefone', with: '11123121211'
     fill_in 'E-mail', with: 'NomeFantasiaTeste@gmail.com'
     fill_in 'Endereço', with: 'Rua do restauranteTeste, número: 200'
     fill_in 'CNPJ', with: cnpj
