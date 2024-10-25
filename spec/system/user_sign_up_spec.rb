@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'cpf_cnpj'
 
 describe 'Usuário se autentica' do
   it 'com sucesso' do
+    cpf = CPF.generate(true)
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar-se'
@@ -11,7 +13,8 @@ describe 'Usuário se autentica' do
       fill_in 'E-mail', with: 'userone@email.com'
       fill_in 'Senha', with: '12345abcdeF#'
       fill_in 'Confirme sua senha', with: '12345abcdeF#'
-      fill_in 'CPF', with: '099.337.111-23'
+      
+      fill_in 'CPF', with: cpf
       click_on 'Cadastrar-se'
     end
     expect(page).to have_content 'Olá, userone'
@@ -21,6 +24,7 @@ describe 'Usuário se autentica' do
     expect(page).not_to have_link 'Entrar'
     user = User.last
     expect(user.first_name).to eq 'userone'
+    expect(CPF.valid?(cpf)).to eq true
   end
   it 'sem sucesso' do
     visit root_path
@@ -46,8 +50,27 @@ describe 'Usuário se autentica' do
     expect(page).not_to have_link 'Sair'
   end
   it 'com cpf único' do
+    cpf = CPF.generate(true)
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '11111abcdeF#', cpf: '111.111.111-11')
+                 last_name: 'one', password: '11111abcdeF#', cpf: cpf)
+    cpf_2 = CPF.generate(true)
+    visit root_path
+    click_on 'Entrar'
+    click_on 'Cadastrar-se'
+    within('form') do
+      fill_in 'Nome', with: 'usertwo'
+      fill_in 'Sobrenome', with: 'two'
+      fill_in 'E-mail', with: 'usertwo@email.com'
+      fill_in 'Senha', with: '22222abcdeF#'
+      fill_in 'Confirme sua senha', with: '22222abcdeF#'
+      fill_in 'CPF', with: cpf
+      click_on 'Cadastrar-se'
+    end
+    expect(page).not_to have_content 'Olá, usertwo'
+    expect(page).to have_content 'CPF já está em uso'
+    expect(page).to have_button 'Cadastrar-se'
+  end
+  it 'sem sucesso com cpf inválido' do
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar-se'
@@ -61,8 +84,7 @@ describe 'Usuário se autentica' do
       click_on 'Cadastrar-se'
     end
     expect(page).not_to have_content 'Olá, usertwo'
-    expect(page).to have_content 'CPF já está em uso'
+    expect(page).to have_content 'CPF não é um CPF válido'
     expect(page).to have_button 'Cadastrar-se'
-
   end
 end

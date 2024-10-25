@@ -1,9 +1,11 @@
 require 'rails_helper'
+require 'cpf_cnpj'
 
 describe 'Usuário se autentica' do
   it 'com sucesso' do
+    cpf = CPF.generate(true)
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -20,8 +22,9 @@ describe 'Usuário se autentica' do
   end
 
   it 'e ve seu nome no cabeçalho' do
+    cpf = CPF.generate(true)
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -35,8 +38,9 @@ describe 'Usuário se autentica' do
   end
 
   it 'e faz logout com sucesso' do
+    cpf = CPF.generate(true)
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf )
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -49,6 +53,7 @@ describe 'Usuário se autentica' do
     within('nav') do
       click_on 'Sair'
     end
+    expect(current_path).to eq destroy_user_session_path
     expect(page).not_to have_link 'Sair'
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_content 'Olá, userone'
