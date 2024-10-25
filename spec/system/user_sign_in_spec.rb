@@ -58,5 +58,6 @@ describe 'Usuário se autentica' do
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_content 'Olá, userone'
     expect(page).to have_content 'Logout efetuado com sucesso'
+    expect(current_path).to eq root_path
   end
 end
