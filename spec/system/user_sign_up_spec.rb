@@ -20,7 +20,7 @@ describe 'Usuário se autentica' do
     expect(page).to have_content 'Olá, userone'
     expect(current_path).to eq root_path
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso'
-    expect(page).to have_link 'Sair'
+    expect(page).to have_button 'Sair'
     expect(page).not_to have_link 'Entrar'
     user = User.last
     expect(user.first_name).to eq 'userone'

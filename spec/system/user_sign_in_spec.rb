@@ -17,7 +17,7 @@ describe 'Usuário se autentica' do
     end
     expect(current_path).to eq root_path
     expect(page).to have_content 'Login efetuado com sucesso'
-    expect(page).to have_link 'Sair'
+    expect(page).to have_button 'Sair'
     expect(page).not_to have_link 'Entrar'
   end
 
@@ -53,8 +53,8 @@ describe 'Usuário se autentica' do
     within('nav') do
       click_on 'Sair'
     end
-    expect(current_path).to eq destroy_user_session_path
-    expect(page).not_to have_link 'Sair'
+
+    expect(page).not_to have_button 'Sair'
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_content 'Olá, userone'
     expect(page).to have_content 'Logout efetuado com sucesso'
