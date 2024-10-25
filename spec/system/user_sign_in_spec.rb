@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário se autentica' do
   it 'com sucesso' do
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#')
+                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -21,7 +21,7 @@ describe 'Usuário se autentica' do
 
   it 'e ve seu nome no cabeçalho' do
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#')
+                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -36,7 +36,7 @@ describe 'Usuário se autentica' do
 
   it 'e faz logout com sucesso' do
     User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#')
+                 last_name: 'one', password: '12345abcdeF#', cpf: '099.337.111-23')
     visit root_path
     within('nav') do
       click_on 'Entrar'
