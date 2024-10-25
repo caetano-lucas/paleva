@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    restaurants:
+      restaurant: 'Restaurante'
+    attributes:
+      restaurant:
+        trade_name: "Nome Fantasia"
+        legal_name: "Razão Social"
+        cnpj: "CNPJ"
+        address: "Endereço"
+        phone: "Telefone"
+        email: "E-mail"

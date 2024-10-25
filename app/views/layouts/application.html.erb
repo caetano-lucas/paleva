@@ -24,6 +24,7 @@
         <% if user_signed_in? %>
           <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
           <p>Olá, <%= current_user.email %> </p>
+          <%= link_to 'Cadastrar Restaurante', new_restaurant_path%>
         <% else %>
           <%= link_to 'Entrar', new_user_session_path%>
         <% end %>
