@@ -5,7 +5,9 @@ describe 'Usuário se autentica' do
   it 'com sucesso' do
     cpf = CPF.generate(true).strip
     visit root_path
-    click_on 'Entrar'
+    within('nav') do
+      click_on 'Entrar'
+    end
     click_on 'Cadastrar-se'
     within('form') do
       fill_in 'Nome', with: 'userone'
@@ -14,7 +16,7 @@ describe 'Usuário se autentica' do
       fill_in 'Senha', with: '12345abcdeF#'
       fill_in 'Confirme sua senha', with: '12345abcdeF#'
       fill_in 'CPF', with: cpf
-      
+
     end
     click_on 'Cadastrar-se'
 
@@ -29,7 +31,9 @@ describe 'Usuário se autentica' do
   end
   it 'sem sucesso' do
     visit root_path
-    click_on 'Entrar'
+    within('nav') do
+      click_on 'Entrar'
+    end
     click_on 'Cadastrar-se'
     within('form') do
       fill_in 'Nome', with: ''
@@ -54,9 +58,11 @@ describe 'Usuário se autentica' do
     cpf = CPF.generate(true).strip
     User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '11111abcdeF#', cpf: cpf)
- 
+
     visit root_path
-    click_on 'Entrar'
+    within('nav') do
+      click_on 'Entrar'
+    end
     click_on 'Cadastrar-se'
     within('form') do
       fill_in 'Nome', with: 'usertwo'
@@ -73,7 +79,9 @@ describe 'Usuário se autentica' do
   end
   it 'sem sucesso com cpf inválido' do
     visit root_path
-    click_on 'Entrar'
+    within('nav') do
+      click_on 'Entrar'
+    end
     click_on 'Cadastrar-se'
     within('form') do
       fill_in 'Nome', with: 'usertwo'

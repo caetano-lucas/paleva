@@ -8,4 +8,10 @@ class Restaurant < ApplicationRecord
             uniqueness: { case_sensitive: false },
             length: { minimum: 4, maximum: 254 }
   validates :phone, length: { minimum: 10, maximum: 11 }
+
+  before_validation :generate_code
+
+  def generate_code
+    self.alphanumeric_code = SecureRandom.base36(6)
+  end
 end

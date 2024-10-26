@@ -20,11 +20,17 @@
   <body>
     <header>
       <nav>
-        <%= link_to 'Palevá', root_path%>
+        <%= link_to 'PaLevá', root_path%>
         <% if user_signed_in? %>          
           <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
-          <p>Olá, <%= current_user.email %> </p>          
-        
+          <p>Olá, <%= current_user.email %> </p>
+          
+          <% if current_user.restaurant&.persisted? %>
+            <%= link_to 'Restaurante', restaurant_path(current_user.restaurant) %>
+          <% else %>
+            <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
+          <% end %>
+          
         <% else %>
           <%= link_to 'Entrar', new_user_session_path%>
         <% end %>

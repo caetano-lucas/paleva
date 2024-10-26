@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
   require 'cpf_cnpj'
 
-  before_action :authenticate_user!
+  skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
 
   def show
     @restaurant = Restaurant.find(params[:id])
@@ -11,11 +11,10 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
 
-  def create  
-    @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.alphanumeric_code = SecureRandom.base36(6)
-    @restaurant.cnpj.strip
-    @restaurant.user= current_user
+  def create
+    @restaurant = current_user.build_restaurant(restaurant_params)
+    @restaurant.cnpj.strip # vou mover pro model
+
     if @restaurant.save
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else

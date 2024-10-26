@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'cpf_cnpj'
 
 describe 'Usuário registra um restaurante, logo após se registrar,' do
-  it 'com sucesso' do 
+  it 'com sucesso' do
     cpf = CPF.generate(true).strip
     cnpj = CNPJ.generate(true)
     visit root_path
@@ -15,7 +15,7 @@ describe 'Usuário registra um restaurante, logo após se registrar,' do
       fill_in 'Sobrenome', with: 'one'
       fill_in 'E-mail', with: 'userone@email.com'
       fill_in 'Senha', with: '12345abcdeF#'
-      fill_in 'Confirme sua senha', with: '12345abcdeF#'      
+      fill_in 'Confirme sua senha', with: '12345abcdeF#'
       fill_in 'CPF', with: cpf
       click_on 'Cadastrar-se'
     end
@@ -29,7 +29,8 @@ describe 'Usuário registra um restaurante, logo após se registrar,' do
 
     expect(page).to have_content 'Restaurante cadastrado com sucesso'
   end
-  it 'sem sucesso' do 
+
+  it 'sem sucesso' do
     cpf = CPF.generate(true).strip
     cnpj = CNPJ.generate(true)
     visit root_path
@@ -42,7 +43,7 @@ describe 'Usuário registra um restaurante, logo após se registrar,' do
       fill_in 'Sobrenome', with: 'one'
       fill_in 'E-mail', with: 'userone@email.com'
       fill_in 'Senha', with: '12345abcdeF#'
-      fill_in 'Confirme sua senha', with: '12345abcdeF#'      
+      fill_in 'Confirme sua senha', with: '12345abcdeF#'
       fill_in 'CPF', with: cpf
       click_on 'Cadastrar-se'
     end
@@ -62,5 +63,5 @@ describe 'Usuário registra um restaurante, logo após se registrar,' do
     expect(page).to have_content 'E-mail não pode ficar em branco'
     expect(page).to have_content 'Telefone é muito curto (mínimo: 10 caracteres)'
   end
-  
+
 end
