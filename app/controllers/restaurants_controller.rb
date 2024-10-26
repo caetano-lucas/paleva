@@ -2,6 +2,10 @@ class RestaurantsController < ApplicationController
   require 'cpf_cnpj'
 
   before_action :authenticate_user!
+
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
   def new
     @restaurant = Restaurant.new
   end

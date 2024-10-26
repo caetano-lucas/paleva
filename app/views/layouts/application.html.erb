@@ -22,7 +22,7 @@
       <nav>
         <%= link_to 'Palevá', root_path%>
         <% if user_signed_in? %>
-          <%= link_to 'Restaurante', root_path%>
+          <%= link_to 'Restaurante', root_path %>
           <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
           <p>Olá, <%= current_user.email %> </p>
         <% else %>
