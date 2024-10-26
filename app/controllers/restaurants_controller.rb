@@ -7,6 +7,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
   def new
+    @user = current_user
     @restaurant = Restaurant.new
   end
 
@@ -14,11 +15,12 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.alphanumeric_code = SecureRandom.base36(6)
     @restaurant.cnpj.strip
+    @restaurant.user= current_user
     if @restaurant.save
-      redirect_to root_path, notice: "Restaurante cadastrado com sucesso"
+      redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
       flash.now[ :alert ] = "ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO"
-      render 'new'
+      render :new
     end
   end
 

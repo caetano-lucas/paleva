@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  
+  has_one :restaurant
   validates :first_name, :last_name, :cpf, presence: true
   validates :cpf, uniqueness: true
   validates :cpf, cpf: true

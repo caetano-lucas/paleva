@@ -1,5 +1,5 @@
 class Restaurant < ApplicationRecord
-
+  belongs_to :user
   validates :trade_name, :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, presence: true
   validates :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, uniqueness: true
   validates :cnpj, cnpj: true
