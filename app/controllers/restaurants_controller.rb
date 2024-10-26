@@ -1,14 +1,19 @@
 class RestaurantsController < ApplicationController
+  require 'cpf_cnpj'
+
+  before_action :authenticate_user!
   def new
     @restaurant = Restaurant.new
   end
 
-  def create
+  def create  
     @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.alphanumeric_code = SecureRandom.base36(6)
+    @restaurant.cnpj.strip
     if @restaurant.save
       redirect_to root_path, notice: "Restaurante cadastrado com sucesso"
     else
-      flash.now[ :notice ] = "ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO"
+      flash.now[ :alert ] = "ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO"
       render 'new'
     end
   end

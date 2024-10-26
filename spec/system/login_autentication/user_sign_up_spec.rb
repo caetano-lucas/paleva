@@ -3,7 +3,7 @@ require 'cpf_cnpj'
 
 describe 'Usuário se autentica' do
   it 'com sucesso' do
-    cpf = CPF.generate(true)
+    cpf = CPF.generate(true).strip
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar-se'
@@ -13,12 +13,13 @@ describe 'Usuário se autentica' do
       fill_in 'E-mail', with: 'userone@email.com'
       fill_in 'Senha', with: '12345abcdeF#'
       fill_in 'Confirme sua senha', with: '12345abcdeF#'
-      
       fill_in 'CPF', with: cpf
-      click_on 'Cadastrar-se'
+      
     end
+    click_on 'Cadastrar-se'
+
     expect(page).to have_content 'Olá, userone'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_restaurant_path
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso'
     expect(page).to have_button 'Sair'
     expect(page).not_to have_link 'Entrar'
@@ -50,10 +51,10 @@ describe 'Usuário se autentica' do
     expect(page).not_to have_link 'Sair'
   end
   it 'com cpf único' do
-    cpf = CPF.generate(true)
+    cpf = CPF.generate(true).strip
     User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '11111abcdeF#', cpf: cpf)
-    cpf_2 = CPF.generate(true)
+ 
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar-se'

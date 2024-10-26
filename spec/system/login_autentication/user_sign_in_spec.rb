@@ -3,7 +3,7 @@ require 'cpf_cnpj'
 
 describe 'Usuário se autentica' do
   it 'com sucesso' do
-    cpf = CPF.generate(true)
+    cpf = CPF.generate(true).split
     User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     visit root_path
@@ -22,7 +22,7 @@ describe 'Usuário se autentica' do
   end
 
   it 'e ve seu nome no cabeçalho' do
-    cpf = CPF.generate(true)
+    cpf = CPF.generate(true).split
     User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     visit root_path
