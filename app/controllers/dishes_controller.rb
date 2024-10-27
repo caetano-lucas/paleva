@@ -1,17 +1,22 @@
 class DishesController < ApplicationController
   #skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
   def index
-    @dishes = Dish.all
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dishes = restaurant.dishes
   end
-  def edit; end
+  def edit
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.find(params[:id])
+  end
   def new
-    @dish = Dish.new
-    @user = current_user
-    @dish.restaurant_id = current_user.restaurant.id 
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.build
   end
   def update
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.find(params[:id])
     if @dish.update(dish_params)
-      redirect_to dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
+      redirect_to restaurant_dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
     else
       flash.now[:notice] = "Não foi possível atualizar o Prato"
       render 'edit', status: :unprocessable_entity
@@ -21,10 +26,10 @@ class DishesController < ApplicationController
   def create
     # @dish = current_user.restaurant.build_dish(dish_params)
     # @restaurant = current_user.build_restaurant(restaurant_params)
-    @dish = Dish.new(dish_params)
-    @dish.restaurant_id = current_user.restaurant.id 
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.build(dish_params)
     if @dish.save
-      redirect_to dishes_path
+      redirect_to restaurant_dishes_path(restaurant), notice: 'Prato cadastrado com sucesso'
     else
       flash.now[ :alert ] = "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
       render :new, status: :unprocessable_entity
@@ -34,6 +39,6 @@ class DishesController < ApplicationController
 
   private
   def dish_params
-    params.require(:dish).permit(:name, :description, :calories, :restaurat)
+    params.require(:dish).permit(:name, :description, :calories)
   end
 end

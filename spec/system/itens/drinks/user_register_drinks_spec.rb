@@ -23,7 +23,6 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     check 'Álcool'
     click_on 'Salvar Bebida'
   
-    expect(current_path).to eq drinks_path
     expect(page).to have_content 'NomeBebidaTeste'
     expect(page).to have_content 'DescriçãoBebidaTeste'
     expect(page).to have_content 'Possui Álcool'

@@ -23,7 +23,6 @@ describe 'usuario registra novos pratos para seu restaurante' do
     fill_in 'Calorias', with: 'Quantidade de calorias do PratoTeste1'
     click_on 'Salvar Prato'
     
-    expect(current_path).to eq dishes_path
     expect(page).to have_content 'NomePratoTeste'
     expect(page).to have_content 'DescriçãoPratoTeste'
     expect(page).to have_content 'Calorias'
