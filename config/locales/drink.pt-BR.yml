@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    drinks:
+      drink: 'Bebida'
+    attributes:
+      drink:
+        name: "Nome da Bebida"
+        description: "Descrição"
+        alcohol: "Álcool"

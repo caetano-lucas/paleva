@@ -27,6 +27,8 @@
           
           <% if current_user.restaurant&.persisted? %>
             <%= link_to 'Restaurante', restaurant_path(current_user.restaurant) %>
+            <%= link_to 'Pratos Cadastrados', dishes_path %>
+            <%= link_to 'Bebidas Cadastradas', drinks_path %>
           <% else %>
             <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
           <% end %>

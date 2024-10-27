@@ -1,0 +1,20 @@
+<h1>Lista de Pratos</h1>
+<p><%= link_to 'Cadastrar novo prato', new_dish_path%></p>
+<table>
+   <thead>
+   <tr>
+       <th>Nome do Prato</th>
+       <th>Descrição</th>
+       <th>Calorias</th>
+   </tr>
+   </thead>
+   <tbody>
+    <% @dishes.each do |d| %>
+      <tr>
+        <td> <%= d.name %> </td>
+        <td> <%= d.description %> </td>
+        <td> <%= d.calories %> </td>
+      </tr>
+   <% end %>
+   </tbody>
+</table>

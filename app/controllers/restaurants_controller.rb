@@ -19,7 +19,7 @@ class RestaurantsController < ApplicationController
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
       flash.now[ :alert ] = "ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

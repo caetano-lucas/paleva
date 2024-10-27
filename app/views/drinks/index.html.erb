@@ -1,0 +1,20 @@
+<h1>Lista de Bebidas</h1>
+<p><%= link_to 'Cadastrar nova Bebida', new_drink_path%></p>
+<table>
+   <thead>
+   <tr>
+       <th>Nome da Bebida</th>
+       <th>Descrição</th>
+       <th>Possui Álcool</th>
+   </tr>
+   </thead>
+   <tbody>
+    <% @drinks.each do |d| %>
+      <tr>
+        <td> <%= d.name %> </td>
+        <td> <%= d.description %> </td>
+        <td> <%= d.alcohol ? 'Sim' : 'Não'  %> </td>
+      </tr>
+   <% end %>
+   </tbody>
+</table>
