@@ -6,6 +6,7 @@
        <th>Nome do Prato</th>
        <th>Descrição</th>
        <th>Calorias</th>
+       <th>Ações</th>
    </tr>
    </thead>
    <tbody>
@@ -14,6 +15,8 @@
         <td> <%= d.name %> </td>
         <td> <%= d.description %> </td>
         <td> <%= d.calories %> </td>
+        <td> <%= link_to "Editar #{d.name}", edit_restaurant_dish_path(current_user.restaurant, d) %> </td>
+        <td> <%= button_to "Deletar #{d.name}", restaurant_dish_path(current_user.restaurant, d), method: :delete %> </td>
       </tr>
    <% end %>
    </tbody>

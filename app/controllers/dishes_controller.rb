@@ -1,9 +1,13 @@
 class DishesController < ApplicationController
   #skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
+  
   def index
     restaurant = Restaurant.find(params[:restaurant_id])
     @dishes = restaurant.dishes
   end
+
+  def show; end
+
   def edit
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.find(params[:id])
@@ -16,7 +20,7 @@ class DishesController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.find(params[:id])
     if @dish.update(dish_params)
-      redirect_to restaurant_dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
+      redirect_to restaurant_dishes_path(current_user.restaurant), notice: 'Prato atualizado com sucesso'
     else
       flash.now[:notice] = "Não foi possível atualizar o Prato"
       render 'edit', status: :unprocessable_entity
@@ -34,10 +38,17 @@ class DishesController < ApplicationController
       flash.now[ :alert ] = "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
       render :new, status: :unprocessable_entity
     end
+  end
 
+  def destroy
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.find(params[:id])
+    @dish.destroy
+    redirect_to restaurant_dishes_path(restaurant), notice: 'Prato deletado com sucesso'
   end
 
   private
+
   def dish_params
     params.require(:dish).permit(:name, :description, :calories)
   end

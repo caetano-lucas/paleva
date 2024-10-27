@@ -4,6 +4,7 @@ class DrinksController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     @drinks = restaurant.drinks
   end
+  def show; end
   def edit
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.find(params[:id])
@@ -16,7 +17,7 @@ class DrinksController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.find(params[:id])
     if @drink.update(drink_params)
-      redirect_to restaurant_drink_path(@drink.id), notice: 'Bebida atualizada com sucesso'
+      redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
     else
       flash.now[:notice] = "Não foi possível atualizar a bebida"
       render 'edit', status: :unprocessable_entity
@@ -35,7 +36,11 @@ class DrinksController < ApplicationController
       flash.now[ :alert ] = "ALGO DEU ERRADO, BEBIDA NÃO CADASTRADA"
       render :new, status: :unprocessable_entity
     end
+  end
 
+  def destroy
+    @drink.destroy
+    redirect_to restaurant_drinks_path(restaurant), notice: 'Bebida deletada com sucesso'
   end
 
   private

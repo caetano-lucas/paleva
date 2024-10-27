@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'cpf_cnpj'
 
-describe 'usuario edita uma bebida ja cadastrada' do
+describe 'usuario deleta um prato' do
   it 'com sucesso' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
@@ -11,23 +11,20 @@ describe 'usuario edita uma bebida ja cadastrada' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: false, restaurant_id: restaurant.id )
-    
+    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
+    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 6000, restaurant_id: restaurant.id )
+
     login_as(user)
     visit root_path
     within('nav') do
-      click_on 'Bebidas Cadastradas'
+      click_on 'Pratos Cadastrados'
     end
     within('table') do
-      click_on 'Editar BebidaPrincipal'
-    end 
-    fill_in 'Nome da Bebida', with: 'NomeBebidaTeste2'
-    fill_in 'Descrição', with: 'DescriçãoBebidaTeste2'
-    check 'Álcool'
-    click_button 'Salvar Bebida'
-    
-    expect(page).to have_content 'NomeBebidaTeste2'
-    expect(page).to have_content 'DescriçãoBebidaTeste2'
-    expect(page).to have_content 'Lista de Bebidas'
+      click_on 'Deletar PratoPrincipal'
+    end
+
+    expect(page).not_to have_content 'NomePratoTeste2'
+    expect(page).not_to have_content 'DescriçãoPratoTeste2'
+    expect(page).to have_content 'Lista de Pratos'
   end
 end
