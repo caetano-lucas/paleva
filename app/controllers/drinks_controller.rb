@@ -46,7 +46,9 @@ class DrinksController < ApplicationController
   end
 
   def search
-    render :edit
+    @find = params["query"]
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @drink = restaurant.drinks.find_by(name: params["query"])
   end
 
   private

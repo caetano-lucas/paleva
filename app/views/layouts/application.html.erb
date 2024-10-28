@@ -31,9 +31,16 @@
 
             <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
               <%= f.label :query, 'Buscar Prato'%>
-              <%= f.text_field :query%>
+              <%= f.text_field :query, id: 'search_dish'%>
               <%= f.submit 'Buscar-Prato'%>
             <% end %>
+
+            <%= form_with(url:  search_restaurant_drinks_path(current_user.restaurant), method: :get ) do |f| %>
+              <%= f.label :query, 'Buscar Bebida'%>
+              <%= f.text_field :query, id: 'search_drink'%>
+              <%= f.submit 'Buscar-Bebida'%>
+            <% end %>
+
           <% else %>
             <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
           <% end %>

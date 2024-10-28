@@ -1,0 +1,18 @@
+<% if @drink.present? %> 
+<h1>Bebida encontrada: <%= @find %> </h1>
+
+<h2>Editar Bebida</h2>
+  <%= form_with(model: [current_user.restaurant, @drink]) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :description%>
+    <%= f.text_field :description %>
+    <%= f.label :alcohol %>
+    <%= f.check_box :alcohol %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <%= f.submit 'Salvar Bebida' %>  
+  <% end %>
+<% else %>
+  <h1>Nenhuma bebida encontrado</h1>
+<% end %>
