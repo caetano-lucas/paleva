@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Versões utilizadas:
+  - Rails 7.2.1.1
+  - ruby 3.1.6
+  - Bundler version 2.3.27
 
-Things you may want to cover:
+Gems instaladas:
 
-* Ruby version
+  gem "devise"
 
-* System dependencies
+  gem "ostruct"
 
-* Configuration
+  gem "bootstrap"
 
-* Database creation
+  gem "sassc-rails"
 
-* Database initialization
+  gem "cpf_cnpj"
 
-* How to run the test suite
+  gem 'validators'
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Projeto Feito Por Lucas Soares Caetano.
