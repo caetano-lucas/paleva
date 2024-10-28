@@ -11,10 +11,12 @@ class DishesController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.find(params[:id])
   end
+
   def new
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.build
   end
+  
   def update
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.find(params[:id])
@@ -27,8 +29,6 @@ class DishesController < ApplicationController
   end
 
   def create
-    # @dish = current_user.restaurant.build_dish(dish_params)
-    # @restaurant = current_user.build_restaurant(restaurant_params)
     restaurant = Restaurant.find(params[:restaurant_id])
     @dish = restaurant.dishes.build(dish_params)
     if @dish.save

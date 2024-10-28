@@ -1,18 +1,22 @@
 class DrinksController < ApplicationController
-  #skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
+  
   def index
     restaurant = Restaurant.find(params[:restaurant_id])
     @drinks = restaurant.drinks
   end
+
   def show; end
+
   def edit
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.find(params[:id])
   end
+
   def new
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.build
   end
+
   def update
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.find(params[:id])
@@ -25,8 +29,6 @@ class DrinksController < ApplicationController
   end
 
   def create
-    # @drink = current_user.restaurant.build_drink(drink_params)
-    # @restaurant = current_user.build_restaurant(restaurant_params)
     restaurant = Restaurant.find(params[:restaurant_id])
     @drink = restaurant.drinks.build(drink_params)
    
@@ -52,6 +54,7 @@ class DrinksController < ApplicationController
   end
 
   private
+
   def drink_params
     params.require(:drink).permit(:name, :description, :alcohol, :image)
   end
