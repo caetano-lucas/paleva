@@ -9,7 +9,7 @@ class OperatingHour < ApplicationRecord
 
   def close_time_more_than_open_time
     if close_time <= open_time
-      flash.now[ :notice] = "Horario de fechamento deve ser maior que o horário de abertura"
+      errors.add(:base, "Horário de fechamento deve ser maior que o horário de abertura")
     end
   end
 end

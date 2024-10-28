@@ -1,0 +1,23 @@
+<h1>Editar Horário de Funcionamento</h1>
+
+<%= form_with(model: [@restaurant, @operating_hour]) do |form| %>
+  <div>
+    <%= form.label :day %>
+    <%= form.select :day, options_for_select(%w[segunda-feira terça-feira quarta-feira quinta-feira sexta-feira sábado domingo]) %>
+  </div>
+  <div>
+    <%= form.label :open_time %>
+    <%= form.time_select :open_time %>
+  </div>
+  <div>
+    <%= form.label :close_time %>
+    <%= form.time_select :close_time %>
+  </div>
+  <div>
+    <%= form.check_box :closed %>
+    <%= form.label :closed, 'Fechado?' %>
+  </div>
+  <div>
+    <%= form.submit 'Salvar' %>
+  </div>
+<% end %>

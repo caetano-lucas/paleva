@@ -1,5 +1,5 @@
 <h1>Horários de Funcionamento Cadastrados</h1>
-
+<%= link_to 'Novo Horário', new_restaurant_operating_hour_path(current_user.restaurant) %>
 <table>
   <thead>
     <tr>
@@ -19,11 +19,11 @@
         <td><%= hour.closed ? 'Sim' : 'Não' %></td>
         <td>
           <%= link_to 'Editar', edit_restaurant_operating_hour_path(current_user.restaurant, hour) %>
-          <%= link_to 'Excluir', restaurant_operating_hour_path(current_user.restaurant, hour), method: :delete, data: { confirm: 'Tem certeza?' } %>
+          <%= button_to 'Excluir', restaurant_operating_hour_path(current_user.restaurant,hour), method: :delete %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Novo Horário', new_restaurant_operating_hour_path(current_user.restaurant) %>
+

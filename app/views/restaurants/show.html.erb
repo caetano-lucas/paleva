@@ -1,3 +1,19 @@
-
-  <%= @restaurant.trade_name %>
-  <%= @restaurant.cnpj %>
+<h3>Detalhes do restaurante </h3>
+  
+ 
+  <dl>
+    <dt>Nome Fantasia:</dt>
+    <dd><%= @restaurant.trade_name %></dd>
+    <dt>Razão Social:</dt>
+    <dd><%= @restaurant.legal_name %></dd>
+    <dt>CNPJ:</dt>
+    <dd><%= @restaurant.cnpj %></dd>
+    <dt>Endereço:</dt>
+    <dd><%= @restaurant.address %></dd>
+    <dt>Telefone:</dt>
+    <dd><%= @restaurant.phone %></dd>
+    <dt>E-mail:</dt>
+    <dd><%= @restaurant.email %></dd>
+    <dt>Código Alfanumérico único:</dt>
+    <dd><%= @restaurant.alphanumeric_code %></dd>
+  </dl>

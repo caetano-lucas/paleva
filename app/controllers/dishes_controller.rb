@@ -46,6 +46,12 @@ class DishesController < ApplicationController
     redirect_to restaurant_dishes_path(restaurant), notice: 'Prato deletado com sucesso'
   end
 
+  def search
+    @find = params["query"]
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @dish = restaurant.dishes.find_by(name: params["query"])
+  end
+
   private
 
   def dish_params

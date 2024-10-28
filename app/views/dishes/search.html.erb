@@ -1,0 +1,19 @@
+
+<% if @dish.present? %> 
+<h1>Prato encontrado: <%= @find %> </h1>
+
+<h2>Editar prato</h2>
+  <%= form_with(model: [current_user.restaurant, @dish]) do  |f|  %>
+    <%= f.label :name%>
+    <%= f.text_field :name %>
+    <%= f.label :description%>
+    <%= f.text_field :description %>
+    <%= f.label :calories%>
+    <%= f.text_field :calories %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <%= f.submit 'Salvar Prato' %>
+  <% end %>
+<% else %>
+  <h1>Nenhuma prato encontrado</h1>
+<% end %>

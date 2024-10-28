@@ -21,19 +21,28 @@
     <header>
       <nav>
         <%= link_to 'PaLevá', root_path%>
+        
         <% if user_signed_in? %>          
-          <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
-          <p>Olá, <%= current_user.email %> </p>
-          
           <% if current_user.restaurant&.persisted? %>
             <%= link_to 'Restaurante', restaurant_path(current_user.restaurant) %>
             <%= link_to 'Pratos Cadastrados', restaurant_dishes_path(current_user.restaurant) %>
             <%= link_to 'Bebidas Cadastradas', restaurant_drinks_path(current_user.restaurant) %>
-             <%= link_to 'Horários Cadastrados', restaurant_operating_hours_path(current_user.restaurant) %> 
+            <%= link_to 'Horários Cadastrados', restaurant_operating_hours_path(current_user.restaurant) %> 
+
+            <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
+              <%= f.label :query, 'Buscar Prato'%>
+              <%= f.text_field :query%>
+              <%= f.submit 'Buscar-Prato'%>
+            <% end %>
           <% else %>
             <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
           <% end %>
+
+          <p>Olá, <%= current_user.first_name %> </p>
+          <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
           
+         
+
         <% else %>
           <%= link_to 'Entrar', new_user_session_path%>
         <% end %>

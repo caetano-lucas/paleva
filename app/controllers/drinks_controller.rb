@@ -45,6 +45,10 @@ class DrinksController < ApplicationController
     redirect_to restaurant_drinks_path(restaurant), notice: 'Bebida deletada com sucesso'
   end
 
+  def search
+    render :edit
+  end
+
   private
   def drink_params
     params.require(:drink).permit(:name, :description, :alcohol, :image)
