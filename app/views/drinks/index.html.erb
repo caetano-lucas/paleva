@@ -6,6 +6,7 @@
        <th>Nome da Bebida</th>
        <th>Descrição</th>
        <th>Possui Álcool</th>
+       <th> Foto </th>
        <th>Ações</th>
    </tr>
    </thead>
@@ -15,6 +16,13 @@
         <td> <%= d.name %> </td>
         <td> <%= d.description %> </td>
         <td> <%= d.alcohol ? 'Sim' : 'Não'  %> </td>
+        <td>
+          <% if d.image.attached? %>
+            <%= image_tag d.image, size: "100x100", alt: d.name %>
+          <% else %>
+            <p>Sem imagem disponível</p>
+          <% end %>
+        </td>
         <td> <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %> </td> |
         <td> <%= button_to "Deletar #{d.name}", restaurant_drink_path(current_user.restaurant, d ), method: :delete %> </td>
       </tr>

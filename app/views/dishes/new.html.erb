@@ -7,12 +7,14 @@
   </ul>
 <% end %>
 
-<%= form_with(model: [current_user.restaurant, @dish]) do  |f|  %>
+<%= form_with(model: [current_user.restaurant, @dish], local: true) do  |f|  %>
   <%= f.label :name%>
   <%= f.text_field :name %>
   <%= f.label :description%>
   <%= f.text_field :description %>
   <%= f.label :calories%>
   <%= f.text_field :calories %>
+   <%= f.label :image %>
+  <%= f.file_field :image %>
   <%= f.submit 'Salvar Prato' %>
 <% end %>

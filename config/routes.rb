@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   resources :restaurant do
     resources :drinks
   end
+  resources :restaurants do
+    resources :operating_hours
+  end
 end

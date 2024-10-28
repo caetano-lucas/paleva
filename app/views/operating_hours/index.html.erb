@@ -1,0 +1,29 @@
+<h1>Horários de Funcionamento Cadastrados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Horário de Abertura</th>
+      <th>Horário de Fechamento</th>
+      <th>Fechado?</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @operating_hours.each do |hour| %>
+      <tr>
+        <td><%= hour.day.humanize %></td>
+        <td><%= hour.open_time.strftime("%H:%M") %></td>
+        <td><%= hour.close_time.strftime("%H:%M") %></td>
+        <td><%= hour.closed ? 'Sim' : 'Não' %></td>
+        <td>
+          <%= link_to 'Editar', edit_restaurant_operating_hour_path(current_user.restaurant, hour) %>
+          <%= link_to 'Excluir', restaurant_operating_hour_path(current_user.restaurant, hour), method: :delete, data: { confirm: 'Tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Novo Horário', new_restaurant_operating_hour_path(current_user.restaurant) %>

@@ -29,6 +29,7 @@
             <%= link_to 'Restaurante', restaurant_path(current_user.restaurant) %>
             <%= link_to 'Pratos Cadastrados', restaurant_dishes_path(current_user.restaurant) %>
             <%= link_to 'Bebidas Cadastradas', restaurant_drinks_path(current_user.restaurant) %>
+             <%= link_to 'Horários Cadastrados', restaurant_operating_hours_path(current_user.restaurant) %> 
           <% else %>
             <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
           <% end %>
