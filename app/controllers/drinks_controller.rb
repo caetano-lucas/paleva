@@ -39,6 +39,8 @@ class DrinksController < ApplicationController
   end
 
   def destroy
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @drink = restaurant.drinks.find(params[:id])
     @drink.destroy
     redirect_to restaurant_drinks_path(restaurant), notice: 'Bebida deletada com sucesso'
   end

@@ -1,5 +1,4 @@
 class DishesController < ApplicationController
-  #skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
   
   def index
     restaurant = Restaurant.find(params[:restaurant_id])
