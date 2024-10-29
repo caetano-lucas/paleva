@@ -55,7 +55,7 @@ describe 'Usuário registra um restaurante, logo após se registrar,' do
     fill_in 'CNPJ', with: cnpj
     click_on 'Salvar Restaurante'
 
-    expect(page).to have_content 'ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO'
+    expect(page).to have_content 'Não foi possível cadastrar o restaurante, siga as instruções abaixo.'
     expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
     expect(page).to have_content 'Razão Social não pode ficar em branco'
     expect(page).to have_content 'Endereço não pode ficar em branco'

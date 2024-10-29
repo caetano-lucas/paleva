@@ -7,12 +7,6 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @restaurant = current_user&.restaurant
-    if @restaurant&.persisted?
-      nil
-    else
-      flash.now[ :alert ] = "Você não tem acesso ao restaurante de outro usuário"
-      redirect_to new_restaurant_path
-    end
   end
 
   def new
@@ -27,6 +21,7 @@ class RestaurantsController < ApplicationController
     if @restaurant.save
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
+      flash.now[:notice] = 'Não foi possível cadastrar o restaurante, siga as instruções abaixo.'
       render :new, status: :unprocessable_entity
     end
   end
@@ -38,6 +33,7 @@ class RestaurantsController < ApplicationController
     if restaurant&.persisted?
       nil
     else
+      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
       redirect_to new_restaurant_path
     end
   end

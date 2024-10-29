@@ -10,15 +10,15 @@ class DrinksController < ApplicationController
   def show; end
 
   def edit
-    @drink = restaurant.drinks.find(params[:id])
+    @drink = @restaurant.drinks.find(params[:id])
   end
 
   def new
-    @drink = restaurant.drinks.build
+    @drink = @restaurant.drinks.build
   end
 
   def update
-    @drink = restaurant.drinks.find(params[:id])
+    @drink = @restaurant.drinks.find(params[:id])
     if @drink.update(drink_params)
       redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
     else
@@ -28,7 +28,7 @@ class DrinksController < ApplicationController
   end
 
   def create
-    @drink = restaurant.drinks.build(drink_params)   
+    @drink = @restaurant.drinks.build(drink_params)   
     if @drink.save
       redirect_to restaurant_drinks_path(@restaurant), notice: 'Bebida cadastrada com sucesso'
     else
