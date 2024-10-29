@@ -1,10 +1,18 @@
 class RestaurantsController < ApplicationController
   require 'cpf_cnpj'
+  before_action :authenticate_user!
+  before_action :redirect_unless_restaurant, only: [:show]
 
-  skip_before_action :redirect_unless_restaurant, only: [ :new, :create ]
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @restaurant = current_user&.restaurant
+    if @restaurant&.persisted?
+      nil
+    else
+      flash.now[ :alert ] = "Você não tem acesso ao restaurante de outro usuário"
+      redirect_to new_restaurant_path
+    end
   end
 
   def new
@@ -19,13 +27,21 @@ class RestaurantsController < ApplicationController
     if @restaurant.save
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
-      flash.now[ :alert ] = "ALGO DEU ERRADO, RESTAURANTE NÃO CADASTRADO"
       render :new, status: :unprocessable_entity
     end
   end
 
-  private
+  private 
   
+  def redirect_unless_restaurant
+    restaurant = current_user&.restaurant
+    if restaurant&.persisted?
+      nil
+    else
+      redirect_to new_restaurant_path
+    end
+  end
+
   def restaurant_params
     params.require(:restaurant).permit(:trade_name, :legal_name, :cnpj,
     :address, :phone, :email)
