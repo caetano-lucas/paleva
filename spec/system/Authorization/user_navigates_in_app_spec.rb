@@ -2,6 +2,15 @@ require 'rails_helper'
 require 'cpf_cnpj'
 
 describe 'usuario nevega pela aplicacao' do
+  it 'se estiver autenticado' do 
+    
+    visit root_path
+    within('nav') do
+      click_on 'PaLevá'
+    end
+
+    expect(current_path).to eq new_user_session_path
+  end
   it 'se tiver restaurante cadastrado' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
@@ -60,3 +69,4 @@ describe 'usuario nevega pela aplicacao' do
     expect(page).not_to have_content('userone-restaurant')
   end
 end
+

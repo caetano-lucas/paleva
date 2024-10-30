@@ -2,6 +2,14 @@ require 'rails_helper'
 require 'cpf_cnpj'
 
 describe 'usuario deleta uma bebida' do
+  it 'se estiver autenticado' do 
+    
+    visit root_path
+
+    expect(current_path).not_to have_link 'Bebidas Cadastradas'
+    expect(page).not_to have_content 'Lista de Bebidas'
+  end
+  
   it 'com sucesso' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split

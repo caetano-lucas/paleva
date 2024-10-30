@@ -21,7 +21,6 @@ describe 'Usuário se autentica' do
     click_on 'Cadastrar-se'
 
     expect(page).to have_content 'Olá, userone'
-    expect(current_path).to eq new_restaurant_path
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso'
     expect(page).to have_button 'Sair'
     expect(page).not_to have_link 'Entrar'
@@ -29,6 +28,28 @@ describe 'Usuário se autentica' do
     expect(user.first_name).to eq 'userone'
     expect(CPF.valid?(cpf)).to eq true
   end
+
+  it 'e é automaticamente redirecionado para a tela de cadastrar novo restaurante' do
+    cpf = CPF.generate(true).strip
+
+    visit root_path
+    within('nav') do
+      click_on 'Entrar'
+    end
+    click_on 'Cadastrar-se'
+    within('form') do
+      fill_in 'Nome', with: 'userone'
+      fill_in 'Sobrenome', with: 'one'
+      fill_in 'E-mail', with: 'userone@email.com'
+      fill_in 'Senha', with: '12345abcdeF#'
+      fill_in 'Confirme sua senha', with: '12345abcdeF#'
+      fill_in 'CPF', with: cpf
+    end
+    click_on 'Cadastrar-se'
+   
+    expect(current_path).to eq new_restaurant_path
+  end
+
   it 'sem sucesso' do
     visit root_path
     within('nav') do

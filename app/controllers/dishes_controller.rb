@@ -45,7 +45,12 @@ class DishesController < ApplicationController
 
   def search
     @find = params["query"]
-    @dish = @restaurant.dishes.find_by(name: params["query"])
+
+    if @restaurant.dishes.find_by(name: params["query"]) == nil
+      @dish = @restaurant.dishes.find_by(description: params["query"])
+    else
+      @dish = @restaurant.dishes.find_by(name: params["query"])
+    end
   end
 
   private

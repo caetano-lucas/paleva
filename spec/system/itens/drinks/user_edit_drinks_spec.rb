@@ -2,6 +2,14 @@ require 'rails_helper'
 require 'cpf_cnpj'
 
 describe 'usuario edita uma bebida ja cadastrada' do
+  it 'se estiver autenticado' do 
+    
+    visit root_path
+
+    expect(current_path).not_to have_link 'Bebidas Cadastradas'
+    expect(page).not_to have_content 'Lista de Bebidas'
+    
+  end
   it 'com sucesso' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
@@ -29,5 +37,7 @@ describe 'usuario edita uma bebida ja cadastrada' do
     expect(page).to have_content 'NomeBebidaTeste2'
     expect(page).to have_content 'DescriçãoBebidaTeste2'
     expect(page).to have_content 'Lista de Bebidas'
+    expect(page).not_to have_content 'BebidaPrincipal'
+    expect(page).not_to have_content 'A mais pedido'
   end
 end

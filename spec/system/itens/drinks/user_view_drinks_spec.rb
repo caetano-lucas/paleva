@@ -1,7 +1,14 @@
 require 'rails_helper'
 require 'cpf_cnpj'
 
-describe 'usuario ve bebidas cadastrados para seu restaurante' do
+describe 'usuario ve bebidas cadastrados' do
+  it 'se estiver autenticado' do 
+    
+    visit root_path
+
+    expect(current_path).not_to have_link 'Bebidas Cadastradas'
+    
+  end
   it 'a partir do menu' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
