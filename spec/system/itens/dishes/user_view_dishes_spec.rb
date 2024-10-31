@@ -27,6 +27,6 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     end
     expect(page).to have_content 'Lista de Pratos'
     expect(page).to have_content 'PratoPrincipal'
-    expect(page).to have_content 'O mais pedido'
+    expect(page).to have_content 'O mais pedido' 
   end
 end
