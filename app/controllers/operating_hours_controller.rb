@@ -17,6 +17,7 @@ class OperatingHoursController < ApplicationController
     if @operating_hour.save
       redirect_to restaurant_operating_hours_path(@restaurant), notice: 'Horário de funcionamento criado com sucesso.'
     else
+      flash.now[:notice] = "Horário de Abertura deve ser menor que o de fechamento"
       render :new
     end
   end

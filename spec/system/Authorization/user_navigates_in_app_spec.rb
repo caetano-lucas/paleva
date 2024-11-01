@@ -54,13 +54,13 @@ describe 'usuario nevega pela aplicacao' do
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
                                             email: 'useronerestaurant@gmail.com',
-                                            user_id: user_one.id)
+                                            user: user_one)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                             email: 'usertworestaurant@gmail.com',
-                            user_id: user_two.id)
+                            user: user_two)
 
     login_as(user_two)
     visit restaurant_path(restaurant_user_one)

@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    operating_hours:
+      operating_hour: 'Horário de Funcionamento'
+    attributes:
+      operating_hour:
+        day: "Dia da semana"
+        open_time: "Abertura"
+        close_time: "Fechamento"

@@ -14,6 +14,8 @@ class Restaurant < ApplicationRecord
 
   before_validation :generate_code
 
+  private
+
   def generate_code
     self.alphanumeric_code = SecureRandom.base36(6)
   end
