@@ -7,7 +7,8 @@ class DishesController < ApplicationController
     @dishes = @restaurant.dishes
   end
 
-  def show; end
+  def show
+  end
 
   def edit
     @dish = @restaurant.dishes.find(params[:id])

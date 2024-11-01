@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'cpf_cnpj'
 
 describe 'usuario nevega pela aplicacao' do
-  it 'se estiver autenticado' do 
+  it 'ao entrar no site' do 
     
     visit root_path
     within('nav') do
@@ -57,7 +57,7 @@ describe 'usuario nevega pela aplicacao' do
                                             user_id: user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
-    restaurant_user_two  = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
+    Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                             email: 'usertworestaurant@gmail.com',
                             user_id: user_two.id)

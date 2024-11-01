@@ -19,8 +19,8 @@ describe 'usuario deleta uma bebida' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Drink.create!(name: 'BebidaPrimaria', description: 'A mais fraca', restaurant_id: restaurant.id )
-    Drink.create!(name: 'BebidaSeguntaria', description: 'super apimentada', restaurant_id: restaurant.id )
+    Drink.create!(name: 'BebidaPrimaria', description: 'A mais fraca', restaurant: restaurant )
+    Drink.create!(name: 'BebidaSeguntaria', description: 'super apimentada', restaurant: restaurant )
 
     login_as(user)
     visit root_path

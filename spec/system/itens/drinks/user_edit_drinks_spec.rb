@@ -19,7 +19,7 @@ describe 'usuario edita uma bebida ja cadastrada' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: false, restaurant_id: restaurant.id )
+    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: false, restaurant: restaurant )
     
     login_as(user)
     visit root_path

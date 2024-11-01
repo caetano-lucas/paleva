@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'cpf_cnpj'
 
-describe 'usuario deleta um prato' do
+describe 'usuario tenta deletar um prato' do
   it 'se estiver autenticado' do 
     
     visit root_path
@@ -18,8 +18,8 @@ describe 'usuario deleta um prato' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
-    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 6000, restaurant_id: restaurant.id )
+    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant )
+    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 6000, restaurant: restaurant )
 
     login_as(user)
     visit root_path

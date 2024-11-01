@@ -18,8 +18,8 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
-                                    user_id: user.id)
-    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
+                                    user: user)
+    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant )
     login_as(user)
     visit root_path
     within('nav') do
@@ -27,6 +27,6 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     end
     expect(page).to have_content 'Lista de Pratos'
     expect(page).to have_content 'PratoPrincipal'
-    expect(page).to have_content 'O mais pedido' 
+    expect(page).to have_content 'O mais pedido'
   end
 end
