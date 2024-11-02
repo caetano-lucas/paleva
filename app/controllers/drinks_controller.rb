@@ -11,7 +11,13 @@ class DrinksController < ApplicationController
     end   
   end
 
-  def show; end
+  def show
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    else
+      @drink = @restaurant.drinks.find(params[:id])
+    end
+  end
 
   def edit
       if @restaurant.user != current_user

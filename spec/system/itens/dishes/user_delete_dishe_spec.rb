@@ -27,8 +27,9 @@ describe 'usuario tenta deletar um prato' do
       click_on 'Pratos Cadastrados'
     end
     within('table') do
-      click_on 'Deletar PratoPrincipal'
+      click_on 'Editar PratoPrincipal'
     end
+    click_on 'Deletar prato'
 
     expect(page).not_to have_content 'NomePratoTeste2'
     expect(page).not_to have_content 'DescriçãoPratoTeste2'

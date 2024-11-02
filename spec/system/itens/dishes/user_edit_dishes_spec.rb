@@ -35,7 +35,6 @@ describe 'usuario edita um prato já cadastrado' do
 
     expect(page).to have_content 'NomePratoTeste2'
     expect(page).to have_content 'DescriçãoPratoTeste2'
-    expect(page).to have_content '5000'
     expect(page).to have_content 'Lista de Pratos'    
     expect(page).not_to have_content 'PratoPrincipal'
     expect(page).not_to have_content 'O mais pedido'

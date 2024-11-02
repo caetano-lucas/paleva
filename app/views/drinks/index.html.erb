@@ -25,8 +25,8 @@
               <p>Sem imagem disponível</p>
             <% end %>
           </td>
-          <td> <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %> </td>
-          <td> <%= button_to "Deletar #{d.name}", restaurant_drink_path(current_user.restaurant, d ), method: :delete %> </td>
+          <td> <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %> |
+          <%= link_to "Detalhes #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> </td> 
         </tr>
     <% end %>
     </tbody>

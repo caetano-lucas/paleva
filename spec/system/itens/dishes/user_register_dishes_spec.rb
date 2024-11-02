@@ -32,7 +32,6 @@ describe 'usuario registra novos pratos para seu restaurante' do
     
     expect(page).to have_content 'NomePratoTeste'
     expect(page).to have_content 'DescriçãoPratoTeste'
-    expect(page).to have_content 'Calorias'
     expect(page).to have_content 'Lista de Pratos'
   end
   

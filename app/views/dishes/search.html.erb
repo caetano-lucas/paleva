@@ -26,7 +26,6 @@
             <% end %>
           </td>
           <td> <%= link_to "Editar #{dish.name}", edit_restaurant_dish_path(current_user.restaurant, dish) %> </td>
-          <td> <%= button_to "Deletar #{dish.name}", restaurant_dish_path(current_user.restaurant, dish), method: :delete %> </td>
         </tr>
       <% end %>
     </tbody>

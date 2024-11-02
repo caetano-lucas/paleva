@@ -12,6 +12,11 @@ class DishesController < ApplicationController
   end
 
   def show
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    else
+      @dish = @restaurant.dishes.find(params[:id])
+    end
   end
 
   def edit

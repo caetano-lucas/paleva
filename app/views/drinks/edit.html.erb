@@ -18,3 +18,5 @@
   <%= f.file_field :image %>
   <%= f.submit 'Salvar Bebida' %>
 <% end %>
+
+<td> <%= button_to "Deletar Bebida", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> </td>

@@ -28,8 +28,9 @@ describe 'usuario deleta uma bebida' do
       click_on 'Bebidas Cadastradas'
     end
     within('table') do
-      click_on 'Deletar BebidaPrimaria'
+      click_on 'Editar BebidaPrimaria'
     end
+    click_on 'Deletar Bebida'
 
     expect(page).not_to have_content 'BebidaPrimaria'
     expect(page).not_to have_content 'A mais fraca'
