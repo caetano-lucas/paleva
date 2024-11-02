@@ -34,7 +34,7 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
-    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
@@ -83,7 +83,7 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     expect(page).to have_content 'Inativo'
     expect(page).not_to have_content 'PratoPrincipalTwo'
   end
-  
+
   it 'e não acessa a pagina de pratos de outros restaurantes' do
     cpf1 = CPF.generate(true).split
     cpf2 = CPF.generate(true).split
