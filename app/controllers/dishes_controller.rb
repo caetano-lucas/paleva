@@ -56,6 +56,9 @@ class DishesController < ApplicationController
   end
 
   def search
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
     @find = params["query"]
     @dishes = @restaurant.dishes.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end

@@ -22,10 +22,16 @@ class DrinksController < ApplicationController
   end
 
   def new
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
     @drink = @restaurant.drinks.build
   end
 
   def update
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
     @drink = @restaurant.drinks.find(params[:id])
     if @drink.update(drink_params)
       redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
@@ -55,6 +61,9 @@ class DrinksController < ApplicationController
   end
 
   def search
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
     @find = params["query"]
     @drinks = @restaurant.drinks.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end
