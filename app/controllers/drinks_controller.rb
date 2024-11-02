@@ -50,7 +50,7 @@ class DrinksController < ApplicationController
   def create
     @drink = @restaurant.drinks.build(drink_params)   
     if @drink.save
-      redirect_to restaurant_drinks_path(@restaurant), notice: 'Bebida cadastrada com sucesso'
+      redirect_to restaurant_drink_path(@restaurant, @drink), notice: 'Bebida cadastrada com sucesso'
     else
       flash.now[ :alert ] = "ALGO DEU ERRADO, BEBIDA NÃO CADASTRADA"
       render :new, status: :unprocessable_entity

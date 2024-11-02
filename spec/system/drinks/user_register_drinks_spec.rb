@@ -35,6 +35,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     expect(page).to have_content 'NomeBebidaTeste'
     expect(page).to have_content 'DescriçãoBebidaTeste'
     expect(page).to have_content 'Possui Álcool'
+    expect(page).to have_content 'Status: Ativo'
     expect(page).to have_content 'Lista de Bebidas'
   end
 

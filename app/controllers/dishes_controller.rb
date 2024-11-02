@@ -44,7 +44,7 @@ class DishesController < ApplicationController
   def create
     @dish = @restaurant.dishes.build(dish_params)
     if @dish.save
-      redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato cadastrado com sucesso'
+      redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Prato cadastrado com sucesso'
     else
       flash.now[ :alert ] = "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
       render :new, status: :unprocessable_entity
