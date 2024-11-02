@@ -7,14 +7,11 @@ Rails.application.routes.draw do
     resources :dishes do
       get 'search', on: :collection
     end
-  end
 
-  resources :restaurant do
     resources :drinks do
       get 'search', on: :collection
     end
-  end
-  resources :restaurants do
+
     resources :operating_hours
   end
 end

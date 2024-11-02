@@ -1,18 +1,33 @@
 <% if @drink.present? %> 
 <h1>Bebida encontrada: <%= @find %> </h1>
+<table>
+   <thead>
+   <tr>
+       <th>Nome da Bebida</th>
+       <th>Descrição</th>
+       <th>Possui Álcool</th>
+       <th> Foto </th>
+       <th>Ações</th>
+   </tr>
+   </thead>
+   <tbody>
+      <tr>
+        <td> <%= @drink.name %> </td>
+        <td> <%= @drink.description %> </td>
+        <td> <%= @drink.alcohol ? 'Sim' : 'Não'  %> </td>
+        <td>
+          <% if @drink.image.attached? %>
+            <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
+          <% else %>
+            <p>Sem imagem disponível</p>
+          <% end %>
+        </td>
+        <td> <%= link_to "Editar #{@drink.name}", edit_restaurant_drink_path(current_user.restaurant, @drink) %> </td>
+        <td> <%= button_to "Deletar #{@drink.name}", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> </td>
+      </tr>
+   </tbody>
+</table>
 
-<h2>Editar Bebida</h2>
-  <%= form_with(model: [current_user.restaurant, @drink]) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :description%>
-    <%= f.text_field :description %>
-    <%= f.label :alcohol %>
-    <%= f.check_box :alcohol %>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-    <%= f.submit 'Salvar Bebida' %>  
-  <% end %>
 <% else %>
   <h1>Nenhuma bebida encontrado</h1>
 <% end %>

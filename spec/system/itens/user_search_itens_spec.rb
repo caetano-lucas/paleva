@@ -20,6 +20,7 @@ describe 'Usuario busca um item' do
                                     user: user)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
+    
     login_as(user)
     visit root_path
 
@@ -46,7 +47,7 @@ describe 'Usuario busca um item' do
       fill_in 'search_dish', with: 'PratoPrincipal'
     end
     click_on 'Buscar-Prato'
-
+    expect(page).to have_link 'Editar PratoPrincipal'
     expect(page).to have_content 'Prato encontrado'
     expect(page).to have_content 'PratoPrincipal'
     expect(page).not_to have_content 'PratoSecundario'
@@ -72,7 +73,7 @@ describe 'Usuario busca um item' do
     click_on 'Buscar-Prato'
 
     expect(page).to have_content 'O menos pedido'
-    expect(page).to have_button 'Salvar Prato'
+    expect(page).to have_link 'PratoSecundario'
     expect(page).not_to have_content 'PratoPrincipal'
   end
 
@@ -122,7 +123,7 @@ describe 'Usuario busca um item' do
     click_on 'Buscar-Bebida'
 
     expect(page).to have_content 'A menos pedida'
-    expect(page).to have_button 'Salvar Bebida'
+    expect(page).to have_link 'Editar BebidaSecundaria'
     expect(page).not_to have_content 'BebidaPrincipal'
   end
 end

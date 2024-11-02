@@ -8,8 +8,8 @@ class OperatingHour < ApplicationRecord
   private
 
   def close_time_more_than_open_time
-    if close_time <= open_time
-      errors.add(:base, "Horário de fechamento deve ser maior que o horário de abertura")
+    if self.close_time <= self.open_time
+      self.errors.add(:close_time_more_than_open_time, "Horário de fechamento deve ser maior que o horário de abertura")
     end
   end
 end

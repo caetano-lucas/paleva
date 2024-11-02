@@ -2,18 +2,34 @@
 <% if @dish.present? %> 
 <h1>Prato encontrado: <%= @find %> </h1>
 
-<h2>Editar prato</h2>
-  <%= form_with(model: [current_user.restaurant, @dish]) do  |f|  %>
-    <%= f.label :name%>
-    <%= f.text_field :name %>
-    <%= f.label :description%>
-    <%= f.text_field :description %>
-    <%= f.label :calories%>
-    <%= f.text_field :calories %>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-    <%= f.submit 'Salvar Prato' %>
-  <% end %>
+<table>
+  <thead>
+  <tr>
+      <th>Nome do Prato</th>
+      <th>Descrição</th>
+      <th>Calorias</th>
+      <th> Foto </th>
+      <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td> <%= @dish.name %> </td>
+      <td> <%= @dish.description %> </td>
+      <td> <%= @dish.calories %> </td>
+      <td>
+        <% if @dish.image.attached? %>
+          <%= image_tag @dish.image, size: "100x100", alt: @dish.name %>
+        <% else %>
+          <p>Sem imagem disponível</p>
+        <% end %>
+      </td>
+      <td> <%= link_to "Editar #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %> </td>
+      <td> <%= button_to "Deletar #{@dish.name}", restaurant_dish_path(current_user.restaurant, @dish), method: :delete %> </td>
+    </tr>
+  </tbody>
+</table>
 <% else %>
   <h1>Nenhuma prato encontrado</h1>
 <% end %>
