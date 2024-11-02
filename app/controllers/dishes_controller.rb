@@ -4,14 +4,22 @@ class DishesController < ApplicationController
   before_action :redirect_unless_restaurant
   
   def index    
-    @dishes = @restaurant.dishes
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    else
+      @dishes = @restaurant.dishes
+    end
   end
 
   def show
   end
 
   def edit
-    @dish = @restaurant.dishes.find(params[:id])
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    else
+      @dish = @restaurant.dishes.find(params[:id])
+    end
   end
 
   def new
@@ -39,6 +47,9 @@ class DishesController < ApplicationController
   end
 
   def destroy
+     if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+     end
     @dish = @restaurant.dishes.find(params[:id])
     @dish.destroy
     redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
@@ -52,7 +63,7 @@ class DishesController < ApplicationController
   private
 
   def set_restaurant
-    @restaurant = current_user&.restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def redirect_unless_restaurant

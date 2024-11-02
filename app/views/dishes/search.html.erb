@@ -1,5 +1,6 @@
+<h1>Pratos encontrados: <%= @find %> </h1>
+<p><%= link_to 'Cadastrar novo prato', new_restaurant_dish_path %></p>
 <% if @dishes.present? %> 
-  <h1>Pratos encontrados: <%= @find %> </h1>
 
   <table>
     <thead>
@@ -31,5 +32,5 @@
     </tbody>
   </table>
 <% else %>
-  <h1>Nenhuma prato encontrado</h1>
+  <h1>Nenhum prato encontrado</h1>
 <% end %>

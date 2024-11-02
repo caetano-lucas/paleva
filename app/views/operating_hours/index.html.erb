@@ -1,6 +1,7 @@
 <h1>Horários de Funcionamento Cadastrados</h1>
 
 <%= link_to 'Novo Horário', new_restaurant_operating_hour_path(current_user.restaurant) %>
+<% if @operating_hours.present? %>
 <table>
   <thead>
     <tr>
@@ -26,3 +27,6 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+  <p>Não há horários Cadastrados</p>
+<% end %>

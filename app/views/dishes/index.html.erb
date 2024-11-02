@@ -1,5 +1,6 @@
 <h1>Lista de Pratos</h1>
 <p><%= link_to 'Cadastrar novo prato', new_restaurant_dish_path%></p>
+<% if @dishes.present? %> 
 <table>
    <thead>
    <tr>
@@ -29,3 +30,6 @@
    <% end %>
    </tbody>
 </table>
+<% else %>
+  <p>Não há pratos cadastrados</p>
+<% end %>

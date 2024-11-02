@@ -29,4 +29,80 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     expect(page).to have_content 'PratoPrincipal'
     expect(page).to have_content 'O mais pedido'
   end
+  it 'e não tem pratos cadastradas' do
+    cpf = CPF.generate(true).split
+    cnpj = CNPJ.generate(true).split
+    user = User.create!(email: 'userone@email.com',first_name: 'userone',
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
+                                    email: 'useronerestaurant@gmail.com',
+                                    user: user)
+    login_as(user)
+    visit root_path
+    within('nav') do
+      click_on 'Pratos Cadastrados'
+    end
+    expect(page).to have_link 'Cadastrar novo prato'
+    expect(page).to have_content 'Lista de Pratos'
+    expect(page).to have_content 'Não há pratos cadastrados'
+  end
+
+  it 'e não vê pratos de outros restaurantes' do
+    cpf1 = CPF.generate(true).split
+    cpf2 = CPF.generate(true).split
+    cnpj1 = CNPJ.generate(true).split
+    cnpj2 = CNPJ.generate(true).split
+    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+                            last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
+    restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
+                                             email: 'useronerestaurant@gmail.com',
+                                             user: user_one)
+    user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
+                            last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
+    restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
+                                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
+                                             email: 'usertworestaurant@gmail.com',
+                                             user: user_two)
+    Dish.create!(name: 'PratoPrincipalOne', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one )
+    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant: restaurant_user_one )
+    Dish.create!(name: 'PratoPrincipalTwo', description: 'O mais pedido', calories: 3000, restaurant: restaurant_user_two )
+
+
+    login_as(user_one)
+    visit root_path
+    within('nav') do
+      click_on 'Pratos Cadastrados'
+    end
+
+    expect(page).to have_content 'Lista de Pratos'
+    expect(page).to have_content 'PratoPrincipal'
+    expect(page).to have_content 'O menos pedido'
+    expect(page).not_to have_content 'PratoPrincipalTwo'
+  end
+  it 'e não acessa a pagina de pratos de outros restaurantes' do
+    cpf1 = CPF.generate(true).split
+    cpf2 = CPF.generate(true).split
+    cnpj1 = CNPJ.generate(true).split
+    cnpj2 = CNPJ.generate(true).split
+    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+                            last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
+    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
+                                             email: 'useronerestaurant@gmail.com',
+                                             user: user_one)
+    user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
+                            last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
+    restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
+                                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
+                                             email: 'usertworestaurant@gmail.com',
+                                             user: user_two)
+
+    login_as(user_one)   
+    visit restaurant_dishes_path(restaurant_user_two)    
+   
+    expect(current_path).not_to eq restaurant_dishes_path(restaurant_user_two)
+    expect(page).to have_content 'Você não possui acesso a esta lista'
+  end
 end
