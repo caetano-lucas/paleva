@@ -2,6 +2,7 @@ class DishesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_restaurant
   before_action :redirect_unless_restaurant
+
   
   def index    
     if @restaurant.user != current_user

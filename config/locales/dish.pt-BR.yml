@@ -1,4 +1,6 @@
 pt-BR:
+  active: "Ativo"
+  inactive: "Inativo"
   activerecord:
     dishes:
       dish: 'Prato'

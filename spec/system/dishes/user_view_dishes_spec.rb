@@ -65,9 +65,9 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                                              email: 'usertworestaurant@gmail.com',
                                              user: user_two)
-    Dish.create!(name: 'PratoPrincipalOne', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one )
-    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant: restaurant_user_one )
-    Dish.create!(name: 'PratoPrincipalTwo', description: 'O mais pedido', calories: 3000, restaurant: restaurant_user_two )
+    Dish.create!(name: 'PratoPrincipalOne', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one, status: 'active' )
+    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant: restaurant_user_one, status: 'inactive')
+    Dish.create!(name: 'PratoPrincipalTwo', description: 'O mais pedido', calories: 3000, restaurant: restaurant_user_two ,status: 'inactive')
 
 
     login_as(user_one)
@@ -78,9 +78,12 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
 
     expect(page).to have_content 'Lista de Pratos'
     expect(page).to have_content 'PratoPrincipal'
+    expect(page).to have_content 'Ativo'
     expect(page).to have_content 'O menos pedido'
+    expect(page).to have_content 'Inativo'
     expect(page).not_to have_content 'PratoPrincipalTwo'
   end
+  
   it 'e não acessa a pagina de pratos de outros restaurantes' do
     cpf1 = CPF.generate(true).split
     cpf2 = CPF.generate(true).split

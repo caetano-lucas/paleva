@@ -33,7 +33,7 @@ describe 'usuario registra novos pratos para seu restaurante' do
     expect(page).to have_content 'NomePratoTeste'
     expect(page).to have_content 'DescriçãoPratoTeste'
     expect(page).to have_content 'Prato cadastrado com sucesso'
-    expect(page).to have_content 'Status: Ativo'
+    expect(page).to have_content 'Ativo'
   end
   
   it 'sem sucesso' do

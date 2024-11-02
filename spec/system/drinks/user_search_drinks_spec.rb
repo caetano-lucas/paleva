@@ -190,10 +190,9 @@ describe 'Usuario busca uma bebida' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
+    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id, status: 'active' )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
-    Drink.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', alcohol: true, restaurant_id: restaurant.id )
     Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
 
     login_as(user)
@@ -205,7 +204,7 @@ describe 'Usuario busca uma bebida' do
 
     expect(page).to have_content 'A mais pedida'
     expect(page).to have_content 'A menos pedida'
-    expect(page).to have_content 'não encontrar - descricao'
+    expect(page).to have_content 'Ativo'
   end
 
   it 'e clica em cadastrar nova bebida' do

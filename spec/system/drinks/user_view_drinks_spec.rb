@@ -18,7 +18,7 @@ describe 'usuario ve bebidas cadastrados' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
+    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant, status: 'active')
 
     login_as(user)
     visit root_path
@@ -29,6 +29,7 @@ describe 'usuario ve bebidas cadastrados' do
     expect(page).to have_content 'Lista de Bebidas'
     expect(page).to have_content 'BebidaPrincipal'
     expect(page).to have_content 'A mais pedido'
+    expect(page).to have_content 'Ativo'
   end
 
   it 'e não tem bebidas cadastradas' do

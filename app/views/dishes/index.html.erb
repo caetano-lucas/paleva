@@ -7,6 +7,7 @@
        <th> Foto </th>
        <th>Nome do Prato</th>
        <th>Descrição</th>
+       <th>Status</th>
        <th>Ações</th>
    </tr>
    </thead>
@@ -22,6 +23,7 @@
         </td>
         <td> <%= d.name %> </td>
         <td> <%= d.description %> </td>
+        <td> <%= I18n.translate(d.status) %> </td>
         <td> <%= link_to "Editar #{d.name}", edit_restaurant_dish_path(current_user.restaurant, d) %> |
          <%= link_to "Detalhes #{d.name}", restaurant_dish_path(current_user.restaurant, d) %> </td>
       </tr>

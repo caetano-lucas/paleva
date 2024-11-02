@@ -5,19 +5,17 @@
   <table>
     <thead>
     <tr>
+        <th> Foto </th>
         <th>Nome do Prato</th>
         <th>Descrição</th>
         <th>Calorias</th>
-        <th> Foto </th>
+        <th>Status</th>
         <th>Ações</th>
     </tr>
     </thead>
     <tbody>
       <% @dishes.each do |dish| %>
         <tr>
-          <td> <%= dish.name %> </td>
-          <td> <%= dish.description %> </td>
-          <td> <%= dish.calories %> </td>
           <td>
             <% if dish.image.attached? %>
               <%= image_tag dish.image, size: "100x100", alt: dish.name %>
@@ -25,6 +23,10 @@
               <p>Sem imagem disponível</p>
             <% end %>
           </td>
+          <td> <%= dish.name %> </td>
+          <td> <%= dish.description %> </td>
+          <td> <%= dish.calories %> </td>
+          <td> <%= I18n.translate(dish.status) %></td>
           <td> <%= link_to "Editar #{dish.name}", edit_restaurant_dish_path(current_user.restaurant, dish) %> </td>
         </tr>
       <% end %>
