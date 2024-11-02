@@ -1,33 +1,34 @@
-<% if @drink.present? %> 
-<h1>Bebida encontrada: <%= @find %> </h1>
-<table>
-   <thead>
-   <tr>
-       <th>Nome da Bebida</th>
-       <th>Descrição</th>
-       <th>Possui Álcool</th>
-       <th> Foto </th>
-       <th>Ações</th>
-   </tr>
-   </thead>
-   <tbody>
+<% if @drinks.present? %> 
+  <h1>Bebidas encontradas para: <%= @find %></h1>
+  <table>
+    <thead>
       <tr>
-        <td> <%= @drink.name %> </td>
-        <td> <%= @drink.description %> </td>
-        <td> <%= @drink.alcohol ? 'Sim' : 'Não'  %> </td>
-        <td>
-          <% if @drink.image.attached? %>
-            <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
-          <% else %>
-            <p>Sem imagem disponível</p>
-          <% end %>
-        </td>
-        <td> <%= link_to "Editar #{@drink.name}", edit_restaurant_drink_path(current_user.restaurant, @drink) %> </td>
-        <td> <%= button_to "Deletar #{@drink.name}", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> </td>
+        <th>Nome da Bebida</th>
+        <th>Descrição</th>
+        <th>Possui Álcool</th>
+        <th>Foto</th>
+        <th>Ações</th>
       </tr>
-   </tbody>
-</table>
-
+    </thead>
+    <tbody>
+      <% @drinks.each do |drink| %>
+        <tr>
+          <td><%= drink.name %></td>
+          <td><%= drink.description %></td>
+          <td><%= drink.alcohol ? 'Sim' : 'Não' %></td>
+          <td>
+            <% if drink.image.attached? %>
+              <%= image_tag drink.image, size: "100x100", alt: drink.name %>
+            <% else %>
+              <p>Sem imagem disponível</p>
+            <% end %>
+          </td>
+          <td><%= link_to "Editar #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink) %></td>
+          <td><%= button_to "Deletar #{drink.name}", restaurant_drink_path(current_user.restaurant, drink), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
-  <h1>Nenhuma bebida encontrado</h1>
+  <h1>Nenhuma bebida encontrada</h1>
 <% end %>

@@ -1,35 +1,35 @@
+<% if @dishes.present? %> 
+  <h1>Pratos encontrados: <%= @find %> </h1>
 
-<% if @dish.present? %> 
-<h1>Prato encontrado: <%= @find %> </h1>
-
-<table>
-  <thead>
-  <tr>
-      <th>Nome do Prato</th>
-      <th>Descrição</th>
-      <th>Calorias</th>
-      <th> Foto </th>
-      <th>Ações</th>
-  </tr>
-  </thead>
-  <tbody>
-
+  <table>
+    <thead>
     <tr>
-      <td> <%= @dish.name %> </td>
-      <td> <%= @dish.description %> </td>
-      <td> <%= @dish.calories %> </td>
-      <td>
-        <% if @dish.image.attached? %>
-          <%= image_tag @dish.image, size: "100x100", alt: @dish.name %>
-        <% else %>
-          <p>Sem imagem disponível</p>
-        <% end %>
-      </td>
-      <td> <%= link_to "Editar #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %> </td>
-      <td> <%= button_to "Deletar #{@dish.name}", restaurant_dish_path(current_user.restaurant, @dish), method: :delete %> </td>
+        <th>Nome do Prato</th>
+        <th>Descrição</th>
+        <th>Calorias</th>
+        <th> Foto </th>
+        <th>Ações</th>
     </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @dishes.each do |dish| %>
+        <tr>
+          <td> <%= dish.name %> </td>
+          <td> <%= dish.description %> </td>
+          <td> <%= dish.calories %> </td>
+          <td>
+            <% if dish.image.attached? %>
+              <%= image_tag dish.image, size: "100x100", alt: dish.name %>
+            <% else %>
+              <p>Sem imagem disponível</p>
+            <% end %>
+          </td>
+          <td> <%= link_to "Editar #{dish.name}", edit_restaurant_dish_path(current_user.restaurant, dish) %> </td>
+          <td> <%= button_to "Deletar #{dish.name}", restaurant_dish_path(current_user.restaurant, dish), method: :delete %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <h1>Nenhuma prato encontrado</h1>
 <% end %>
