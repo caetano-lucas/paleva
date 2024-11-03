@@ -87,7 +87,7 @@ describe 'Usuario busca uma bebida' do
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant)
-    drink = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
+    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
     drink2 = Drink.create!(name: 'BebidaP', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
     drink2.inactive!
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedido', alcohol: true, restaurant: restaurant )
