@@ -74,6 +74,19 @@ class DrinksController < ApplicationController
     @drinks = @restaurant.drinks.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end
 
+  def change_status
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end    
+    @drink = @restaurant.drinks.find(params[:id])
+    if @drink.active? 
+      @drink.inactive!
+    else 
+      @drink.active!
+    end
+    redirect_to restaurant_drink_path(@restaurant, @drink)
+  end
+
   private
   
   def set_restaurant

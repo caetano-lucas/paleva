@@ -27,8 +27,8 @@
           <td> <%= d.description %> </td>
           <td> <%= d.alcohol ? 'Sim' : 'Não'  %> </td>
           <td> <%= I18n.translate(d.status) %></td>
-          <td> <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %> |
-          <%= link_to "Detalhes #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> </td> 
+          <td><%= link_to "Detalhes #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> |
+          <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %></td> 
         </tr>
     <% end %>
     </tbody>

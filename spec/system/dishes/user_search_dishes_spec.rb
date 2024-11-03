@@ -50,8 +50,58 @@ describe 'Usuario busca um prato' do
     expect(page).to have_link 'Editar PratoPrincipal'
     expect(page).to have_content 'Pratos encontrados'
     expect(page).to have_content 'PratoPrincipal'
-    expect(page).not_to have_content 'não encontrar - nome'
+    expect(current_path).to eq search_restaurant_dishes_path(restaurant)
   end
+
+  it 'e tem acesso a detalhes do prato' do
+    cpf = CPF.generate(true).split
+    cnpj = CNPJ.generate(true).split
+    user = User.create!(email: 'userone@email.com',first_name: 'userone',
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
+                                    email: 'useronerestaurant@gmail.com',
+                                    user: user)
+    Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
+    Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant_id: restaurant.id )
+    Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
+   
+    login_as(user)
+    visit root_path
+    within('nav') do
+      fill_in 'search_dish', with: 'PratoPrincipal'
+    end
+    click_on 'Buscar-Prato'
+
+    expect(current_path).to eq search_restaurant_dishes_path(restaurant)
+   
+    expect(page).to have_content 'Ativo'
+  end
+
+  it 'e tem acesso a detalhes dos pratos' do
+    cpf = CPF.generate(true).split
+    cnpj = CNPJ.generate(true).split
+    user = User.create!(email: 'userone@email.com',first_name: 'userone',
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
+                                    email: 'useronerestaurant@gmail.com',
+                                    user: user)
+    drink1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant)
+    drink2 = Dish.create!(name: 'PratoP', description: 'O menos pedido', calories: 2000, restaurant: restaurant )
+    drink2.inactive!
+    login_as(user)
+    visit root_path
+    within('nav') do
+      fill_in 'search_dish', with: 'PratoP'
+    end
+    click_on 'Buscar-Prato'
+
+    expect(current_path).to eq search_restaurant_dishes_path(restaurant)
+    expect(page).to have_content 'Ativo'
+    expect(page).to have_content 'Inativo'
+  end
+
 
   it 'e encontra um prato pela descrição' do
     cpf = CPF.generate(true).split

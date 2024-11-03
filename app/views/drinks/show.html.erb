@@ -21,7 +21,9 @@
           <td> <%= @drink.name %> </td>
           <td> <%= @drink.description %> </td>
           <td> <%= @drink.alcohol ? 'Sim' : 'Não'  %> </td>
-          <td> <%= I18n.translate(@drink.status) %></td>
+          <td> <%= I18n.translate(@drink.status) %>
+          </td>
+          <td> <%= button_to 'Alterar Status', change_status_restaurant_drink_path(@restaurant, @drink) %></td>
           <td> <%= link_to "Editar #{@drink.name}", edit_restaurant_drink_path(current_user.restaurant, @drink) %></td>
         </tr>
  

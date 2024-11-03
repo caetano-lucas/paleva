@@ -22,6 +22,7 @@
         <td> <%= @dish.description %> </td>
         <td> <%= @dish.calories %> </td>
         <td> <%= I18n.translate(@dish.status) %> </td>
+        <td> <%= button_to 'Alterar Status', change_status_restaurant_dish_path(@restaurant, @dish) %></td>
         <td> <%= link_to "Editar #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %></td>
       </tr>
    </tbody>

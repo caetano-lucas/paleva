@@ -28,7 +28,9 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     expect(page).to have_content 'Lista de Pratos'
     expect(page).to have_content 'PratoPrincipal'
     expect(page).to have_content 'O mais pedido'
+    expect(page).to have_content 'Ativo'
   end
+  
   it 'e não tem pratos cadastradas' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split

@@ -9,7 +9,7 @@
         <th>Descrição</th>
         <th>Possui Álcool</th>
         <th>Status</th>
-        <th>Ações</th>
+        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +26,7 @@
           <td><%= drink.description %></td>
           <td><%= drink.alcohol ? 'Sim' : 'Não' %></td>
           <td> <%= I18n.translate(drink.status) %></td>
+          <td> <%= link_to "Detalhes #{drink.name}", restaurant_drink_path(current_user.restaurant, drink) %></td>
           <td><%= link_to "Editar #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink) %></td>
         </tr>
       <% end %>

@@ -69,6 +69,19 @@ class DishesController < ApplicationController
     @dishes = @restaurant.dishes.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end
 
+  def change_status
+    if @restaurant.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end    
+    @dish = @restaurant.dishes.find(params[:id])
+    if @dish.active? 
+      @dish.inactive!
+    else 
+      @dish.active!
+    end
+    redirect_to restaurant_dish_path(@restaurant, @dish)
+  end
+
   private
 
   def set_restaurant
