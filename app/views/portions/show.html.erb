@@ -1,0 +1,7 @@
+<h1>Detalhes da Porção</h1>
+
+<p><strong>Descrição:</strong> <%= @portion.description %></p>
+<p><strong>Preço:</strong> R$ <%= @portion.price_whole %>,<%= @portion.price_cents %></p>
+
+<%= link_to 'Editar', edit_restaurant_dish_portion_path(@restaurant, @dish, @portion) %>
+<%= link_to 'Voltar para todas as porções', restaurant_dish_portions_path(@restaurant, @dish) %>

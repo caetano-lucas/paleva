@@ -4,5 +4,6 @@ class Dish < ApplicationRecord
   has_many :dish_features
   has_many :features, through: :dish_features
   has_one_attached :image
+  has_many :portions, as: :portionable, dependent: :destroy
   enum status: { active: 1, inactive: 0 }
 end

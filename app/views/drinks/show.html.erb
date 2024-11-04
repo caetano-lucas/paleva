@@ -29,3 +29,28 @@
  
     </tbody>
   </table>
+
+<% if @drink.portions.present? %>
+  <h2>Porções Cadastradas Para esta bebida:</h2> 
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição da Porção</th>
+          <th>Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @drink.portions.each do |portion| %>
+          <tr>
+            <td><%= portion.description %></td>
+            <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% else %>
+  <p>Nenhuma porção cadastrada para esta bebida.</p>
+<% end %>
+
+
+<%= link_to 'Voltar', restaurant_drinks_path(@drink.restaurant) %>

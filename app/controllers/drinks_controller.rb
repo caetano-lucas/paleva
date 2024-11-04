@@ -16,6 +16,7 @@ class DrinksController < ApplicationController
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     else
       @drink = @restaurant.drinks.find(params[:id])
+      @portions = @drink.portions
     end
   end
 

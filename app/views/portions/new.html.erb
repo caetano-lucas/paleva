@@ -1,0 +1,32 @@
+<h1>Adicione as informações da Porção:</h1>
+
+<% if @portion.errors.any? %>
+  <ul>
+    <% @portion.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: [@restaurant, @dish, @portion], local: true) do |f| %>
+  <div>
+    <%= f.label :description, 'Descrição da Porção' %>
+    <%= f.text_field :description, required: true, placeholder: "Ex.: Meia porção, serve 3 pessoas" %>
+  </div>
+
+  <div>
+    <%= f.label :price_whole, 'Preço (Parte Inteira - R$)' %>
+    <%= f.number_field :price_whole, required: true, placeholder: "Ex.: 45" %>
+  </div>
+
+  <div>
+    <%= f.label :price_cents, 'Preço (Centavos)' %>
+    <%= f.number_field :price_cents, required: true, placeholder: "Ex.: 99" %>
+  </div>
+
+  <div>
+    <%= f.submit 'Salvar Porção' %>
+  </div>
+<% end %>
+
+<p><%= link_to 'Voltar para Porções', restaurant_dish_portions_path(@restaurant, @dish) %></p>

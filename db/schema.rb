@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_011906) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_04_130824) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,6 +87,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_011906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_operating_hours_on_restaurant_id"
+  end
+
+  create_table "portions", force: :cascade do |t|
+    t.string "description"
+    t.integer "price_whole"
+    t.integer "price_cents"
+    t.string "portionable_type", null: false
+    t.integer "portionable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
   end
 
   create_table "restaurants", force: :cascade do |t|

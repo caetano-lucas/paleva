@@ -39,3 +39,26 @@
    </tbody>
 </table>
 
+<% if @dish.portions.present? %>
+<h2>Porções Cadastradas Para este prato:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Descrição da Porção</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dish.portions.each do |portion| %>
+        <tr>
+          <td><%= portion.description %></td>
+          <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nenhuma porção cadastrada para este prato.</p>
+<% end %>
+<p><%= link_to 'Cadastrar porção',new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
+<%= link_to 'Voltar', restaurant_dishes_path(@dish.restaurant) %>

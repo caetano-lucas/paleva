@@ -25,6 +25,7 @@ class DishesController < ApplicationController
         @dish = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
       else
         @dish = @restaurant.dishes.find(params[:id])
+        @portions = @dish.portions
       end
     end
   end
