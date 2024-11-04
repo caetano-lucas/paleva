@@ -37,7 +37,6 @@ class DishesController < ApplicationController
     if @dish.update(dish_params)
       redirect_to restaurant_dishes_path(current_user.restaurant), notice: 'Prato atualizado com sucesso'
     else
-      Rails.logger.error(@dish.errors.full_messages) 
       flash.now[:notice] = "Não foi possível atualizar o Prato"
       render 'edit', status: :unprocessable_entity
     end

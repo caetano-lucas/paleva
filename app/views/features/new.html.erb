@@ -1,15 +1,17 @@
-<h1>Cadastre uma nova característica:</h1>
-<% if @features.errors.any? %>
+<% provide(:title, 'Nova Característica') %>
+
+<h1>Adicione as informações da Característica:</h1>
+
+<% if @feature.errors.any? %>
   <ul>
-    <% @features.errors.full_messages.each do |msg | %>
-    <li> <%= msg %> </li>
+    <% @feature.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= form_with(model: [current_user.restaurant, @features]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
- 
-  <%= f.submit 'Salvar Característica' %>  
+<%= form_with(model: [@restaurant, @feature], local: true) do |f| %>
+  <%= f.label :name, 'Nome da característica' %>
+  <%= f.text_field :name, required: true %>
+  <%= f.submit 'Salvar Característica' %>
 <% end %>

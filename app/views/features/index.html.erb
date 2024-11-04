@@ -4,13 +4,14 @@
   <table>
     <thead>
     <tr>
-        <th> Nome </th>
+        <th> Nome da característica </th>
     </tr>
     </thead>
     <tbody>
-      <% @features.each do |f| %>
+      <% @features.each do |feature| %>
+      
         <tr>
-          <td> <%= f.name %> </td>
+          <td> <%= feature.name %> </td>
         </tr>
       <% end %>
     </tbody>
