@@ -1,0 +1,15 @@
+<h1>Cadastre uma nova característica:</h1>
+<% if @features.errors.any? %>
+  <ul>
+    <% @features.errors.full_messages.each do |msg | %>
+    <li> <%= msg %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: [current_user.restaurant, @features]) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+ 
+  <%= f.submit 'Salvar Característica' %>  
+<% end %>

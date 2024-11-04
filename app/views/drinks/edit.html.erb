@@ -6,17 +6,17 @@
     <% end %>
   </ul>
 <% end %>
-
 <%= form_with(model: [current_user.restaurant, @drink]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description%>
-  <%= f.text_field :description %>
-  <%= f.label :alcohol %>
-  <%= f.check_box :alcohol %>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
+  <ul>
+    <li><%= f.label :name %> <%= f.text_field :name %></li>
+    <li><%= f.label :description%> <%= f.text_field :description %></li>
+    <li><%= f.label :alcohol %> <%= f.check_box :alcohol %></li>
+    <li><%= f.label :image %> 
+    <% if @drink.image.attached? %> <%= f.file_field :image %>
+      <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
+    <% else %>
+      <p>Sem imagem disponível</p>
+    <% end %></li>
   <%= f.submit 'Salvar Bebida' %>
 <% end %>
-
-<td> <%= button_to "Deletar Bebida", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> </td>
+  <%= button_to "Deletar Bebida", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> 

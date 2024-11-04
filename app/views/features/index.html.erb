@@ -1,0 +1,20 @@
+<h1>Características adicionais</h1>
+<p><%= link_to 'Cadastrar nova característica', new_restaurant_feature_path %></p>
+<% if @features.present? %> 
+  <table>
+    <thead>
+    <tr>
+        <th> Nome </th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @features.each do |f| %>
+        <tr>
+          <td> <%= f.name %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Não há Características cadastradas para este restaurante, cadastre!</p>
+<% end %>

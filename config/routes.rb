@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 
     resources :drinks do
       get 'search', on: :collection
-      post 'change_status', on: :member
+      post 'change_status', on: :member     
     end
 
     resources :operating_hours
+    
+    resources :features
   end
 end

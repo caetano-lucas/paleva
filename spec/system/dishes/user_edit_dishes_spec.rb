@@ -19,7 +19,7 @@ describe 'usuario edita um prato já cadastrado' do
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant )
-
+  
     login_as(user)
     visit root_path
     within('nav') do
@@ -28,14 +28,15 @@ describe 'usuario edita um prato já cadastrado' do
     within('table') do
       click_on 'Editar PratoPrincipal'
     end
+
     fill_in 'Nome do Prato', with: 'NomePratoTeste2'
     fill_in 'Descrição', with: 'DescriçãoPratoTeste2'
     fill_in 'Calorias', with: '5000'
-    click_button 'Salvar Prato'
-
+    click_on 'Salvar Prato'
+    
     expect(page).to have_content 'NomePratoTeste2'
     expect(page).to have_content 'DescriçãoPratoTeste2'
-    expect(page).to have_content 'Lista de Pratos'    
+    expect(page).to have_content 'Lista de Pratos'
     expect(page).not_to have_content 'PratoPrincipal'
     expect(page).not_to have_content 'O mais pedido'
   end  

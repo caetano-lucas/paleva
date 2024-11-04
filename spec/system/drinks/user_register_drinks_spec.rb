@@ -20,7 +20,6 @@ describe 'usuario registra novas bebidas para seu restaurante' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-
     login_as(user)
     visit root_path
     within('nav') do

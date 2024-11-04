@@ -9,6 +9,7 @@
         <th>Nome do Prato</th>
         <th>Descrição</th>
         <th>Calorias</th>
+        <th>Contém</th>
         <th>Status</th>
         <th>Ações</th>
     </tr>
@@ -26,6 +27,11 @@
           <td> <%= dish.name %> </td>
           <td> <%= dish.description %> </td>
           <td> <%= dish.calories %> </td>
+          <td> 
+            <% dish.dish_features.each do |drink_feature| %>
+              <%= dish_feature.feature.name %>
+            <% end %>
+          </td>
           <td> <%= I18n.translate(dish.status) %></td>
           <td> <%= link_to "Detalhes #{dish.name}", restaurant_dish_path(current_user.restaurant, dish) %></td>
           <td> <%= link_to "Editar #{dish.name}", edit_restaurant_dish_path(current_user.restaurant, dish) %> </td>
@@ -36,3 +42,5 @@
 <% else %>
   <h1>Nenhum prato encontrado</h1>
 <% end %>
+
+<p><%= link_to 'Características adicionais', root_path %></p>

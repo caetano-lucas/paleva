@@ -3,6 +3,7 @@ class Restaurant < ApplicationRecord
   has_many :dishes
   has_many :drinks
   has_many :operating_hours, dependent: :destroy
+  has_many :features
   validates :trade_name, :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, presence: true
   validates :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, uniqueness: true
   validates :cnpj, cnpj: true

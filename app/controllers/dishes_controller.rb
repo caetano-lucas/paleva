@@ -37,6 +37,7 @@ class DishesController < ApplicationController
     if @dish.update(dish_params)
       redirect_to restaurant_dishes_path(current_user.restaurant), notice: 'Prato atualizado com sucesso'
     else
+      Rails.logger.error(@dish.errors.full_messages) 
       flash.now[:notice] = "Não foi possível atualizar o Prato"
       render 'edit', status: :unprocessable_entity
     end
@@ -57,8 +58,11 @@ class DishesController < ApplicationController
       return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
      end
     @dish = @restaurant.dishes.find(params[:id])
-    @dish.destroy
-    redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
+    if @dish.destroy
+      redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
+    else
+      redirect_to restaurant_dishes_path(@restaurant), alert: 'Erro ao deletar o prato'
+    end
   end
 
   def search
