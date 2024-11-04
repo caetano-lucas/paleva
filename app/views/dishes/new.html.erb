@@ -1,4 +1,5 @@
 <h1>Adicione as informações do prato: </h1>
+
 <% if @dish.errors.any? %>
   <ul>
     <% @dish.errors.full_messages.each do |msg | %>
@@ -7,14 +8,17 @@
   </ul>
 <% end %>
 
-<%= form_with(model: [current_user.restaurant, @dish], local: true) do  |f|  %>
-  <%= f.label :name%>
-  <%= f.text_field :name %>
-  <%= f.label :description%>
-  <%= f.text_field :description %>
-  <%= f.label :calories%>
-  <%= f.text_field :calories %>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-  <%= f.submit 'Salvar Prato' %>
-<% end %>
+
+<div>
+  <%= form_with(model: [current_user.restaurant, @dish], local: true) do  |f|  %>
+    <%= f.label :name%>
+    <%= f.text_field :name %>
+    <%= f.label :description%>
+    <%= f.text_field :description %>
+    <%= f.label :calories%>
+    <%= f.text_field :calories %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <%= f.submit 'Salvar Prato' %>
+  <% end %>
+</div>

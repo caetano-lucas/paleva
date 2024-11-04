@@ -1,0 +1,12 @@
+<h1>Nova característica</h1>
+
+<%= form_with(model: [@dish.restaurant, @dish, @dish_feature]) do |f| %>
+  <div>
+    <%= f.label :feature_id, 'Característica' %>
+    <%= f.collection_select :feature_id, Feature.where(restaurant: @dish.restaurant), :id, :name %>
+  </div>
+  
+  <div>
+    <%= f.submit 'Salvar' %>
+  </div>
+<% end %>

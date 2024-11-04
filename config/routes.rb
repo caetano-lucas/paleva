@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :dishes do
       get 'search', on: :collection
       post 'change_status', on: :member
+      resources :dish_features, only: [:new, :create]
     end
 
     resources :drinks do

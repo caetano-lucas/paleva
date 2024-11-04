@@ -8,6 +8,7 @@ class DishesController < ApplicationController
     if @restaurant.user != current_user
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     else
+      @restaurant = Restaurant.find(params[:restaurant_id])
       @dishes = @restaurant.dishes
     end
   end
@@ -30,6 +31,7 @@ class DishesController < ApplicationController
 
   def new
     @dish = @restaurant.dishes.build
+    @dish_feature = DishFeature.new
   end
   
   def update
@@ -56,7 +58,9 @@ class DishesController < ApplicationController
      if @restaurant.user != current_user
       return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
      end
+     
     @dish = @restaurant.dishes.find(params[:id])
+    @dish.dish_features.destroy_all
     if @dish.destroy
       redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
     else

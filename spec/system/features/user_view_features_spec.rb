@@ -113,14 +113,14 @@ describe 'usuario vê características extras dos pratos' do
 
    expect(page).to have_content 'Contém'
    expect(page).to have_content 'Glúten'
-   expect(page).to have_content 'Características adicionais'
+   expect(page).to have_content 'Adicionar característica'
   end
 
   it 'com sucesso ao clicar em editar uma bebida' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
-    last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+                        last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
@@ -143,6 +143,6 @@ describe 'usuario vê características extras dos pratos' do
 
     expect(page).to have_content 'Contém'
     expect(page).to have_content 'Glúten'
-    expect(page).to have_link 'Características adicionais'
+    expect(page).to have_link 'Adicionar característica'
   end
 end
