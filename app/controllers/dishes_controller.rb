@@ -9,7 +9,11 @@ class DishesController < ApplicationController
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     else
       @restaurant = Restaurant.find(params[:restaurant_id])
-      @dishes = @restaurant.dishes
+      if params[:feature_ids].present?
+        @dishes = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
+      else
+        @dishes = @restaurant.dishes
+      end
     end
   end
 
@@ -17,7 +21,11 @@ class DishesController < ApplicationController
     if @restaurant.user != current_user
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     else
-      @dish = @restaurant.dishes.find(params[:id])
+      if params[:feature_ids].present?
+        @dish = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
+      else
+        @dish = @restaurant.dishes.find(params[:id])
+      end
     end
   end
 

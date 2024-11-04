@@ -278,4 +278,34 @@ describe 'Usuario busca um prato' do
     expect(page).to have_content 'Adicione as informações do prato'
     expect(current_path).to eq new_restaurant_dish_path(restaurant)
   end
+
+  it 'e encontra um prato filtrando por características' do
+    cpf = CPF.generate(true).split
+    cnpj = CNPJ.generate(true).split
+    user = User.create!(email: 'userone@email.com',first_name: 'userone',
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
+                                    email: 'useronerestaurant@gmail.com',
+                                    user: user)
+    dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
+    dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
+    dish3 = Dish.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', calories: 2000, restaurant_id: restaurant.id )
+    feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
+    feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
+    DishFeature.create!(dish: dish1, feature: feature1)
+    DishFeature.create!(dish: dish2, feature: feature1)
+    DishFeature.create!(dish: dish3, feature: feature2)
+    
+    login_as(user)
+    visit root_path
+    click_on 'Buscar-Prato'
+    check 'Glúten'
+    click_button 'Filtrar'
+
+    expect(page).to have_link 'Editar PratoPrincipal'
+    expect(page).to have_content 'Lista de Pratos'
+    expect(page).to have_content 'PratoPrincipal'
+    expect(current_path).to eq restaurant_dishes_path(restaurant)
+  end
 end
