@@ -4,4 +4,4 @@ import "controllers"
 import "popper"
 import "bootstrap"
 
-// Turbo.session.drive = false 
+Turbo.session.drive = false 

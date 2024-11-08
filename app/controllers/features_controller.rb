@@ -2,14 +2,13 @@ class FeaturesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_restaurant
   before_action :redirect_unless_restaurant
+  before_action :user_have_permition
 
   def index
-    authorize_access
     @features = @restaurant.features
   end
 
   def show
-    authorize_access
     @feature = @restaurant.features.find(params[:id])
   end
 
@@ -28,7 +27,6 @@ class FeaturesController < ApplicationController
   end
 
   def edit
-    authorize_access
     @feature = @restaurant.features.find(params[:id])
   end
 
@@ -43,7 +41,6 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    authorize_access
     @feature = @restaurant.features.find(params[:id])
     if @feature.destroy
       redirect_to restaurant_features_path(@restaurant), notice: 'Característica deletada com sucesso'
@@ -54,6 +51,12 @@ class FeaturesController < ApplicationController
 
   private
 
+  def user_have_permition
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
+
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
   end
@@ -63,10 +66,6 @@ class FeaturesController < ApplicationController
     unless restaurant&.persisted?
       redirect_to new_restaurant_path, alert: "Você não tem permissão para isso"
     end
-  end
-
-  def authorize_access
-    redirect_to root_path, alert: 'Você não possui acesso a esta lista' if @restaurant.user != current_user
   end
 
   def feature_params

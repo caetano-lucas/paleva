@@ -1,6 +1,13 @@
 require 'rails_helper'
 
-describe 'usuario vê características extras dos pratos' do  
+describe 'usuario vê características extras dos pratos' do
+  it 'se estiver autenticado' do 
+
+    visit root_path
+
+    expect(current_path).not_to have_link 'Pratos Cadastrados'
+
+  end
   it 'com sucesso' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split

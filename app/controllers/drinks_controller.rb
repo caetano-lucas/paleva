@@ -1,44 +1,27 @@
 class DrinksController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_restaurant
   before_action :redirect_unless_restaurant
+  before_action :set_restaurant
+  before_action :authenticate_user!
+  before_action :user_have_permition
 
   def index
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    else
-      @drinks = @restaurant.drinks
-    end   
+    @drinks = @restaurant.drinks
   end
 
   def show
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    else
       @drink = @restaurant.drinks.find(params[:id])
       @portions = @drink.portions
-    end
   end
 
   def edit
-      if @restaurant.user != current_user
-        redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-      else
-        @drink = @restaurant.drinks.find(params[:id])
-      end
+    @drink = @restaurant.drinks.find(params[:id])
   end
 
   def new
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end
     @drink = @restaurant.drinks.build
   end
 
   def update
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end
     @drink = @restaurant.drinks.find(params[:id])
     if @drink.update(drink_params)
       redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
@@ -49,7 +32,7 @@ class DrinksController < ApplicationController
   end
 
   def create
-    @drink = @restaurant.drinks.build(drink_params)   
+    @drink = @restaurant.drinks.build(drink_params)
     if @drink.save
       redirect_to restaurant_drink_path(@restaurant, @drink), notice: 'Bebida cadastrada com sucesso'
     else
@@ -60,25 +43,17 @@ class DrinksController < ApplicationController
 
   def destroy
     @drink = @restaurant.drinks.find(params[:id])
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a este item'
-    end 
     @drink.destroy
     redirect_to restaurant_drinks_path(@restaurant), notice: 'Bebida deletada com sucesso'
   end
 
   def search
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end
     @find = params["query"]
     @drinks = @restaurant.drinks.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end
 
   def change_status
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end    
+
     @drink = @restaurant.drinks.find(params[:id])
     if @drink.active? 
       @drink.inactive!
@@ -89,6 +64,12 @@ class DrinksController < ApplicationController
   end
 
   private
+
+  def user_have_permition
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
   
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])

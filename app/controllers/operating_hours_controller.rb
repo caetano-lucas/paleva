@@ -1,7 +1,8 @@
 class OperatingHoursController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_restaurant
   before_action :redirect_unless_restaurant
+  before_action :set_restaurant
+  before_action :user_have_permition
 
   def index
     @operating_hours = @restaurant.operating_hours
@@ -43,8 +44,14 @@ class OperatingHoursController < ApplicationController
   
   private
 
+  def user_have_permition
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
+
   def set_restaurant
-    @restaurant = current_user&.restaurant
+    @restaurant =  Restaurant.find(params[:restaurant_id])
   end
 
   def redirect_unless_restaurant

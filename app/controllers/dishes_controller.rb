@@ -2,40 +2,29 @@ class DishesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_restaurant
   before_action :redirect_unless_restaurant
+  before_action :user_have_permition
 
   
-  def index    
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+  def index
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    if params[:feature_ids].present?
+      @dishes = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
     else
-      @restaurant = Restaurant.find(params[:restaurant_id])
-      if params[:feature_ids].present?
-        @dishes = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
-      else
-        @dishes = @restaurant.dishes
-      end
+      @dishes = @restaurant.dishes
     end
   end
 
   def show
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    if params[:feature_ids].present?
+      @dish = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
     else
-      if params[:feature_ids].present?
-        @dish = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
-      else
-        @dish = @restaurant.dishes.find(params[:id])
-        @portions = @dish.portions
-      end
+      @dish = @restaurant.dishes.find(params[:id])
+      @portions = @dish.portions
     end
   end
 
   def edit
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    else
-      @dish = @restaurant.dishes.find(params[:id])
-    end
+    @dish = @restaurant.dishes.find(params[:id])
   end
 
   def new
@@ -64,10 +53,6 @@ class DishesController < ApplicationController
   end
 
   def destroy
-     if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-     end
-     
     @dish = @restaurant.dishes.find(params[:id])
     @dish.dish_features.destroy_all
     if @dish.destroy
@@ -78,17 +63,11 @@ class DishesController < ApplicationController
   end
 
   def search
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end
     @find = params["query"]
     @dishes = @restaurant.dishes.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
   end
 
   def change_status
-    if @restaurant.user != current_user
-      return redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end    
     @dish = @restaurant.dishes.find(params[:id])
     if @dish.active? 
       @dish.inactive!
@@ -99,6 +78,12 @@ class DishesController < ApplicationController
   end
 
   private
+
+  def user_have_permition
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
