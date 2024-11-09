@@ -22,9 +22,8 @@ describe 'usuario vê características extras dos pratos' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -51,9 +50,8 @@ describe 'usuario vê características extras dos pratos' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -79,9 +77,8 @@ describe 'usuario vê características extras dos pratos' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -107,9 +104,8 @@ describe 'usuario vê características extras dos pratos' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -137,9 +133,8 @@ describe 'usuario vê características extras dos pratos' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish2)
+
     
     login_as(user)
     visit root_path

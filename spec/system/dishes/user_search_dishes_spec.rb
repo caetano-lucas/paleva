@@ -293,9 +293,7 @@ describe 'Usuario busca um prato' do
     dish3 = Dish.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', calories: 2000, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
     
     login_as(user)
     visit root_path
@@ -305,7 +303,7 @@ describe 'Usuario busca um prato' do
 
     expect(page).to have_link 'Editar PratoPrincipal'
     expect(page).to have_content 'Lista de Pratos'
-    expect(page).to have_content 'PratoPrincipal'
+    expect(page).to have_content 'Glúten'
     expect(current_path).to eq restaurant_dishes_path(restaurant)
   end
 end

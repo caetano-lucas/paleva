@@ -1,7 +1,7 @@
   <p><%= link_to 'Características adicionais', restaurant_features_path %></p>
 
 <h1>Detalhes do prato</h1>
-<p><%= link_to 'Adicionar característica', new_restaurant_dish_dish_feature_path(dish_id: @dish.id) %></p>
+<p><%= link_to 'Adicionar característica', new_restaurant_dish_feature_path(restaurant: @restaurant, dish_id: @dish.id) %></p>
 
 <table>
    <thead>
@@ -28,8 +28,8 @@
         <td> <%= @dish.description %> </td>
         <td> <%= @dish.calories %> </td>
         <td> 
-          <% @dish.dish_features.each do |dish_feature| %>
-            <%= dish_feature.feature.name %>
+          <% @dish.features.each do |dish_feature| %>
+            <%= dish_feature.name %>
           <% end %>
         </td>
         <td> <%= I18n.translate(@dish.status) %> </td>

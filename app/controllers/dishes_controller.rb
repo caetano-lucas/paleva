@@ -4,9 +4,7 @@ class DishesController < ApplicationController
   before_action :redirect_unless_restaurant
   before_action :user_have_permition
 
-  
   def index
-    @restaurant = Restaurant.find(params[:restaurant_id])
     if params[:feature_ids].present?
       @dishes = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
     else
@@ -29,9 +27,9 @@ class DishesController < ApplicationController
 
   def new
     @dish = @restaurant.dishes.build
-    @dish_feature = DishFeature.new
+    @features = @restaurant.features
   end
-  
+
   def update
     @dish = @restaurant.dishes.find(params[:id])
     if @dish.update(dish_params)
@@ -54,7 +52,7 @@ class DishesController < ApplicationController
 
   def destroy
     @dish = @restaurant.dishes.find(params[:id])
-    @dish.dish_features.destroy_all
+    @dish.features.destroy_all
     if @dish.destroy
       redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
     else
@@ -69,9 +67,9 @@ class DishesController < ApplicationController
 
   def change_status
     @dish = @restaurant.dishes.find(params[:id])
-    if @dish.active? 
+    if @dish.active?
       @dish.inactive!
-    else 
+    else
       @dish.active!
     end
     redirect_to restaurant_dish_path(@restaurant, @dish)

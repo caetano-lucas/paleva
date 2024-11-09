@@ -19,7 +19,8 @@ describe 'usuario registra porções' do
                                     user: user)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path

@@ -1,5 +1,17 @@
 <h1>Bebidas encontradas para: <%= @find %></h1>
 <p><%= link_to 'Cadastrar nova Bebida', new_restaurant_drink_path %></p>
+<%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
+  <h3>Filtrar por características:</h3>
+  <% @features = Feature.where(restaurant_id: @restaurant.id) %> 
+  <% @features.each do |feature| %>
+    <div>
+      <%= check_box_tag feature.name, feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
+      <%= label_tag "feature_ids_#{feature.id}", feature.name %>
+    </div>
+  <% end %>
+  <%= submit_tag 'Filtrar' %>
+<% end %>
+
 <% if @drinks.present? %> 
   <table>
     <thead>
@@ -7,6 +19,7 @@
         <th>Foto</th>
         <th>Nome da Bebida</th>
         <th>Descrição</th>
+        <th>Contém</th>
         <th>Possui Álcool</th>
         <th>Status</th>
         <th> </th>
@@ -24,6 +37,11 @@
           </td>
           <td><%= drink.name %></td>
           <td><%= drink.description %></td>
+          <td> 
+            <% drink.features.each do |drink_feature| %>
+              <%= drink_feature.name %>
+            <% end %>
+          </td>
           <td><%= drink.alcohol ? 'Sim' : 'Não' %></td>
           <td> <%= I18n.translate(drink.status) %></td>
           <td> <%= link_to "Detalhes #{drink.name}", restaurant_drink_path(current_user.restaurant, drink) %></td>

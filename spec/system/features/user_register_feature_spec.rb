@@ -8,7 +8,7 @@ describe 'usuario cadastra uma característica' do
     expect(current_path).not_to have_link 'Pratos Cadastrados'
 
   end
-  it 'com sucesso a partir da lista' do
+  it 'nova com sucesso a partir da lista' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -22,10 +22,8 @@ describe 'usuario cadastra uma característica' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
-    
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     login_as(user)
     visit root_path
     within('nav') do
@@ -38,7 +36,7 @@ describe 'usuario cadastra uma característica' do
 
     expect(page).to have_content 'Glúten'
   end
-  it 'com sucesso a partir da busca' do
+  it 'nova com sucesso a partir da busca' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -52,9 +50,8 @@ describe 'usuario cadastra uma característica' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -67,7 +64,7 @@ describe 'usuario cadastra uma característica' do
     expect(current_path).to eq new_restaurant_feature_path(restaurant)
   end
 
-  it 'com sucesso a partir tela de edição do prato' do
+  it 'ao prato, com sucesso a partir tela de edição do prato' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -81,9 +78,6 @@ describe 'usuario cadastra uma característica' do
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
     
     login_as(user)
     visit root_path
@@ -102,7 +96,7 @@ describe 'usuario cadastra uma característica' do
     expect(page).to have_content 'Goiabada'
   end
 
-  it 'com sucesso a partir tela de cadastro do prato' do
+  it 'ao prato, com sucesso a partir tela de cadastro do prato' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -117,9 +111,8 @@ describe 'usuario cadastra uma característica' do
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
     Feature.create!(name: 'Apimentado', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user)
     visit root_path
@@ -165,9 +158,8 @@ describe 'usuario cadastra uma característica' do
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
     Feature.create!(name: 'Apimentado', restaurant: restaurant)
-    DishFeature.create!(dish: dish1, feature: feature1)
-    DishFeature.create!(dish: dish2, feature: feature1)
-    DishFeature.create!(dish: dish3, feature: feature2)
+    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+
     
     login_as(user_one)
     visit new_restaurant_feature_path(restaurant_user_two)

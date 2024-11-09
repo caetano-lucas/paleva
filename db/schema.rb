@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_130824) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_08_230205) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,15 +37,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_130824) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "dish_features", force: :cascade do |t|
-    t.integer "dish_id", null: false
-    t.integer "feature_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dish_id"], name: "index_dish_features_on_dish_id"
-    t.index ["feature_id"], name: "index_dish_features_on_feature_id"
   end
 
   create_table "dishes", force: :cascade do |t|
@@ -76,6 +67,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_130824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_features_on_restaurant_id"
+  end
+
+  create_table "item_features", force: :cascade do |t|
+    t.string "featurable_type"
+    t.integer "featurable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "feature_id", null: false
+    t.index ["featurable_type", "featurable_id"], name: "index_item_features_on_featurable"
+    t.index ["feature_id"], name: "index_item_features_on_feature_id"
   end
 
   create_table "operating_hours", force: :cascade do |t|
@@ -131,11 +132,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_130824) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dish_features", "dishes"
-  add_foreign_key "dish_features", "features"
   add_foreign_key "dishes", "restaurants"
   add_foreign_key "drinks", "restaurants"
   add_foreign_key "features", "restaurants"
+  add_foreign_key "item_features", "features"
   add_foreign_key "operating_hours", "restaurants"
   add_foreign_key "restaurants", "users"
 end

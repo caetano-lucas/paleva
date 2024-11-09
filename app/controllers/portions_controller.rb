@@ -3,6 +3,7 @@ class PortionsController < ApplicationController
   before_action :set_restaurant
   before_action :set_dish
   before_action :redirect_unless_restaurant
+  before_action :user_have_permition
 
   def index
     authorize_access
@@ -11,7 +12,6 @@ class PortionsController < ApplicationController
 
   def show
     authorize_access
-    @dish = @restaurant.dishes.find(params[:id])
     @portion = @dish.portions.find(params[:id])
   end
 
@@ -31,7 +31,7 @@ class PortionsController < ApplicationController
 
   def edit
     authorize_access
-    @portion = @restaurant.portions.find(params[:id])
+    @portion = Portion.find params[:id]
   end
 
   def update
@@ -55,6 +55,12 @@ class PortionsController < ApplicationController
   end
 
   private
+
+  def user_have_permition
+    if @restaurant.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
 
   def set_dish
     @dish = @restaurant.dishes.find(params[:dish_id])

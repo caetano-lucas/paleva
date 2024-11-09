@@ -41,8 +41,8 @@
           <td> <%= dish.description %> </td>
           <td> <%= dish.calories %> </td>
           <td> 
-            <% dish.dish_features.each do |dish_feature| %>
-              <%= dish_feature.feature.name %>
+            <% dish.features.each do |dish_feature| %>
+              <%= dish_feature.name %>
             <% end %>
           </td>
           <td> <%= I18n.translate(dish.status) %></td>
