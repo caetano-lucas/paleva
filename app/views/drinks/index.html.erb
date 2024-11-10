@@ -1,6 +1,18 @@
 <h1>Lista de Bebidas</h1>
 <p><%= link_to 'Cadastrar nova Bebida', new_restaurant_drink_path %></p>
+<%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
+  <h3>Filtrar por características:</h3>
+  
+  <% @features.each do |feature| %>
+    <div>
+      <%= check_box_tag "feature_ids[]", feature.feature.id, params[:feature_ids]&.include?(feature.feature.id.to_s) %>
+      <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name %>
+    </div>
+  <% end %>
+  <%= submit_tag 'Filtrar' %>
+<% end %>
 
+<p><%= link_to 'Características adicionais', restaurant_features_path %></p>
 <% if @drinks.present? %> 
   <table>
     <thead>
@@ -9,11 +21,12 @@
         <th>Nome da Bebida</th>
         <th>Descrição</th>
         <th>Possui Álcool</th>
+        <th>Contém</th>
         <th>Status</th>
         <th>Ações</th>
     </tr>
     </thead>
-    <tbody>
+        <tbody>
       <% @drinks.each do |d| %>
         <tr>
           <td>
@@ -26,6 +39,11 @@
           <td> <%= d.name %> </td>
           <td> <%= d.description %> </td>
           <td> <%= d.alcohol ? 'Sim' : 'Não'  %> </td>
+          <td> 
+            <% d.features.each do |drink_feature| %>
+              <%= drink_feature.name %>
+            <% end %>
+          </td>
           <td> <%= I18n.translate(d.status) %></td>
           <td><%= link_to "Detalhes #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> |
           <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %></td> 

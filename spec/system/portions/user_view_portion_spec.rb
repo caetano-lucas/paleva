@@ -17,12 +17,9 @@ describe 'usuario vê porções' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user: user)
-    dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
-    feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    
+    dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )    
     portion1 = Portion.create!(description: 'Meia porção - 3 pessoas', price_whole: 45, price_cents: 99, portionable_type: 'Dish', portionable_id: dish1.id) 
     portion2 = Portion.create!(description: 'Inteira - 6 pessoas', price_whole: 79, price_cents: 99, portionable_type: 'Dish', portionable_id: dish1.id) 
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
 
     login_as(user)
     visit root_path

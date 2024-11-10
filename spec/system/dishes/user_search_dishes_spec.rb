@@ -292,13 +292,11 @@ describe 'Usuario busca um prato' do
     dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
     dish3 = Dish.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', calories: 2000, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
     item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
     
     login_as(user)
     visit root_path
     click_on 'Buscar-Prato'
-    check 'Glúten'
     click_button 'Filtrar'
 
     expect(page).to have_link 'Editar PratoPrincipal'

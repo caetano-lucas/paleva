@@ -5,15 +5,24 @@ class DrinksController < ApplicationController
   before_action :user_have_permition
 
   def index
+    @features = ItemFeature.where(featurable_type: "Drink")
     @drinks = @restaurant.drinks
+    if params[:feature_ids] 
+      @drinks = @drinks.joins(:features).where(features: { id: params[:feature_ids] }).distinct
+    end
   end
 
   def show
+    if params[:feature_ids].present?
+      @drink = @restaurant.drinks.includes(:features).where(features: { id: params[:feature_ids] }).distinct
+    else
       @drink = @restaurant.drinks.find(params[:id])
       @portions = @drink.portions
+    end
   end
 
   def edit
+    @features = @restaurant.features
     @drink = @restaurant.drinks.find(params[:id])
   end
 
@@ -24,6 +33,12 @@ class DrinksController < ApplicationController
   def update
     @drink = @restaurant.drinks.find(params[:id])
     if @drink.update(drink_params)
+      if params[:feature_ids] 
+        params[:feature_ids].each do |feature_id|
+          feature = Feature.find(feature_id)
+          ItemFeature.create!(feature: feature, featurable: @drink)
+        end
+      end
       redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
     else
       flash.now[:notice] = "Não foi possível atualizar a bebida"
@@ -50,6 +65,10 @@ class DrinksController < ApplicationController
   def search
     @find = params["query"]
     @drinks = @restaurant.drinks.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
+    @features = ItemFeature.where(featurable_type: "Drink")
+    if params[:feature_ids] 
+      @drinks = @drinks.joins(:features).where(features: { id: params[:feature_ids] }).distinct
+    end
   end
 
   def change_status

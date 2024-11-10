@@ -5,10 +5,10 @@ class DishesController < ApplicationController
   before_action :user_have_permition
 
   def index
-    if params[:feature_ids].present?
-      @dishes = @restaurant.dishes.includes(:features).where(features: { id: params[:feature_ids] }).distinct
-    else
-      @dishes = @restaurant.dishes
+    @item_features = ItemFeature.where(featurable_type: "Dish")
+    @dishes = @restaurant.dishes
+    if params[:feature_ids] 
+      @dishes = @dishes.joins(:features).where(features: { id: params[:feature_ids] }).distinct
     end
   end
 
@@ -22,6 +22,7 @@ class DishesController < ApplicationController
   end
 
   def edit
+    @features = @restaurant.features
     @dish = @restaurant.dishes.find(params[:id])
   end
 
@@ -31,9 +32,16 @@ class DishesController < ApplicationController
   end
 
   def update
+
     @dish = @restaurant.dishes.find(params[:id])
     if @dish.update(dish_params)
-      redirect_to restaurant_dishes_path(current_user.restaurant), notice: 'Prato atualizado com sucesso'
+      if params[:feature_ids] 
+        params[:feature_ids].each do |feature_id|
+          feature = Feature.find(feature_id)
+          ItemFeature.create!(feature: feature, featurable: @dish)
+        end
+      end
+      redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato atualizado com sucesso'
     else
       flash.now[:notice] = "Não foi possível atualizar o Prato"
       render 'edit', status: :unprocessable_entity
@@ -63,6 +71,10 @@ class DishesController < ApplicationController
   def search
     @find = params["query"]
     @dishes = @restaurant.dishes.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
+    @features = ItemFeature.where(featurable_type: "Dish")
+    if params[:feature_ids] 
+      @dishes = @dishes.joins(:features).where(features: { id: params[:feature_ids] }).distinct
+    end
   end
 
   def change_status

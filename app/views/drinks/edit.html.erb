@@ -17,6 +17,19 @@
     <% else %>
       <p>Sem imagem disponível</p>
     <% end %></li>
+    <% @drink.features.each do |drink_feature|%>
+      <li>Contém: <%= drink_feature.name %></li>
+    <% end %>
+    
+  <p>Adicionar característica</p>
+  <div>
+    <% @features.each do |feature| %>
+      <div>
+        <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
+        <%= label_tag "feature_ids_#{feature.id}", feature.name %>
+      </div>
+    <% end %>
+  </div>
   <%= f.submit 'Salvar Bebida' %>
 <% end %>
   <%= button_to "Deletar Bebida", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> 

@@ -1,5 +1,4 @@
 <h1>Adicione as informações do prato: </h1>
-<p><%= link_to 'Adicionar característica', new_restaurant_dish_feature_path(restaurant: @restaurant, dish_id: @dish.id) %></p>
 <% if @dish.errors.any? %>
   <ul>
     <% @dish.errors.full_messages.each do |msg| %>
@@ -26,6 +25,16 @@
       <li>Contém: <%= dish_feature.name %></li>
     <% end %>
   </ul>
+  <p>Adicionar característica</p>
+  <div>
+    <% @features.each do |feature| %>
+      <div>
+        <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
+        <%= label_tag "feature_ids_#{feature.id}", feature.name %>
+      </div>
+    <% end %>
+  </div>
+
   <td><%= f.submit 'Salvar Prato' %></td>
 <% end %>
   

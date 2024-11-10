@@ -2,11 +2,11 @@
 <p><%= link_to 'Cadastrar nova Bebida', new_restaurant_drink_path %></p>
 <%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
   <h3>Filtrar por características:</h3>
-  <% @features = Feature.where(restaurant_id: @restaurant.id) %> 
+  
   <% @features.each do |feature| %>
     <div>
-      <%= check_box_tag feature.name, feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
-      <%= label_tag "feature_ids_#{feature.id}", feature.name %>
+      <%= check_box_tag "feature_ids[]", feature.feature.id, params[:feature_ids]&.include?(feature.feature.id.to_s) %>
+      <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name %>
     </div>
   <% end %>
   <%= submit_tag 'Filtrar' %>
