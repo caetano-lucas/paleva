@@ -58,5 +58,5 @@
   <p>Nenhuma porção cadastrada para esta bebida.</p>
 <% end %>
 
-
+<p><%= link_to 'Cadastrar porção',new_restaurant_drink_portion_path(@restaurant, @drink) %></p>
 <%= link_to 'Voltar', restaurant_drinks_path(@drink.restaurant) %>

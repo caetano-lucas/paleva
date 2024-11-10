@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 
-<%= form_with(model: [@restaurant, @dish, @portion], local: true) do |f| %>
+<%= form_with(model: [@restaurant, @portionable, @portion], local: true) do |f| %>
   <div>
     <%= f.label :description, 'Descrição da Porção' %>
     <%= f.text_field :description, required: true, placeholder: "Ex.: Meia porção, serve 3 pessoas" %>
@@ -28,5 +28,3 @@
     <%= f.submit 'Salvar Porção' %>
   </div>
 <% end %>
-
-<p><%= link_to 'Voltar para Porções', restaurant_dish_portions_path(@restaurant, @dish) %></p>

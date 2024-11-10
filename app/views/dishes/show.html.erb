@@ -60,4 +60,5 @@
   <p>Nenhuma porção cadastrada para este prato.</p>
 <% end %>
 <p><%= link_to 'Cadastrar porção',new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
+<p><%= link_to 'Editar porção', edit_restaurant_dish_portion_path(@restaurant, @dish) %></p>
 <%= link_to 'Voltar', restaurant_dishes_path(@dish.restaurant) %>

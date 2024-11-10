@@ -1,28 +1,32 @@
 class PortionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_restaurant
-  before_action :set_dish
+  before_action :set_dish_or_drink
   before_action :redirect_unless_restaurant
   before_action :user_have_permition
 
   def index
     authorize_access
-    @portions = @dish.portions
+    @portions = @portionable.portions
   end
 
   def show
     authorize_access
-    @portion = @dish.portions.find(params[:id])
+    @portion = @portionable.portions.find(params[:id])
   end
 
   def new
-    @portion = @dish.portions.build
+    @portion = @portionable.portions.build
   end
 
   def create
-    @portion = @dish.portions.build(portion_params)
+    @portion = @portionable.portions.build(portion_params)
     if @portion.save
-      redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Porção cadastrada com sucesso'
+      if (params[:dish_id])
+        redirect_to restaurant_dish_path(@restaurant, @portionable), notice: 'Porção cadastrada com sucesso'
+      else
+        redirect_to restaurant_drink_path(@restaurant, @portionable), notice: 'Porção cadastrada com sucesso'
+      end
     else
       flash.now[:alert] = 'Não foi possível cadastrar a porção'
       render :new, status: :unprocessable_entity
@@ -62,8 +66,12 @@ class PortionsController < ApplicationController
     end
   end
 
-  def set_dish
-    @dish = @restaurant.dishes.find(params[:dish_id])
+  def set_dish_or_drink
+    if (params[:dish_id])
+      @portionable = @restaurant.dishes.find(params[:dish_id])
+    else
+      @portionable = @restaurant.drinks.find(params[:drink_id])     
+    end
   end
 
   def set_restaurant
