@@ -144,7 +144,7 @@ describe 'usuario cadastra uma característica' do
     visit new_restaurant_feature_path(restaurant_user_two)
 
     expect(current_path).not_to eq new_restaurant_feature_path(restaurant_user_two)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq restaurant_menus_path(restaurant)
     expect(page).to have_content "Você não possui acesso a esta lista"
   end
 end

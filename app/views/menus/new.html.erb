@@ -1,0 +1,9 @@
+<h1>Cadastrar novo cardápio:</h1>
+
+<%= form_with(model: [@restaurant, @menu] ) do |f|%>
+  <div>
+    <%== f.label :name, 'Nome do cardápio' %>
+    <%= f.text_field :name, required: true%>
+    <%= f.submit 'Salvar Cardápio'%>
+  </div>
+<% end %>

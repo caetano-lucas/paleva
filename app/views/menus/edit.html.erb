@@ -1,0 +1,25 @@
+<h1>EDITAR CARDÁPIO: <%=@menu.name%></h1>
+
+<p>Adicionar pratos</p>
+<%= form_with(model: [current_user.restaurant, @menu], local: true) do |f| %>
+
+  <div>
+    <% @dishes.each do |dish| %>
+      <div>
+        <%= check_box_tag "dish_ids[]", dish.id, (params[:dish_ids]&.include?(dish.id.to_s) || @menu.dishes.include?(dish)) %>
+        <%= label_tag "dish_ids_#{dish.id}", dish.name %>
+      </div>
+    <% end %>
+  </div>
+<p>Adicionar bebidas</p>
+  <div>
+    <% @drinks.each do |drink| %>
+      <div>
+        <%= check_box_tag "drink_ids[]", drink.id, (params[:drink_ids]&.include?(drink.id.to_s) || @menu.drinks.include?(drink)) %>
+        <%= label_tag "drink_ids_#{drink.id}", drink.name %>
+      </div>
+    <% end %>
+  </div>
+
+  <td><%= f.submit 'Salvar Cardápio' %></td>
+<% end %>

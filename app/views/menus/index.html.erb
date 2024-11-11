@@ -1,0 +1,57 @@
+<div>
+  <%= link_to 'Cadastrar Cardápio', new_restaurant_menu_path(current_user.restaurant) %>
+</div>
+<p></p>
+<% if @menus.present?%>
+  <div>
+    <ul>
+      <% @menus.each do |menu| %>
+        <li>
+          <p> <%= menu.name %> <%= link_to "Adicionar item ao #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %></p>
+         
+          <% menu.dishes.each do |dish| %>
+            <p> <%= dish.name %> </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Descrição da Porção</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% dish.portions.each do |portion| %>
+                  <tr>
+                    <td><%= portion.description %></td>
+                    <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+          <% menu.drinks.each do |drink| %>
+            <p> <%= drink.name %> </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Descrição da Porção</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% drink.portions.each do |portion| %>
+                  <tr>
+                    <td><%= portion.description %></td>
+                    <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <p>Não há cardapios cadastrados para este restaurante</p>
+<% end %>
+

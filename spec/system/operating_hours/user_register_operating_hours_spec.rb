@@ -100,7 +100,7 @@ describe 'usuario cadastra novo horário' do
     visit restaurant_operating_hours_path(restaurant_user_two)
 
     expect(current_path).not_to eq restaurant_operating_hours_path(restaurant_user_two)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq restaurant_menus_path(restaurant)
     expect(page).to have_content 'Você não possui acesso a esta lista'
     expect(page).not_to have_content 'quinta-feira'
   end

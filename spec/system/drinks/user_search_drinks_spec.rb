@@ -293,14 +293,12 @@ describe 'Usuario busca uma bebida' do
     drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     drink2 = Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    feature2 = Feature.create!(name: 'Apimentada', restaurant: restaurant)
     ItemFeature.create!(feature: feature1, featurable: drink1)
-    ItemFeature.create!(feature: feature2, featurable: drink2)
     
     login_as(user)
     visit root_path
     click_on 'Buscar-Bebida'
-    check 'Glúten'
+    check 'feature_ids[]'
     click_button 'Filtrar'
 
     expect(page).to have_link 'Editar BebidaPrincipal'
@@ -321,20 +319,18 @@ describe 'Usuario busca uma bebida' do
     drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     drink2 = Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    feature2 = Feature.create!(name: 'Apimentada', restaurant: restaurant)
     ItemFeature.create!(feature: feature1, featurable: drink1)
-    ItemFeature.create!(feature: feature2, featurable: drink2)
     dish1 = Dish.create!(name: 'Macarronada', description: 'Mineira', calories: 400, restaurant: restaurant )
     ItemFeature.create!(feature: feature1, featurable: dish1)
 
     login_as(user)
     visit root_path
     click_on 'Buscar-Bebida'
-    check 'Glúten'
+    check 'feature_ids[]'
     click_button 'Filtrar'
 
     expect(page).to have_link 'BebidaPrincipal'
-    expect(page).to have_content 'Bebidas encontradas para'
+    expect(page).to have_content 'Lista de Bebidas'
     expect(page).not_to have_content 'Macarronada'
     expect(page).not_to have_content 'BebidaSecundaria'
     expect(current_path).to eq restaurant_drinks_path(restaurant)
@@ -357,7 +353,7 @@ describe 'Usuario busca uma bebida' do
     login_as(user)
     visit root_path
     click_on 'Bebidas Cadastradas'
-    check 'Glúten'
+    check "feature_ids[]"
     click_button 'Filtrar'
 
     expect(page).to have_link 'BebidaPrincipal'

@@ -16,7 +16,7 @@ describe 'usuario nevega pela aplicacao' do
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
-    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com',
                                     user_id: user.id)
@@ -27,7 +27,7 @@ describe 'usuario nevega pela aplicacao' do
       click_on 'PaLevá'
     end
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq restaurant_menus_path(restaurant)
   end
 
   it 'se tiver restaurante não estiver cadastrado' do

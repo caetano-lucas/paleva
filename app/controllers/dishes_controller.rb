@@ -5,8 +5,8 @@ class DishesController < ApplicationController
   before_action :user_have_permition
 
   def index
-    @item_features = ItemFeature.where(featurable_type: "Dish")
     @dishes = @restaurant.dishes
+    @item_features = ItemFeature.where(featurable_type: "Dish")
     if params[:feature_ids] 
       @dishes = @dishes.joins(:features).where(features: { id: params[:feature_ids] }).distinct
     end
@@ -71,7 +71,7 @@ class DishesController < ApplicationController
   def search
     @find = params["query"]
     @dishes = @restaurant.dishes.where("name LIKE ? OR description LIKE ?", "%#{@find}%", "%#{@find}%").all
-    @features = ItemFeature.where(featurable_type: "Dish")
+    @features = ItemFeature.where(featurable_type: "Dish").distinct
     if params[:feature_ids] 
       @dishes = @dishes.joins(:features).where(features: { id: params[:feature_ids] }).distinct
     end

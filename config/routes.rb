@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'search', on: :collection
       post 'change_status', on: :member
       resources :features, only: [:new, :create]
+      resources :menus, only: [:new, :create]
 
       resources :portions, controller: 'portions', type: 'Dish'
     end
@@ -15,12 +16,13 @@ Rails.application.routes.draw do
       get 'search', on: :collection
       post 'change_status', on: :member
       resources :features, only: [:new, :create]
+      resources :menus, only: [:new, :create]
       resources :portions, controller: 'portions', type: 'Drink'
     end
 
     resources :operating_hours
 
     resources :features
-
+    resources :menus
   end
 end

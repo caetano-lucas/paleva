@@ -93,7 +93,7 @@ describe 'usuario vê porções' do
     visit restaurant_dish_portions_path(restaurant_user_two, dish2)
 
     expect(current_path).not_to eq restaurant_dish_portions_path(restaurant_user_two, dish2)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq restaurant_menus_path(restaurant)
     expect(page).to have_content 'Você não possui acesso a esta lista'
   end
   it 'somente das bebidas do seu restaurante' do
@@ -123,7 +123,7 @@ describe 'usuario vê porções' do
     visit restaurant_dish_portions_path(restaurant_user_two, dish2)
 
     expect(current_path).not_to eq restaurant_dish_portions_path(restaurant_user_two, dish2)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq restaurant_menus_path(restaurant)
     expect(page).to have_content 'Você não possui acesso a esta lista'
   end
 end

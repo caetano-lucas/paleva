@@ -62,7 +62,6 @@ RSpec.describe Restaurant, type: :model do
     end
 
     context 'uniqueness' do
-      # validates  :cnpj, :phone, :email, :alphanumeric_code, uniqueness: true
       it 'falso quando a razão social não é única' do
         cpf1 = CPF.generate(true).split
         cnpj1 = CNPJ.generate(true).split
