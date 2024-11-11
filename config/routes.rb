@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'change_status', on: :member
       resources :features, only: [:new, :create]
       resources :menus, only: [:new, :create]
+      resources :orders, only: [:new, :create]
 
       resources :portions, controller: 'portions', type: 'Dish'
     end
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       post 'change_status', on: :member
       resources :features, only: [:new, :create]
       resources :menus, only: [:new, :create]
+      resources :orders, only: [:new, :create]
       resources :portions, controller: 'portions', type: 'Drink'
     end
 
@@ -24,5 +26,6 @@ Rails.application.routes.draw do
 
     resources :features
     resources :menus
+    resources :orders
   end
 end

@@ -1,5 +1,8 @@
 <div>
   <%= link_to 'Cadastrar Cardápio', new_restaurant_menu_path(current_user.restaurant) %>
+  <%= link_to 'Novo Pedido', new_restaurant_order_path(current_user.restaurant) %>
+ 
+
 </div>
 <p></p>
 <% if @menus.present?%>
