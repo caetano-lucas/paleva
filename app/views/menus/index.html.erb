@@ -1,6 +1,7 @@
 <div>
   <%= link_to 'Cadastrar Cardápio', new_restaurant_menu_path(current_user.restaurant) %>
   <%= link_to 'Novo Pedido', new_restaurant_order_path(current_user.restaurant) %>
+  <%= link_to 'Histórico de Pedidos', restaurant_orders_path(current_user.restaurant) %>
  
 
 </div>
@@ -10,13 +11,13 @@
     <ul>
       <% @menus.each do |menu| %>
         <li>
-          <p> <%= menu.name %> <%= link_to "Adicionar item ao #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %></p>
+          <h3> <%= menu.name %> <%= link_to "Adicionar item ao #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %></h3>
          
           <% menu.dishes.each do |dish| %>
-            <p> <%= dish.name %> </p>
             <table>
               <thead>
                 <tr>
+                  <h4><%= dish.name %></h4>
                   <th>Descrição da Porção</th>
                   <th>Preço</th>
                 </tr>
@@ -30,12 +31,14 @@
                 <% end %>
               </tbody>
             </table>
+            <br>
           <% end %>
-          <% menu.drinks.each do |drink| %>
-            <p> <%= drink.name %> </p>
+          <br>
+          <% menu.drinks.each do |drink| %>            
             <table>
               <thead>
                 <tr>
+                  <h4><%= drink.name %></h4>
                   <th>Descrição da Porção</th>
                   <th>Preço</th>
                 </tr>
@@ -49,6 +52,7 @@
                 <% end %>
               </tbody>
             </table>
+            <br>
           <% end %>
         </li>
       <% end %>

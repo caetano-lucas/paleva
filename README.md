@@ -1,5 +1,16 @@
 # README
 
+SEED populado:
+_____________________________
+Usuario1: 
+email: jose.silva@example.com
+senha: password123123
+_____________________________
+Usuario2: 
+email: maria.fernandes@example.com
+senha: password123123
+_____________________________
+
 Versões utilizadas:
   - Rails 7.2.1.1
   - ruby 3.1.6

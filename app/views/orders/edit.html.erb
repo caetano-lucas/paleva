@@ -1,0 +1,78 @@
+<h1>Adicionar itens ao Pedido de: <%=@order.client_name%></h1>
+<h2>Número Pedido: <%= @order.id %></h2>
+
+</div>
+<p></p>
+<%= form_with(model: [current_user.restaurant, @order], local: true) do |f| %>
+  <p><%= f.submit 'Salvar Pedido' %></p>
+  <div>
+    <ul>
+      <% @menus.each do |menu| %>
+        <li>
+          <p> <%= menu.name %></p>
+          <% menu.dishes.each do |dish| %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Descrição da Porção</th>
+                  <th>Preço</th>
+                  <th>Adicionar</th>
+                  <th>Quantidade</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% dish.portions.each do |portion| %>
+                  <tr>
+                    <td><%= dish.name %> <%= portion.description %></td>
+                    <td><%= portion.price_whole %>,<%= portion.price_cents %></td>
+                    <td>
+                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false %>
+                    </td>
+                    <td>
+                      <%= number_field_tag "order_item[quantity][#{portion.id}]"%>
+                    </td>
+                    <td>
+                      <%= text_field_tag "order_item[notes][#{portion.id}]" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+          <% menu.drinks.each do |drink| %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Descrição da Porção</th>
+                  <th>Preço</th>
+                  <th>Adicionar</th>
+                  <th>Quantidade</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% drink.portions.each do |portion| %>
+                  <tr>
+                    <td> <%= drink.name %><%= portion.description %></td>
+                    <td><%= portion.price_whole %>,<%= portion.price_cents %></td>
+                    <td>
+                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false %>
+                    </td>
+                    <td>
+                      <%= number_field_tag "order_item[quantity][#{portion.id}]"%>
+                    </td>
+                    <td>
+                      <%= text_field_tag "order_item[notes][#{portion.id}]"%>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %> 

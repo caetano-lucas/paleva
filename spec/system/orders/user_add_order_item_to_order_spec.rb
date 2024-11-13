@@ -26,11 +26,10 @@ describe 'usuario cadastra um novo pedido' do
     click_on 'Iniciar Pedido'
 
     expect(page).to have_content 'Pedido iniciado com sucesso..'
-    expect(page).to have_content 'Felipe Marciel'
-    expect(page).to have_content 'felipemarciel@exemple.com'
-    expect(page).to have_content "#{cpf2}"
+    expect(page).to have_content 'Adicionar itens ao Pedido de: Felipe Marciel'
+    expect(page).to have_content "Número Pedido: #{MenuItem.last}"
   end
-  it 'com sucesso' do
+  it 'e adiciona items ao pedido' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -42,13 +41,12 @@ describe 'usuario cadastra um novo pedido' do
     dish = Dish.create!(name: 'Macarronada', description: 'Carne - provolone', calories: 1800, restaurant: restaurant )
     drink = Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant)
     portion1 = Portion.create!(description: 'Meia porção - 3 pessoas', price_whole: 45, price_cents: 99, portionable_type: 'Dish', portionable_id: dish.id) 
-    portion2 = Portion.create!(description: '2 litros - zero', price_whole: 10, price_cents: 99, portionable_type: 'Drink', portionable_id: drink.id) 
     dinner = Menu.create!(name: 'Jantar', restaurant: restaurant)
     lunch = Menu.create!(name: 'Almoço', restaurant: restaurant)
     MenuItem.create!(menu_itemable: dish, menu: dinner )
-    MenuItem.create!(menu_itemable: dish, menu: lunch )
     cpf2 = CPF.generate(true).split
-    
+    Order.create!(client_name: 'Felipe Marciel', cpf: cpf2, phone: nil, email: 'felipemarciel@exemple.com',
+                  restaurant: restaurant, status: 0)
     login_as(user)
     visit root_path
     click_on 'Novo Pedido'
@@ -56,8 +54,14 @@ describe 'usuario cadastra um novo pedido' do
     fill_in 'CPF', with: "#{cpf2}"
     fill_in 'E-mail', with: 'felipemarciel@exemple.com'
     click_on 'Iniciar Pedido'
+    check 'order_item[portion_ids][]'
+    fill_in 'order_item[quantity][1]', with: '3'
+    click_on 'Salvar Pedido'
+    
     expect(page).to have_content 'Felipe Marciel'
     expect(page).to have_content 'felipemarciel@exemple.com'
-    expect(page).to have_content "#{cpf2}"
+    expect(page).to have_content 'Macarronada'
+    expect(page).to have_content 'Meia porção - 3 pessoas'
+
   end
 end
