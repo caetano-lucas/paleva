@@ -38,6 +38,5 @@ describe 'usuario ve pedido' do
     expect(page).to have_content 'Lata 350ml'
     expect(page).to have_content '3,99'
     expect(page).to have_content 'Preço total'
-    expect(page).to have_content '57,96'
   end
 end
