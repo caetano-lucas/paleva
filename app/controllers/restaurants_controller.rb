@@ -6,7 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
-    @restaurant = current_user&.restaurant
+    @restaurant = current_user.restaurant
   end
 
   def new
@@ -16,8 +16,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = current_user.build_restaurant(restaurant_params)
-    @restaurant.cnpj.strip # vou mover pro model
-
+    @restaurant.cnpj.strip 
     if @restaurant.save
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
@@ -29,7 +28,7 @@ class RestaurantsController < ApplicationController
   private 
   
   def redirect_unless_restaurant
-    restaurant = current_user&.restaurant
+    restaurant = current_user.restaurant
     if restaurant&.persisted?
       nil
     else
