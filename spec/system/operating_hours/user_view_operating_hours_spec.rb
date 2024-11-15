@@ -16,8 +16,8 @@ describe 'usuario vê os horários cadastrados' do
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
     OperatingHour.create!(day: 'sexta-feira', open_time: "2000-01-01 12:13:00",
                                                   close_time: "2000-01-01 12:32:00", closed: 0, restaurant: restaurant)
     login_as(user)
@@ -28,24 +28,24 @@ describe 'usuario vê os horários cadastrados' do
     expect(page).to have_content "Sexta-feira"
   end
   it 'somente do seu restaurante' do
-    cpf = CPF.generate(true).split
+    cpf1 = CPF.generate(true).split
     cpf2 = CPF.generate(true).split
-    cnpj = CNPJ.generate(true).split
+    cnpj1 = CNPJ.generate(true).split
     cnpj2 = CNPJ.generate(true).split
     user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
-    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
-                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user_one)
-    OperatingHour.create!(day: 'sexta-feira', open_time: "2000-01-01 12:13:00",
-                                                  close_time: "2000-01-01 12:32:00", closed: 0, restaurant: restaurant)
+                            last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
+    restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
-                                            cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                            email: 'usertworestaurant@gmail.com',
-                                            user: user_two)
+                                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
+    OperatingHour.create!(day: 'sexta-feira', open_time: "2000-01-01 12:13:00",
+                                                  close_time: "2000-01-01 12:32:00", closed: 0, restaurant: restaurant_user_one)
     OperatingHour.create!(day: 'quinta-feira', open_time: "2000-01-01 17:24:00",
                                                  close_time: "2000-01-01 18:42:00", closed: 0, restaurant: restaurant_user_two)
     
@@ -53,7 +53,7 @@ describe 'usuario vê os horários cadastrados' do
     visit restaurant_operating_hours_path(restaurant_user_two)
 
     expect(current_path).not_to eq restaurant_operating_hours_path(restaurant_user_two)
-    expect(current_path).to eq restaurant_menus_path(restaurant)
+    expect(current_path).to eq restaurant_menus_path(restaurant_user_one)
     expect(page).to have_content 'Você não possui acesso a esta lista'
     expect(page).not_to have_content 'quinta-feira'
   end
@@ -63,10 +63,10 @@ describe 'usuario vê os horários cadastrados' do
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
-    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
 
     login_as(user)
     visit root_path

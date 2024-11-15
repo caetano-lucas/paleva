@@ -14,11 +14,11 @@ describe 'usuario edita porções' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
-                        last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
     Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant, status: 'active')
     
     login_as(user)
@@ -40,24 +40,23 @@ describe 'usuario edita porções' do
   end
 
   it 'somente dos pratos do seu restaurante' do
-    cpf = CPF.generate(true).split
-    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
-                 last_name: 'one', password: '12345abcdeF#', cpf: cpf)    
-    cnpj = CNPJ.generate(true).split
-    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
-                                    cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user_one)
-
+    cpf1 = CPF.generate(true).split
     cpf2 = CPF.generate(true).split
+    cnpj1 = CNPJ.generate(true).split
+    cnpj2 = CNPJ.generate(true).split
+    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+                            last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
+    restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
-    cnpj2 = CNPJ.generate(true).split
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
-                                            cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                            email: 'usertworestaurant@gmail.com',
-                                            user: user_two)
-    dish1 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant: restaurant, status: 'active')
+                                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
+    dish1 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant: restaurant_user_one, status: 'active')
     dish2 = Dish.create!(name: 'PratoPrincipalTwo', description: 'O mais pedido', calories: 3000, restaurant: restaurant_user_two ,status: 'inactive')
     Portion.create!(description: 'PratoSecundario descricao1', price_whole: 3, price_cents: 99, portionable_type: 'Dish', portionable_id: dish1.id) 
     Portion.create!(description: 'PratoSecundario descricao2', price_whole: 5, price_cents: 40, portionable_type: 'Dish', portionable_id: dish1.id) 
@@ -67,7 +66,7 @@ describe 'usuario edita porções' do
     visit restaurant_dish_portions_path(restaurant_user_two, dish2)
 
     expect(current_path).not_to eq restaurant_dish_portions_path(restaurant_user_two, dish2)
-    expect(current_path).to eq restaurant_menus_path(restaurant)
+    expect(current_path).to eq restaurant_menus_path(restaurant_user_one)
     expect(page).to have_content 'Você não possui acesso a esta lista'
   end
   

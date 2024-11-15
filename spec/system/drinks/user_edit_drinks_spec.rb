@@ -17,8 +17,8 @@ describe 'usuario edita uma bebida ja cadastrada' do
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: false, restaurant: restaurant )
     
     login_as(user)
@@ -49,18 +49,20 @@ describe 'usuario edita uma bebida ja cadastrada' do
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                              cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                             email: 'useronerestaurant@gmail.com',
-                                             user: user_one)
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                             email: 'usertworestaurant@gmail.com',
-                                             user: user_two)
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
+
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: false, restaurant: restaurant_user_one )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: false, restaurant: restaurant_user_one )
     drink3 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: false, restaurant: restaurant_user_two )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant: restaurant_user_two )
+
     login_as(user_one)   
     visit edit_restaurant_drink_path(restaurant_user_two, drink3)    
    
@@ -68,3 +70,4 @@ describe 'usuario edita uma bebida ja cadastrada' do
     expect(page).to have_content 'Você não possui acesso a esta lista'
   end
 end
+

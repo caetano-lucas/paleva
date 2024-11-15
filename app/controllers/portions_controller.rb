@@ -61,7 +61,7 @@ class PortionsController < ApplicationController
   private
 
   def user_have_permition
-    if @restaurant.user != current_user
+    if @restaurant.id != current_user.restaurant_id
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     end
   end
@@ -79,9 +79,9 @@ class PortionsController < ApplicationController
   end
 
   def redirect_unless_restaurant
-    restaurant = current_user&.restaurant
-    unless restaurant&.persisted?
-      redirect_to new_restaurant_path, alert: "Você não tem permissão para isso"
+    if current_user.restaurant_id.nil?
+      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      redirect_to new_restaurant_path
     end
   end
 

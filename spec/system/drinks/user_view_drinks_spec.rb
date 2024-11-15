@@ -16,8 +16,8 @@ describe 'usuario ve bebidas cadastrados' do
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant, status: 'active')
 
     login_as(user)
@@ -37,10 +37,10 @@ describe 'usuario ve bebidas cadastrados' do
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
                  last_name: 'one', password: '12345abcdeF#', cpf: cpf)
-    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+    restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
-                                    email: 'useronerestaurant@gmail.com',
-                                    user: user)
+                                    email: 'useronerestaurant@gmail.com')
+    user.update!(restaurant_id: restaurant.id)
     login_as(user)
     visit root_path
     within('nav') do
@@ -60,14 +60,14 @@ describe 'usuario ve bebidas cadastrados' do
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                              cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                             email: 'useronerestaurant@gmail.com',
-                                             user: user_one)
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                             email: 'usertworestaurant@gmail.com',
-                                             user: user_two)
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant_user_one )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant: restaurant_user_one )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais barata', alcohol: true, restaurant: restaurant_user_two )
@@ -91,16 +91,16 @@ describe 'usuario ve bebidas cadastrados' do
     cnpj2 = CNPJ.generate(true).split
     user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
-    Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+    restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                              cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                             email: 'useronerestaurant@gmail.com',
-                                             user: user_one)
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                             email: 'usertworestaurant@gmail.com',
-                                             user: user_two)
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
     
     login_as(user_one)   
     visit restaurant_drinks_path(restaurant_user_two)    

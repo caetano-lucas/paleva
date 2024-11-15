@@ -34,14 +34,12 @@ describe 'Usuário registra um restaurante' do
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                            email: 'useronerestaurant@gmail.com',
-                                            user_id: user_one.id)
+                                            email: 'useronerestaurant@gmail.com')
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                            email: 'usertworestaurant@gmail.com',
-                            user_id: user_two.id)
+                            email: 'usertworestaurant@gmail.com')
 
     restaurant_user_two.save!
     
@@ -57,14 +55,12 @@ describe 'Usuário registra um restaurante' do
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                            email: 'useronerestaurant@gmail.com',
-                                            user_id: user_one.id)
+                                            email: 'useronerestaurant@gmail.com')
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                            email: 'usertworestaurant@gmail.com',
-                            user_id: user_two.id)
+                            email: 'usertworestaurant@gmail.com')
 
     restaurant_user_two.save!
     expect(restaurant_user_two.alphanumeric_code).not_to eq restaurant_user_one.alphanumeric_code

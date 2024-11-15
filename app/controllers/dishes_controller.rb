@@ -32,7 +32,6 @@ class DishesController < ApplicationController
   end
 
   def update
-
     @dish = @restaurant.dishes.find(params[:id])
     if @dish.update(dish_params)
       if params[:feature_ids] 
@@ -89,23 +88,21 @@ class DishesController < ApplicationController
 
   private
 
-  def user_have_permition
-    if @restaurant.user != current_user
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
-    end
-  end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
+  def user_have_permition
+    if @restaurant.id != current_user.restaurant_id
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
+
   def redirect_unless_restaurant
-    restaurant = current_user&.restaurant
-    if restaurant&.persisted?
-      nil
-    else
+    if current_user.restaurant_id.nil?
+      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
       redirect_to new_restaurant_path
-      flash.now[:alert] = "Você não tem permissão para isso"
     end
   end
 

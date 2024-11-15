@@ -45,7 +45,7 @@ class OperatingHoursController < ApplicationController
   private
 
   def user_have_permition
-    if @restaurant.user != current_user
+    if @restaurant.id != current_user.restaurant_id
       redirect_to root_path, alert: 'Você não possui acesso a esta lista'
     end
   end
@@ -55,12 +55,9 @@ class OperatingHoursController < ApplicationController
   end
 
   def redirect_unless_restaurant
-    restaurant = current_user&.restaurant
-    if restaurant&.persisted?
-      nil
-    else
+    if current_user.restaurant_id.nil?
+      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
       redirect_to new_restaurant_path
-      flash.now[:alert] = "Você não tem permissão para isso"
     end
   end
 

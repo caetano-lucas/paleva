@@ -10,14 +10,14 @@ describe 'usuario deleta um prato' do
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                              cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
-                                             email: 'useronerestaurant@gmail.com',
-                                             user: user_one)
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
-                                             email: 'usertworestaurant@gmail.com',
-                                             user: user_two)
+                                             email: 'usertworestaurant@gmail.com')
+    user_two.update!(restaurant_id: restaurant_user_two.id)
     dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one )
     dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 6000, restaurant: restaurant_user_two )
                                          
