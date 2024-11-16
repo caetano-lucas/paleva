@@ -17,7 +17,7 @@ describe 'usuario vê os horários cadastrados' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     OperatingHour.create!(day: 'sexta-feira', open_time: "2000-01-01 12:13:00",
                                                   close_time: "2000-01-01 12:32:00", closed: 0, restaurant: restaurant)
     login_as(user)
@@ -66,7 +66,7 @@ describe 'usuario vê os horários cadastrados' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
 
     login_as(user)
     visit root_path

@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
   
   private
 
+
   def order_params
     params.require(:order).permit(:client_name, :cpf, :phone, :email, :id, :portion_ids, :note, :quantity, :status)
   end

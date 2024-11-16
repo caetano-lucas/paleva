@@ -4,6 +4,8 @@ class PortionsController < ApplicationController
   before_action :set_dish_or_drink
   before_action :redirect_unless_restaurant
   before_action :user_have_permition
+  before_action :user_is_owner
+  
 
   def index
     authorize_access
@@ -59,6 +61,18 @@ class PortionsController < ApplicationController
   end
 
   private
+
+  def user_is_owner
+    if current_user.employee?
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
+
+  def user_is_owner
+    if current_user.employee?
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id

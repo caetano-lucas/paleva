@@ -19,7 +19,7 @@ describe 'usuario nevega pela aplicacao' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
 
     login_as(user)
     visit root_path

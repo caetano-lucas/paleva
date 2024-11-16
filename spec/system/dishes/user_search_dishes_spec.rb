@@ -17,7 +17,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
 
     login_as(user)
     visit root_path
@@ -35,7 +35,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant_id: restaurant.id )
     Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
@@ -61,7 +61,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant_id: restaurant.id )
     Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
@@ -86,7 +86,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant)
     drink2 = Dish.create!(name: 'PratoP', description: 'O menos pedido', calories: 2000, restaurant: restaurant )
     drink2.inactive!
@@ -112,7 +112,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant_id: restaurant.id )
     Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
@@ -137,7 +137,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant)
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedido', alcohol: true, restaurant: restaurant )
@@ -164,7 +164,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
@@ -189,7 +189,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
@@ -215,7 +215,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
@@ -242,7 +242,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant_id: restaurant.id )
     Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
@@ -266,7 +266,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
 
     login_as(user)
     visit root_path
@@ -288,7 +288,7 @@ describe 'Usuario busca um prato' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     
     dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
     dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )

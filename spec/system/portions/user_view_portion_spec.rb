@@ -16,7 +16,7 @@ describe 'usuario vê porções' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )    
     portion1 = Portion.create!(description: 'Meia porção - 3 pessoas', price_whole: 45, price_cents: 99, portionable_type: 'Dish', portionable_id: dish1.id) 
     portion2 = Portion.create!(description: 'Inteira - 6 pessoas', price_whole: 79, price_cents: 99, portionable_type: 'Dish', portionable_id: dish1.id) 
@@ -44,7 +44,7 @@ describe 'usuario vê porções' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     drink1 = Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant, status: 'active')
     drink2 = Drink.create!(name: 'Cerveja', description: 'Schin', alcohol: true, restaurant: restaurant, status: 'active')
     Portion.create!(description: 'Lata 350 ml', price_whole: 3, price_cents: 99, portionable_type: 'Drink', portionable_id: drink1.id) 

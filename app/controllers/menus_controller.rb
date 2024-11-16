@@ -3,6 +3,7 @@ class MenusController < ApplicationController
   before_action :set_restaurant
   before_action :redirect_unless_restaurant
   before_action :user_have_permition
+  before_action :user_is_owner, only: [:new,:create,:show, :edit]
   def new
     @menu = @restaurant.menus.build
   end
@@ -54,7 +55,14 @@ class MenusController < ApplicationController
       render 'edit', status: :unprocessable_entity
     end
   end
+
   private
+
+  def user_is_owner
+    if current_user.employee?
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
 
   def menu_params1
     params.permit(:name, :dish_ids, :drink_ids, :restaurant_id, :id)

@@ -14,7 +14,7 @@ describe 'usuario ve cadapio' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
     dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
@@ -43,13 +43,13 @@ describe 'usuario ve cadapio' do
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                              cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
                                              email: 'useronerestaurant@gmail.com')
-    user_one.update!(restaurant_id: restaurant_user_one.id)
+    user_one.update!(restaurant_id: restaurant_user_one.id, position: :owner)
     user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.create!(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                                              email: 'usertworestaurant@gmail.com')
-    user_two.update!(restaurant_id: restaurant_user_two.id)
+    user_two.update!(restaurant_id: restaurant_user_two.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant_user_one )
     dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant_user_one )
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant_user_one )
@@ -72,7 +72,7 @@ describe 'usuario ve cadapio' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
 
     login_as(user)
     visit root_path
@@ -111,7 +111,7 @@ describe 'usuario ve cadapio' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
     dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )

@@ -3,6 +3,7 @@ class DrinksController < ApplicationController
   before_action :set_restaurant
   before_action :authenticate_user!
   before_action :user_have_permition
+  before_action :user_is_owner
 
   def index
     @features = ItemFeature.where(featurable_type: "Drink")
@@ -83,6 +84,12 @@ class DrinksController < ApplicationController
   end
 
   private
+
+  def user_is_owner
+    if current_user.employee?
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id

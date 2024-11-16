@@ -16,7 +16,7 @@ describe 'usuario registra porções' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
@@ -48,7 +48,7 @@ describe 'usuario registra porções' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant, status: 'active')
     
     login_as(user)

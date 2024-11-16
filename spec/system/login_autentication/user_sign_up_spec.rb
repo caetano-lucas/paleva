@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'cpf_cnpj'
 
-describe 'Usuário se autentica' do
+describe 'Usuário se registra' do
   it 'com sucesso' do
     cpf = CPF.generate(true).strip
     visit root_path

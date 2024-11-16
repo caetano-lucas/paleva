@@ -9,7 +9,7 @@ describe 'usuario altera status do pedido' do
     restaurant = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                  cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                  email: 'useronerestaurant@gmail.com')
-    user.update!(restaurant_id: restaurant.id)
+    user.update!(restaurant_id: restaurant.id, position: :owner)
     dish = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant )
     
     login_as(user)
