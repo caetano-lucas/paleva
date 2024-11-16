@@ -291,7 +291,7 @@ describe 'Usuario busca uma bebida' do
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id)
     drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
-    drink2 = Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
+    Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     ItemFeature.create!(feature: feature1, featurable: drink1)
     
@@ -317,7 +317,7 @@ describe 'Usuario busca uma bebida' do
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id)
     drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedida', alcohol: true, restaurant_id: restaurant.id )
-    drink2 = Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
+    Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
     ItemFeature.create!(feature: feature1, featurable: drink1)
     dish1 = Dish.create!(name: 'Macarronada', description: 'Mineira', calories: 400, restaurant: restaurant )

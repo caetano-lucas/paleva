@@ -85,9 +85,6 @@ class PortionsController < ApplicationController
     end
   end
 
-  def authorize_access
-    redirect_to root_path, alert: 'Você não possui acesso a esta lista' if @restaurant.user != current_user
-  end
 
   def portion_params
     params.require(:portion).permit(:description, :price_whole, :price_cents, :portionable_type, :portionable_id)

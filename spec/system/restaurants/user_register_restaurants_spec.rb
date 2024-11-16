@@ -30,12 +30,12 @@ describe 'Usuário registra um restaurante' do
     cpf2 = CPF.generate(true).split
     cnpj1 = CNPJ.generate(true).split
     cnpj2 = CNPJ.generate(true).split
-    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+    User.create!(email: 'userone@email.com',first_name: 'userone',
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
                                             email: 'useronerestaurant@gmail.com')
-    user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
+    User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
@@ -51,12 +51,12 @@ describe 'Usuário registra um restaurante' do
     cpf2 = CPF.generate(true).split
     cnpj1 = CNPJ.generate(true).split
     cnpj2 = CNPJ.generate(true).split
-    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+    User.create!(email: 'userone@email.com',first_name: 'userone',
                             last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
     restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
                                             email: 'useronerestaurant@gmail.com')
-    user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
+    User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
                             last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
     restaurant_user_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant LTDA2',
                             cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
@@ -100,4 +100,25 @@ describe 'Usuário registra um restaurante' do
     expect(page).to have_content 'E-mail não pode ficar em branco'
     expect(page).to have_content 'Telefone é muito curto (mínimo: 10 caracteres)'
   end
+
+  it 'e é marcado como dono' do
+    cpf = CPF.generate(true).strip
+    cnpj = CNPJ.generate(true)
+    user = User.create!(email: 'userone@email.com',first_name: 'userone',
+    last_name: 'one', password: '12345abcdeF#', cpf: cpf)
+    
+    login_as(user)
+    visit root_path
+    
+    fill_in 'Nome Fantasia', with: 'NomeFantasiaTeste'
+    fill_in 'Razão Social', with: 'RazãoSocialTeste LTDA'
+    fill_in 'Telefone', with: '11123121211'
+    fill_in 'E-mail', with: 'eras@email.com'
+    fill_in 'Endereço', with: 'Rua do restauranteTeste, número: 200'
+    fill_in 'CNPJ', with: cnpj
+    click_on 'Salvar Restaurante'
+      
+      expect(page).to have_content 'Dono: userone one'
+  end
+
 end

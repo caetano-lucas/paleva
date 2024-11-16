@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(current_user.restaurant_id)
+    @user = current_user
   end
 
   def new
@@ -18,7 +19,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.cnpj.strip
     if @restaurant.save
-      @user.update!(restaurant_id: @restaurant.id)
+      @user.update!(restaurant_id: @restaurant.id, position: :owner)
       redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
     else
       flash.now[:notice] = 'Não foi possível cadastrar o restaurante, siga as instruções abaixo.'
@@ -27,7 +28,12 @@ class RestaurantsController < ApplicationController
   end
 
   private 
-
+  def user_have_permition
+    if @restaurant.id != current_user.restaurant_id
+      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+    end
+  end
+  
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
       flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
