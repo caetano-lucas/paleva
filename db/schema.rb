@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_16_115325) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_16_153753) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,6 +59,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_115325) do
     t.integer "restaurant_id", null: false
     t.integer "status", default: 1
     t.index ["restaurant_id"], name: "index_drinks_on_restaurant_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.integer "restaurant_id", null: false
+    t.integer "user_id", null: false
+    t.string "email"
+    t.string "cpf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_employees_on_restaurant_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "features", force: :cascade do |t|
@@ -180,6 +191,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_16_115325) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dishes", "restaurants"
   add_foreign_key "drinks", "restaurants"
+  add_foreign_key "employees", "restaurants"
+  add_foreign_key "employees", "users"
   add_foreign_key "features", "restaurants"
   add_foreign_key "item_features", "features"
   add_foreign_key "menu_items", "menus"

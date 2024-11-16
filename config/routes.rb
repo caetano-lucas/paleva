@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
 
     resources :operating_hours
-
+    resources :employees, only: [:new, :index, :create]
     resources :features
     resources :menus
     resources :orders

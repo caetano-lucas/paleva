@@ -1,11 +1,12 @@
 class Restaurant < ApplicationRecord
-  has_many :use
+  has_many :users
   has_many :dishes
   has_many :drinks
   has_many :operating_hours, dependent: :destroy
   has_many :features
   has_many :menus
   has_many :orders
+  has_many :employees
     
   validates :trade_name, :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, presence: true
   validates :legal_name, :cnpj, :address, :phone, :email, :alphanumeric_code, uniqueness: true

@@ -1,0 +1,24 @@
+
+<% if @employees.present? %> 
+  <table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> E-mail </th>
+        <th> CPF </th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @employees.each do |employee| %>
+      
+        <tr>
+          <td><%= employee.id %> </td>
+          <td><%= employee.email %> </td>
+          <td><%= employee.cpf %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Não há Características cadastradas para este restaurante, cadastre!</p>
+<% end %>

@@ -17,18 +17,14 @@ describe 'um usuário dono' do
     visit root_path
     click_on 'Restaurante'
     click_on 'Pré Cadastrar Novo Funcionário'
-    within('form') do
-      fill_in 'Nome', with: 'employee'
-      fill_in 'Sobrenome', with: 'one'
-      fill_in 'E-mail', with: 'employee@email.com'
-      fill_in 'CPF', with: cpf2
-    end
-    click_button 'Salvar'
+    fill_in 'E-mail', with: 'employee@email.com'
+    fill_in 'CPF', with: "#{cpf2}"
+   
+    click_button 'Salvar Funcionário'
 
-    expect(current_page).to eq  new_user_registration_path
-    expect(page).to have_content 'Funcionário salvo com sucesso'
-    expect(page).to have_content 'Nome: employee one'
-    expect(page).to have_content 'E-mail: employee@email.com'
-    expect(page).to have_content "CPF: #{cpf2}"
+    expect(current_path).to eq  restaurant_employees_path(restaurant)
+    expect(page).to have_content 'Funcionário criado com sucesso.'
+    expect(page).to have_content 'employee@email.com'
+    expect(page).to have_content "#{cpf2}"
   end
 end
