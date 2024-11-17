@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
         get 'restaurants/:restaurant_alphanumeric_code/orders/:order_alphanumeric_code', to: 'orders#show', as: 'show'
+        patch 'restaurants/:restaurant_alphanumeric_code/orders/:order_alphanumeric_code', to: 'orders#update', as: 'update'
         get 'restaurants/:restaurant_alphanumeric_code/orders/', to: 'orders#index', as: 'index'
     end
   end

@@ -40,5 +40,29 @@ class Api::V1::OrdersController < ActionController::API
       return render status: 404, json: '{}'
     end
   end
+
+  def update
+    begin
+      restaurant = Restaurant.find_by(alphanumeric_code: params[:restaurant_alphanumeric_code])
+      order = Order.find_by(alphanumeric_code: params[:order_alphanumeric_code])
+      if params[:status].present?  && Order.statuses.values.include?(params[:status].to_i)
+        order.status = params[:status].to_i
+        order_items = order.order_items.includes(portion: :portionable)
+        render status: 200, json: {
+          order: order.as_json(only: [:client_name, :created_at, :status]),
+          order_items: order_items.map do |item|{
+            portion_name: item.portion.portionable.name,
+            portion_description: item.portion.description,
+            note: item.note,
+            quantity: item.quantity}
+          end
+        }
+      else
+        return render status: 404, json: '{}'
+      end
+    rescue
+      return render status: 404, json: '{}'
+    end
+  end
 end
 
