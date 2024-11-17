@@ -5,3 +5,36 @@
   <%= @order.email %>
   <%= @order.restaurant %>
 </div>
+
+<ul>
+    <li>  
+      <p>Nome Cliente: <%= @order.client_name %> | <%= @order.id %></p>
+      <p>Contato: <%= @order.email %> | <%= @order.phone %></p>
+      <p>Hora Pedido: <%= @order.created_at %></p>
+      <p>Preço total: <%= @order.total_price%></p>
+      <p>Status: <%= @order.status%></p>
+    <h4>Pratos</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Prato</th>
+            <th>Descrição da Porção</th>
+            <th>Preço</th>
+            <th>Observação</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |order_item| %>
+          <tr>
+            <td> <%= order_item.portion.portionable.name%></td>
+            <td> <%= order_item.portion.description%></td>
+            <td> <%= order_item.price%>,<%= order_item.cents%></td>
+            <td> <%= order_item.note%></td>
+            <td> <%= order_item.quantity%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </li>
+</ul>

@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :restaurant
-  validates :client_name, :restaurant, :alphanumeric_code, presence: true
+  validates :client_name, :restaurant, presence: true
   validates :email,
              format: { with: /\A(.+)@(.+)\z/, message: "Email invalid"  }, allow_blank: true
   validates :phone, length: { minimum: 10, maximum: 11 }, allow_blank:  true
@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :portions, through: :order_items
 
-  before_validation :generate_code
+  before_create :generate_code
 
   enum status: { aguardando_confirmacao_cozinha: 0, cancelado: 1, preparação: 2, pronto: 3, entregue: 4 }
 
@@ -22,5 +22,6 @@ class Order < ApplicationRecord
 
   def generate_code
     self.alphanumeric_code = SecureRandom.base36(8)
+    generate_code if Order.exists?(alphanumeric_code: alphanumeric_code)
   end
 end

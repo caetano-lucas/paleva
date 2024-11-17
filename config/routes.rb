@@ -26,4 +26,11 @@ Rails.application.routes.draw do
     resources :menus
     resources :orders
   end
+
+  namespace :api do
+    namespace :v1 do
+        get 'restaurants/:restaurant_alphanumeric_code/orders/:order_alphanumeric_code', to: 'orders#show', as: 'show'
+        get 'restaurants/:restaurant_alphanumeric_code/orders/', to: 'orders#index', as: 'index'
+    end
+  end
 end

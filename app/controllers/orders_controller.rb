@@ -13,8 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])    
-    redirect_to edit_restaurant_order_path(@restaurant, @order)
+    @order = Order.find(params[:id])
   end
 
   def create
