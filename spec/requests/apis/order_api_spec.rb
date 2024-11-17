@@ -78,6 +78,12 @@ describe 'Orders API' do
       expect(json_response.keys).not_to include('criated_at')
       expect(json_response.keys).not_to include('updated_at')
     end
+    it 'fail if restaurant not found' do
+
+      get '/api/v1/restaurants/123123/orders'
+
+      expect(response.status).to eq 404
+    end
 
   end
 end

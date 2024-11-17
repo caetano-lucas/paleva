@@ -28,7 +28,12 @@ class Api::V1::OrdersController < ActionController::API
   def index
     begin 
       restaurant = Restaurant.find_by(alphanumeric_code: params[:restaurant_alphanumeric_code])
-      orders = restaurant.orders.where(status: [0,1,2,3]).sort.reverse
+      #http://localhost:3000/api/v1/restaurants/11bs0k/orders?status=nil
+      if params[:status].present?  && Order.statuses.values.include?(params[:status].to_i)
+        orders = restaurant.orders.where(status: params[:status]).sort.reverse
+      else
+        orders = restaurant.orders.sort.reverse
+      end
       render status: 200, json: {orders: orders.as_json(except: [:updated_at]), 
                                restaurant: restaurant.as_json(except: [:created_at, :updated_at])}
     rescue
