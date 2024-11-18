@@ -71,8 +71,8 @@ describe 'Orders API' do
       expect(response.content_type).to include 'application/json'
 
       json_response = JSON.parse(response.body)
-      expect(json_response['orders'][1]["client_name"]).to eq ('Felipe Marciel')
-      expect(json_response['orders'][0]["client_name"]).to eq('Joao gustavo')
+      expect(json_response['orders'][0]["client_name"]).to eq ('Felipe Marciel')
+      expect(json_response['orders'][1]["client_name"]).to eq('Joao gustavo')
       expect(json_response['orders'][0]["status"]).not_to eq ''
       expect(json_response['orders'][1]["status"]).not_to eq ''
       expect(json_response.keys).not_to include('criated_at')
