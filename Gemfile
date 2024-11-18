@@ -30,7 +30,7 @@ gem "bootstrap"
 gem "sassc-rails"
 
 gem "cpf_cnpj"
-
+gem 'rack-cors'
 gem 'validators'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
