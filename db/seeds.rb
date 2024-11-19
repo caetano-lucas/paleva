@@ -10,8 +10,11 @@
 user1 = User.create!( first_name: "José", last_name: "Silva", email: "jose.silva@example.com", cpf: "02149587017", password: "password123123")
 user2 = User.create!( first_name: "Maria", last_name: "Fernandes", email: "maria.fernandes@example.com", cpf: "84884225040", password: "password123123")
 
-restaurant1 = Restaurant.create!(trade_name: "Bistro do José", legal_name: "Bistro José Ltda", cnpj: "93860545000159", address: "Rua 1, 100", phone: "11999999999", email: "contato@bistrojose.com", alphanumeric_code: "BJ0012")
-restaurant2 = Restaurant.create!(trade_name: "Cantina da Maria", legal_name: "Cantina Maria Ltda", cnpj: "66697438000189", address: "Rua 2, 200", phone: "11988888888", email: "contato@cantinamaria.com", alphanumeric_code: "CCM002")
+restaurant1 = Restaurant.create!(trade_name: "Bistro do José", legal_name: "Bistro José Ltda", cnpj: "93860545000159", address: "Rua 1, 100", phone: "11999999999", email: "contato@bistrojose.com")
+restaurant2 = Restaurant.create!(trade_name: "Cantina da Maria", legal_name: "Cantina Maria Ltda", cnpj: "66697438000189", address: "Rua 2, 200", phone: "11988888888", email: "contato@cantinamaria.com")
+
+restaurant1.update(alphanumeric_code: "BJ0012")
+restaurant2.update(alphanumeric_code: "CCM002")
 
 user1.update(restaurant_id: restaurant1.id, position: :owner)
 user2.update(restaurant_id: restaurant2.id, position: :owner)
