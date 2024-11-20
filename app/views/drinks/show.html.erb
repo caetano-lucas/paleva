@@ -1,13 +1,13 @@
 <table>
     <thead>
     <tr>
-        <th> Foto </th>
-        <th>Nome da Bebida</th>
-        <th>Descrição</th>
-        <th>Possui Álcool</th>
-        <th>Contém</th>
-        <th>Status</th>
-        <th>Ações</th>
+        <th><%= I18n.t('.picture')%> </th>
+        <th><%= Drink.human_attribute_name(:name)%></th>
+        <th><%= Drink.human_attribute_name(:description)%></th>
+        <th><%= I18n.t('drinks.have_alcohol')%></th>
+        <th><%= I18n.t('.contains')%></th>
+        <th><%= Drink.human_attribute_name(:status)%></th>
+        <th><%= I18n.t('.action')%></th>
     </tr>
     </thead>
     <tbody>
@@ -16,7 +16,7 @@
             <% if @drink.image.attached? %>
               <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
             <% else %>
-              <p>Sem imagem disponível</p>
+              <p><%= I18n.t('.no_img')%></p>
             <% end %>
           </td>
           <td> <%= @drink.name %> </td>
@@ -37,12 +37,12 @@
   </table>
 
 <% if @drink.portions.present? %>
-  <h2>Porções Cadastradas Para esta bebida:</h2> 
+  <h2><%= I18n.t('drinks.portions_list')%>:</h2> 
     <table>
       <thead>
         <tr>
-          <th>Descrição da Porção</th>
-          <th>Preço</th>
+          <th><%= I18n.t('portions.description_of')%></th>
+          <th><%= I18n.t('.price')%></th>
         </tr>
       </thead>
       <tbody>
@@ -55,8 +55,8 @@
       </tbody>
     </table>
 <% else %>
-  <p>Nenhuma porção cadastrada para esta bebida.</p>
+  <p><%= I18n.t('drinks.no_portion')%>.</p>
 <% end %>
 
-<p><%= link_to 'Cadastrar porção',new_restaurant_drink_portion_path(@restaurant, @drink) %></p>
-<%= link_to 'Voltar', restaurant_drinks_path(@drink.restaurant) %>
+<p><%= link_to I18n.t('.portions.add_portion'),new_restaurant_drink_portion_path(@restaurant, @drink) %></p>
+<%= link_to I18n.t('.go_back'), restaurant_drinks_path(@drink.restaurant) %>

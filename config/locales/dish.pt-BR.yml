@@ -1,20 +1,41 @@
 pt-BR:
-  active: "Ativo"
-  inactive: "Inativo"
   activerecord:
     models:
       dish: 'Prato'
     attributes:
       dish:
-        name: "Nome do Prato"
-        description: "Descrição"
-        calories: "Calorias"
+        calories: 'Calorias'
+        description: 'Descrição'
+        image: 'Imagem'
+        name: 'Nome do Prato'
+        status: 'status'
   dishes:
-      update_success: 'Prato atualizado com sucesso'
-      update_fail: "Não foi possível atualizar o Prato"
-      create_success: 'Prato cadastrado com sucesso'
+      add_info: 'Adicione as informações do prato'
       create_fail: "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
-      destroy_success: 'Prato deletado com sucesso'
+      create_success: 'Prato cadastrado com sucesso'
+      del_dish: 'Deletar prato'
       destroy_fail: 'Erro ao deletar o prato'
+      destroy_success: 'Prato deletado com sucesso'
+      dish_details: 'Detalhes do prato'
+      dish_list: 'Lista de Pratos'
+      dishes_found: 'Pratos encontrados'
+      dishes_no_found: 'Nenhum prato encontrado'
+      feature_list: 'Características adicionais'
+      filter_by_features: 'Filtrar por características'
+      new_dish: 'Cadastrar novo prato'
       no_autorization: 'Você não possui acesso a esta função'
+      no_dishes: 'Não há pratos cadastrados'
       no_permition: 'Você não tem permissão para acessar esse restaurante.'
+      save_dish: 'Salvar Prato'
+      update_dish: 'Alterar Status'
+      update_fail: 'Não foi possível atualizar o Prato'
+      update_success: 'Prato atualizado com sucesso'
+      portions_list: 'Porções Cadastradas Para este prato'
+      no_portion: 'Nenhuma porção cadastrada para este prato'
+
+
+# I18n.t('.')
+# I18n.t('dishes.')
+#<%= I18n.t('.')%>
+#<%= I18n.t('dishes.')%>
+#<%= Dish.human_attribute_name(:)%>

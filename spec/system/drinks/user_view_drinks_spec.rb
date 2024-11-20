@@ -46,7 +46,7 @@ describe 'usuario ve bebidas cadastrados' do
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end
-    expect(page).to have_link 'Cadastrar nova Bebida'
+    expect(page).to have_link 'Cadastrar Nova Bebida'
     expect(page).to have_content 'Lista de Bebidas'
     expect(page).to have_content 'Não há bebidas cadastradas'
   end
@@ -106,6 +106,7 @@ describe 'usuario ve bebidas cadastrados' do
     visit restaurant_drinks_path(restaurant_user_two)    
    
     expect(current_path).not_to eq restaurant_drinks_path(restaurant_user_two)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não tem permissão para acessar esse restaurante.'
+
   end
 end

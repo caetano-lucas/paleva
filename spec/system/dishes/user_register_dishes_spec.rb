@@ -59,6 +59,10 @@ describe 'usuario registra novos pratos para seu restaurante' do
     expect(page).to have_content 'ALGO DEU ERRADO, PRATO NÃO CADASTRADO'
     expect(page).to have_content 'Nome do Prato não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
+    expect(page).to have_content 'Nome do Prato'
+    expect(page).to have_content 'Descrição'
+    expect(page).to have_content 'Imagem'
+    expect(page).to have_content 'Calorias'
   end
   
   it 'e não clica em salvar' do 

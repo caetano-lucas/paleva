@@ -1,7 +1,7 @@
-<h1>Lista de Bebidas</h1>
-<p><%= link_to 'Cadastrar nova Bebida', new_restaurant_drink_path %></p>
+<h1><%= I18n.t('drinks.drink_list')%></h1>
+<p><%= link_to I18n.t('drinks.new_drink'), new_restaurant_drink_path %></p>
 <%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
-  <h3>Filtrar por características:</h3>
+  <h3><%= I18n.t('drinks.filter_by_features')%>:</h3>
   
   <% @features.each do |feature| %>
     <div>
@@ -9,21 +9,21 @@
       <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name %>
     </div>
   <% end %>
-  <%= submit_tag 'Filtrar' %>
+  <%= submit_tag I18n.t('.filter') %>
 <% end %>
 
-<p><%= link_to 'Características adicionais', restaurant_features_path %></p>
+<p><%= link_to I18n.t('drinks.feature_list'), restaurant_features_path %></p>
 <% if @drinks.present? %> 
   <table>
     <thead>
     <tr>
-        <th> Foto </th>
-        <th>Nome da Bebida</th>
-        <th>Descrição</th>
-        <th>Possui Álcool</th>
-        <th>Contém</th>
-        <th>Status</th>
-        <th>Ações</th>
+        <th><%= I18n.t('.picture')%> </th>
+        <th><%= Drink.human_attribute_name(:name)%></th>
+        <th><%= Drink.human_attribute_name(:description)%></th>
+        <th><%= I18n.t('drinks.have_alcohol')%></th>
+        <th><%= I18n.t('.contains')%></th>
+        <th><%= Drink.human_attribute_name(:status)%></th>
+        <th><%= I18n.t('.action')%></th>
     </tr>
     </thead>
         <tbody>
@@ -33,24 +33,24 @@
             <% if d.image.attached? %>
               <%= image_tag d.image, size: "100x100", alt: d.name %>
             <% else %>
-              <p>Sem imagem disponível</p>
+              <p><%= I18n.t('.no_img')%></p>
             <% end %>
           </td>
           <td> <%= d.name %> </td>
           <td> <%= d.description %> </td>
-          <td> <%= d.alcohol ? 'Sim' : 'Não'  %> </td>
+          <td> <%= d.alcohol ? I18n.t('.yes') : I18n.t('.no')  %> </td>
           <td> 
             <% d.features.each do |drink_feature| %>
               <%= drink_feature.name %>
             <% end %>
           </td>
           <td> <%= I18n.translate(d.status) %></td>
-          <td><%= link_to "Detalhes #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> |
-          <%= link_to "Editar #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %></td> 
+          <td><%= link_to "#{I18n.t('.details')} #{d.name}", restaurant_drink_path(current_user.restaurant, d) %> |
+          <%= link_to "#{I18n.t('.edit')} #{d.name}", edit_restaurant_drink_path(current_user.restaurant, d) %></td> 
         </tr>
     <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>Não há bebidas cadastradas</p>
+  <p><%= I18n.t('drinks.no_drinks')%></p>
 <% end %>

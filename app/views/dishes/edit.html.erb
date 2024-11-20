@@ -1,4 +1,4 @@
-<h1>Adicione as informações do prato: </h1>
+<h1><%= I18n.t('.dishes.add_info')%> </h1>
 <% if @dish.errors.any? %>
   <ul>
     <% @dish.errors.full_messages.each do |msg| %>
@@ -17,15 +17,15 @@
       <% if @dish.image.attached? %>
         <%= image_tag @dish.image, size: "100x100", alt: @dish.name %>
       <% else %>
-        <p>Sem imagem disponível</p>
+        <p><%= I18n.t('.no_img')%></p>
       <% end %>
     </li>
     
     <% @dish.features.each do |dish_feature| %>
-      <li>Contém: <%= dish_feature.name %></li>
+      <li><%= I18n.t('.contains')%>: <%= dish_feature.name %></li>
     <% end %>
   </ul>
-  <p>Adicionar característica</p>
+  <p><%= I18n.t('.add_feature')%></p>
   <div>
     <% @features.each do |feature| %>
       <div>
@@ -35,7 +35,7 @@
     <% end %>
   </div>
 
-  <td><%= f.submit 'Salvar Prato' %></td>
+  <td><%= f.submit I18n.t('.dishes.save_dish') %></td>
 <% end %>
   
-<p> <%= button_to "Deletar prato", restaurant_dish_path(current_user.restaurant, @dish), method: :delete%></p>
+<p> <%= button_to I18n.t('.dishes.del_dish'), restaurant_dish_path(current_user.restaurant, @dish), method: :delete%></p>

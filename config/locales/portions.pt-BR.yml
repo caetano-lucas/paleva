@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      portion: 'Porção'
+    attributes:
+      portion:
+        description: 'Descrição'
+  portions:
+      description_of: 'Descrição da Porção'
+      add_portion: 'Cadastrar porção'
+      edit_portion: 'Editar porção'
+  ###
+      
+# I18n.t('.')
+# I18n.t('dishes.')
+#<%= I18n.t('.')%>
+#<%= I18n.t('dishes.')%>
+#<%= Dish.human_attribute_name(:)%>

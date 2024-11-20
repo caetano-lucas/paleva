@@ -40,9 +40,9 @@ class DrinksController < ApplicationController
           ItemFeature.create!(feature: feature, featurable: @drink)
         end
       end
-      redirect_to restaurant_drinks_path(current_user.restaurant), notice: 'Bebida atualizada com sucesso'
+      redirect_to restaurant_drinks_path(current_user.restaurant), notice: I18n.t('drinks.update_success')
     else
-      flash.now[:notice] = "Não foi possível atualizar a bebida"
+      flash.now[:notice] = I18n.t('drinks.update_fail')
       render 'edit', status: :unprocessable_entity
     end
   end
@@ -50,9 +50,9 @@ class DrinksController < ApplicationController
   def create
     @drink = @restaurant.drinks.build(drink_params)
     if @drink.save
-      redirect_to restaurant_drink_path(@restaurant, @drink), notice: 'Bebida cadastrada com sucesso'
+      redirect_to restaurant_drink_path(@restaurant, @drink), notice: I18n.t('drinks.create_success')
     else
-      flash.now[ :alert ] = "ALGO DEU ERRADO, BEBIDA NÃO CADASTRADA"
+      flash.now[ :alert ] = I18n.t('drinks.create_fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -60,7 +60,7 @@ class DrinksController < ApplicationController
   def destroy
     @drink = @restaurant.drinks.find(params[:id])
     @drink.destroy
-    redirect_to restaurant_drinks_path(@restaurant), notice: 'Bebida deletada com sucesso'
+    redirect_to restaurant_drinks_path(@restaurant), notice: I18n.t('drinks.destroy_success')
   end
 
   def search
@@ -73,7 +73,6 @@ class DrinksController < ApplicationController
   end
 
   def change_status
-
     @drink = @restaurant.drinks.find(params[:id])
     if @drink.active? 
       @drink.inactive!
@@ -87,13 +86,13 @@ class DrinksController < ApplicationController
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('drinks.no_permition')
     end
   end
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('drinks.no_permition')
     end
   end
   
@@ -103,7 +102,7 @@ class DrinksController < ApplicationController
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('drinks.no_permition')
       redirect_to new_restaurant_path
     end
   end

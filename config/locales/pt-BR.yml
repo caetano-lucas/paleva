@@ -1,4 +1,19 @@
 pt-BR:
+  active: 'Ativo'
+  inactive: 'Inativo'
+  filter: 'Filtrar'
+  contains: 'Contém'
+  picture: 'Foto'
+  image: 'Foto'
+  no_img: 'Sem imagem disponível'
+  add_feature: 'Adicionar característica'
+  action: 'Ação'
+  details: 'Detalhes'
+  edit: 'Editar'
+  price: 'Preço'
+  go_back: 'Voltar'
+  yes: 'Sim'
+  no: 'Não'
   activerecord:
     errors:
       messages:

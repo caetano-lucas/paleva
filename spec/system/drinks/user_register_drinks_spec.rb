@@ -25,7 +25,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end
-    click_on 'Cadastrar nova Bebida'   
+    click_on 'Cadastrar Nova Bebida'   
     fill_in 'Nome da Bebida', with: 'NomeBebidaTeste'
     fill_in 'Descrição', with: 'DescriçãoBebidaTeste'
     check 'Álcool'
@@ -52,7 +52,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end
-    click_on 'Cadastrar nova Bebida'   
+    click_on 'Cadastrar Nova Bebida'   
     fill_in 'Nome da Bebida', with: ''
     fill_in 'Descrição', with: ''
     check 'Álcool'
@@ -77,7 +77,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end
-    click_on 'Cadastrar nova Bebida'
+    click_on 'Cadastrar Nova Bebida'
     fill_in 'Nome da Bebida', with: 'NomeBebidaTeste'
     fill_in 'Descrição', with: 'DescriçãoBebidaTeste'
     check 'Álcool'
@@ -85,7 +85,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end
-    click_on 'Cadastrar nova Bebida'
+    click_on 'Cadastrar Nova Bebida'
   
     expect(page).not_to have_content 'NomeBebidaTeste'
     expect(page).not_to have_content 'DescriçãoBebidaTeste'

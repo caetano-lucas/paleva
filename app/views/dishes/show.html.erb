@@ -1,17 +1,15 @@
-  <p><%= link_to 'Características adicionais', restaurant_features_path %></p>
-
-<h1>Detalhes do prato</h1>
+<h1><%= I18n.t('dishes.dish_details')%></h1>
 
 <table>
    <thead>
    <tr>
-       <th>Foto </th>
-       <th>Nome do Prato</th>
-       <th>Descrição</th>
-       <th>Calorias</th>
-       <th>Contém</th>
-       <th>Status</th>
-       <th>Ações</th>
+       <th><%= Dish.human_attribute_name(:image)%></th>
+       <th><%= Dish.human_attribute_name(:name)%></th>
+       <th><%= Dish.human_attribute_name(:description)%></th>
+       <th><%= Dish.human_attribute_name(:calories)%></th>
+       <th><%= I18n.t('.contains')%></th>
+       <th><%= Dish.human_attribute_name(:status)%></th>
+       <th><%= I18n.t('.action')%></th>
    </tr>
    </thead>
    <tbody>
@@ -20,7 +18,7 @@
           <% if @dish.image.attached? %>
             <%= image_tag @dish.image, size: "100x100", alt: @dish.name %>
           <% else %>
-            <p>Sem imagem disponível</p>
+            <p><%= I18n.t('.no_img')%></p>
           <% end %>
         </td>
         <td> <%= @dish.name %> </td>
@@ -32,19 +30,19 @@
           <% end %>
         </td>
         <td> <%= I18n.translate(@dish.status) %> </td>
-        <td> <%= button_to 'Alterar Status', change_status_restaurant_dish_path(@restaurant, @dish) %></td>
-        <td> <%= link_to "Editar #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %></td>
+        <td> <%= button_to I18n.t('dishes.update_dish'), change_status_restaurant_dish_path(@restaurant, @dish) %></td>
+        <td> <%= link_to "#{I18n.t('.edit')} #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %></td>
       </tr>
    </tbody>
 </table>
 
 <% if @dish.portions.present? %>
-<h2>Porções Cadastradas Para este prato:</h2>
+<h2><%= I18n.t('dishes.portions_list')%>:</h2>
   <table>
     <thead>
       <tr>
-        <th>Descrição da Porção</th>
-        <th>Preço</th>
+        <th><%= I18n.t('.portions.description_of')%></th>
+        <th><%= I18n.t('.price')%></th>
       </tr>
     </thead>
     <tbody>
@@ -57,8 +55,8 @@
     </tbody>
   </table>
 <% else %>
-  <p>Nenhuma porção cadastrada para este prato.</p>
+  <p><%= I18n.t('dishes.no_portion')%>.</p>
 <% end %>
-<p><%= link_to 'Cadastrar porção',new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
-<p><%= link_to 'Editar porção', edit_restaurant_dish_portion_path(@restaurant, @dish) %></p>
-<%= link_to 'Voltar', restaurant_dishes_path(@dish.restaurant) %>
+<p><%= link_to I18n.t('portions.add_portion'),new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
+<p><%= link_to I18n.t('portions.edit_portion'), edit_restaurant_dish_portion_path(@restaurant, @dish) %></p>
+<%= link_to I18n.t('.go_back'), restaurant_dishes_path(@dish.restaurant) %>

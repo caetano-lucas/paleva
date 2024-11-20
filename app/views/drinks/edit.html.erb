@@ -1,4 +1,4 @@
-<h1>Adicione as informações da bebida: </h1>
+<h1><%= I18n.t('drinks.add_info')%>: </h1>
 <% if @drink.errors.any? %>
   <ul>
     <% @drink.errors.full_messages.each do |msg | %>
@@ -11,17 +11,17 @@
     <li><%= f.label :name %> <%= f.text_field :name %></li>
     <li><%= f.label :description%> <%= f.text_field :description %></li>
     <li><%= f.label :alcohol %> <%= f.check_box :alcohol %></li>
-    <li><%= f.label :image %> 
+    <li><%= f.label Drink.human_attribute_name(:image) %> 
     <% if @drink.image.attached? %> <%= f.file_field :image %>
       <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
     <% else %>
-      <p>Sem imagem disponível</p>
+      <p><%= I18n.t('.no_img')%></p>
     <% end %></li>
     <% @drink.features.each do |drink_feature|%>
-      <li>Contém: <%= drink_feature.name %></li>
+      <li><%= I18n.t('.contains')%>: <%= drink_feature.name %></li>
     <% end %>
     
-  <p>Adicionar característica</p>
+  <p><%= I18n.t('.add_feature')%></p>
   <div>
     <% @features.each do |feature| %>
       <div>
@@ -30,6 +30,6 @@
       </div>
     <% end %>
   </div>
-  <%= f.submit 'Salvar Bebida' %>
+  <%= f.submit I18n.t('drinks.save_drink')%>
 <% end %>
-  <%= button_to "Deletar Bebida", restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> 
+  <%= button_to I18n.t('drinks.del_drink'), restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> 

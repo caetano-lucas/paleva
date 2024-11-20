@@ -1,9 +1,32 @@
 pt-BR:
   activerecord:
-    drinks:
+    models:
       drink: 'Bebida'
     attributes:
       drink:
         name: "Nome da Bebida"
         description: "Descrição"
         alcohol: "Álcool"
+        status: 'Status'
+        image: 'imagem'
+  drinks:
+      update_success: 'Bebida atualizada com sucesso'      
+      update_fail: 'Não foi possível atualizar a bebida'      
+      create_fail: "ALGO DEU ERRADO, BEBIDA NÃO CADASTRADA"
+      create_success: 'Bebida cadastrada com sucesso'
+      destroy_success: 'Bebida deletada com sucesso'
+      no_autorization: 'Você não possui acesso a esta função'
+      no_permition: 'Você não tem permissão para acessar esse restaurante.'
+      add_info: 'Adicione as informações da bebida'
+      save_drink: 'Salvar Bebida'
+      del_drink: 'Deletar Bebida'
+      drink_list: 'Lista de Bebidas'
+      new_drink: 'Cadastrar Nova Bebida'
+      filter_by_features: 'Filtrar por características'
+      feature_list: 'Características adicionais'
+      have_alcohol: 'Possui Álcool'
+      no_drinks: 'Não há bebidas cadastradas'
+      drinks_found: 'Bebidas encontradas'
+      drinks_not_found: 'Nenhuma bebida encontrada'
+      no_portion: 'Nenhuma porção cadastrada para esta bebida'
+      portions_list: 'Porções Cadastradas Para esta bebida'

@@ -1,4 +1,4 @@
-<h1>Adicione as informações da bebida: </h1>
+<h1><%= I18n.t('drinks.add_info')%>: </h1>
 <% if @drink.errors.any? %>
   <ul>
     <% @drink.errors.full_messages.each do |msg | %>
@@ -8,14 +8,15 @@
 <% end %>
 
 <%= form_with(model: [current_user.restaurant, @drink]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description%>
-  <%= f.text_field :description %>
-  <%= f.label :alcohol %>
-  <%= f.check_box :alcohol %>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-  <%= f.submit 'Salvar Bebida' %>
-  
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name %></dd>
+    <dt><%= f.label :description%></dt>
+    <dd><%= f.text_field :description %></dd>
+    <dt><%= f.label :alcohol %></dt>
+    <dd><%= f.check_box :alcohol %></dd>
+    <dt><%= f.label :image %></dt>
+    <dd><%= f.file_field :image %></dd>
+  </dl>
+  <%= f.submit I18n.t('drinks.save_drink') %>  
 <% end %>

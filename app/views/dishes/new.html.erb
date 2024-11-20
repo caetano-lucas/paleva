@@ -1,4 +1,4 @@
-<h1>Adicione as informações do prato: </h1>
+<h1><%= I18n.t('dishes.add_info') %>: </h1>
 
 <% if @dish.errors.any? %>
   <ul>
@@ -11,14 +11,16 @@
 
 <div>
   <%= form_with(model: [current_user.restaurant, @dish], local: true) do  |f|  %>
-    <%= f.label :name%>
-    <%= f.text_field :name %>
-    <%= f.label :description%>
-    <%= f.text_field :description %>
-    <%= f.label :calories%>
-    <%= f.text_field :calories %>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-    <%= f.submit 'Salvar Prato' %>
+    <dl>
+      <dt><%= f.label :name%></dt>
+      <dl><%= f.text_field :name %></dl>
+      <dt><%= f.label :description%></dt>
+      <dl><%= f.text_field :description %></dl>
+      <dt><%= f.label :calories%></dt>
+      <dl><%= f.text_field :calories %></dl>
+      <dt><%= f.label :image %></dt>
+      <dl><%= f.file_field :image %></dl>
+    </dl>
+    <%= f.submit I18n.t('dishes.save_dish') %>
   <% end %>
 </div>

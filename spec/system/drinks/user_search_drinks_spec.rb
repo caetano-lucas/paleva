@@ -276,7 +276,7 @@ describe 'Usuario busca uma bebida' do
       fill_in 'search_drink', with: ''
     end
     click_on 'Buscar-Bebida'
-    click_on 'Cadastrar nova Bebida'
+    click_on 'Cadastrar Nova Bebida'
 
     expect(page).to have_content 'Adicione as informações da bebida'
     expect(current_path).to eq new_restaurant_drink_path(restaurant)

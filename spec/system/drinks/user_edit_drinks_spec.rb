@@ -67,7 +67,9 @@ describe 'usuario edita uma bebida ja cadastrada' do
     visit edit_restaurant_drink_path(restaurant_user_two, drink3)    
    
     expect(current_path).not_to eq edit_restaurant_drink_path(restaurant_user_two, drink3)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não tem permissão para acessar esse restaurante.'
+
+
   end
 end
 

@@ -1,7 +1,7 @@
-<h1>Bebidas encontradas para: <%= @find %></h1>
-<p><%= link_to 'Cadastrar nova Bebida', new_restaurant_drink_path %></p>
+<h1><%= I18n.t('drinks.drinks_found')%>: <%= @find %></h1>
+<p><%= link_to I18n.t('drinks.new_drink'), new_restaurant_drink_path %></p>
 <%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
-  <h3>Filtrar por características:</h3>
+  <h3><%= I18n.t('drinks.filter_by_features')%>:</h3>
   
   <% @features.each do |feature| %>
     <div>
@@ -16,13 +16,12 @@
   <table>
     <thead>
       <tr>
-        <th>Foto</th>
-        <th>Nome da Bebida</th>
-        <th>Descrição</th>
-        <th>Contém</th>
-        <th>Possui Álcool</th>
-        <th>Status</th>
-        <th> </th>
+        <th><%= I18n.t('.picture')%> </th>
+        <th><%= Drink.human_attribute_name(:name)%></th>
+        <th><%= Drink.human_attribute_name(:description)%></th>
+        <th><%= I18n.t('.contains')%></th>
+        <th><%= I18n.t('drinks.have_alcohol')%></th>
+        <th><%= Drink.human_attribute_name(:status)%></th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +31,7 @@
             <% if drink.image.attached? %>
               <%= image_tag drink.image, size: "100x100", alt: drink.name %>
             <% else %>
-              <p>Sem imagem disponível</p>
+              <p><%= I18n.t('.no_img')%></p>
             <% end %>
           </td>
           <td><%= drink.name %></td>
@@ -42,14 +41,14 @@
               <%= drink_feature.name %>
             <% end %>
           </td>
-          <td><%= drink.alcohol ? 'Sim' : 'Não' %></td>
+          <td><%= drink.alcohol ? 'Sim': 'Não' %></td>
           <td> <%= I18n.translate(drink.status) %></td>
-          <td> <%= link_to "Detalhes #{drink.name}", restaurant_drink_path(current_user.restaurant, drink) %></td>
-          <td><%= link_to "Editar #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink) %></td>
+          <td> <%= link_to "#{I18n.t('.details')} #{drink.name}", restaurant_drink_path(current_user.restaurant, drink) %></td>
+          <td><%= link_to " #{I18n.t('.edit')} #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <h1>Nenhuma bebida encontrada</h1>
+  <h1><%= I18n.t('drinks.drinks_not_found')%></h1>
 <% end %>

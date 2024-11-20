@@ -1,28 +1,28 @@
-<h1>Lista de Pratos</h1>
-<p><%= link_to 'Cadastrar novo prato', new_restaurant_dish_path%></p>
+<h1><%= I18n.t('dishes.dish_list')%></h1>
+<p><%= link_to I18n.t('dishes.new_dish'), new_restaurant_dish_path%></p>
 
 <%= form_with(url: restaurant_dishes_path(@restaurant), method: :get, local: true) do %>
-  <h3>Filtrar por características:</h3>
+  <h3><%= I18n.t('dishes.filter_by_features')%>:</h3>
   <% @item_features.each do |item_feature| %>
     <div>
       <%= check_box_tag "feature_ids[]", item_feature.feature.id, params[:feature_ids]&.include?(item_feature.id.to_s) %>
       <%= label_tag "feature_ids_#{item_feature.feature.id}", item_feature.feature.name %>
     </div>
   <% end %>
-  <%= submit_tag 'Filtrar' %>
+  <%= submit_tag I18n.t('.filter') %>
 <% end %>
 
-<p><%= link_to 'Características adicionais', restaurant_features_path %></p>
+<p><%= link_to I18n.t('dishes.feature_list'), restaurant_features_path %></p>
 <% if @dishes.present? %> 
 <table>
    <thead>
    <tr>
-       <th> Foto </th>
-       <th>Nome do Prato</th>
-       <th>Descrição</th>
-       <th>Contém:</th>
-       <th>Status</th>
-       <th>Ações</th>
+       <th><%= I18n.t('.picture')%></th>
+       <th><%= Dish.human_attribute_name(:name)%></th>
+       <th><%= Dish.human_attribute_name(:description)%></th>
+       <th><%= I18n.t('.contains')%>:</th>
+       <th><%= Dish.human_attribute_name(:status)%></th>
+       <th><%= I18n.t('.action')%></th>
    </tr>
    </thead>
    <tbody>
@@ -32,7 +32,7 @@
           <% if d.image.attached? %>
             <%= image_tag d.image, size: "100x100", alt: d.name %>
           <% else %>
-            <p>Sem imagem disponível</p>
+            <p><%= I18n.t('.no_img')%></p>
           <% end %>
         </td>
         <td> <%= d.name %> </td>
@@ -42,13 +42,13 @@
             <%= dish_feature.name %>
           <% end %>
         </td>
-        <td> <%= I18n.translate(d.status) %> </td>
-        <td>  <%= link_to "Detalhes #{d.name}", restaurant_dish_path(current_user.restaurant, d) %> |
-        <%= link_to "Editar #{d.name}", edit_restaurant_dish_path(current_user.restaurant, d) %></td>
+        <td> <%= I18n.t(d.status) %> </td>
+        <td>  <%= link_to "#{I18n.t('.details')} #{d.name}", restaurant_dish_path(current_user.restaurant, d) %> |
+        <%= link_to "#{I18n.t('.edit')} #{d.name}", edit_restaurant_dish_path(current_user.restaurant, d) %></td>
       </tr>
    <% end %>
    </tbody>
 </table>
 <% else %>
-  <p>Não há pratos cadastrados</p>
+  <p><%= I18n.t('.dishes.no_dishes')%></p>
 <% end %>
