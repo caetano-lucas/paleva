@@ -54,7 +54,7 @@ describe 'usuario vê os horários cadastrados' do
 
     expect(current_path).not_to eq restaurant_operating_hours_path(restaurant_user_two)
     expect(current_path).to eq restaurant_menus_path(restaurant_user_one)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não possui acesso a esta função'
     expect(page).not_to have_content 'quinta-feira'
   end
 

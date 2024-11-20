@@ -11,9 +11,9 @@ class MenusController < ApplicationController
   def create
     @menu = @restaurant.menus.build(menu_params)
     if @menu.save
-      redirect_to restaurant_menu_path(@restaurant, @menu), notice: I18n.t('menus.create.success')
+      redirect_to restaurant_menu_path(@restaurant, @menu), notice: I18n.t('menus.create_success')
     else
-      flash.now[:alert] = "ERRO Cardápio já cadastrado"
+      flash.now[:alert] = I18n.t('menus.create_fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -49,9 +49,9 @@ class MenusController < ApplicationController
           MenuItem.create!(menu_id: @menu.id, menu_itemable: drink)
         end
       end
-      redirect_to restaurant_menus_path(@restaurant), notice: 'Cardápio atualizado com sucesso'
+      redirect_to restaurant_menus_path(@restaurant), notice:  I18n.t('menus.update_success')
     else
-      flash.now[:notice] = "Não foi possível atualizar o cardápio"
+      flash.now[:notice] =  I18n.t('menus.udpate_fail')
       render 'edit', status: :unprocessable_entity
     end
   end
@@ -60,7 +60,7 @@ class MenusController < ApplicationController
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
 
@@ -74,7 +74,7 @@ class MenusController < ApplicationController
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
 
@@ -84,7 +84,7 @@ class MenusController < ApplicationController
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('.no_permition')
       redirect_to new_restaurant_path
     end
   end

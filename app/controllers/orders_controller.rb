@@ -19,9 +19,9 @@ class OrdersController < ApplicationController
   def create
     @order = @restaurant.orders.build(order_params)
     if @order.save
-      redirect_to edit_restaurant_order_path(@restaurant, @order), notice: 'Pedido iniciado com sucesso..'
+      redirect_to edit_restaurant_order_path(@restaurant, @order), notice: "#{I18n.t('orders.create_success')}.."
     else
-      flash.now[:alert] = "ERRO Cardápio já cadastrado"
+      flash.now[:alert] = I18n.t('orders.fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
       @order.aguardando_confirmacao_cozinha!
       @order.save
     end
-      redirect_to  restaurant_orders_path(current_user.restaurant), notice: 'Pedido enviado a cozinha..'
+      redirect_to  restaurant_orders_path(current_user.restaurant), notice: "#{I18n.t('orders.send_to_kitchen')}.."
   end
   
   private
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
   
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('.no_permition')
       redirect_to new_restaurant_path
     end
   end

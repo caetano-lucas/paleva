@@ -1,4 +1,4 @@
-<h1><%= I18n.t('menus.new.new_menu')%>:</h1>
+<h1><%= I18n.t('menus.new_menu')%>:</h1>
 
 <%= form_with(model: [@restaurant, @menu] ) do |f|%>
   <div>
@@ -6,6 +6,6 @@
       <dt><%= f.label :name %></dt>
       <dd><%= f.text_field :name, required: true%></dd>
     </dl>
-    <%= f.submit I18n.t('menus.new.save_menu')%>
+    <%= f.submit I18n.t('menus.save_menu')%>
   </div>
 <% end %>

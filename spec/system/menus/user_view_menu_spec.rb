@@ -101,7 +101,7 @@ describe 'usuario ve cadapio' do
     visit restaurant_menus_path(restaurant_user_two)
    
     expect(current_path).not_to eq restaurant_menus_path(restaurant_user_two)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não possui acesso a esta função'
   end
   it 'e ve as porções com sucesso' do
     cpf = CPF.generate(true).split

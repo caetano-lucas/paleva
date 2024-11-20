@@ -10,3 +10,8 @@ pt-BR:
         address: "Endereço"
         phone: "Telefone"
         email: "E-mail"
+  restaurants: 
+      description_of: 'Descrição da Porção'
+      add_portion: 'Cadastrar porção'
+      edit_portion: 'Editar porção'
+      new_restaurant: 'Cadastrar Restaurante'

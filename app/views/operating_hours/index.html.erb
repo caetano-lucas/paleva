@@ -1,15 +1,15 @@
-<h1>Horários de Funcionamento Cadastrados</h1>
+<h1><%= I18n.t('operating_hours.hours_list')%></h1>
 
-<%= link_to 'Novo Horário', new_restaurant_operating_hour_path(current_user.restaurant) %>
+<%= link_to I18n.t('operating_hours.new_hour'), new_restaurant_operating_hour_path(current_user.restaurant) %>
 <% if @operating_hours.present? %>
 <table>
   <thead>
     <tr>
-      <th>Dia</th>
-      <th>Horário de Abertura</th>
-      <th>Horário de Fechamento</th>
-      <th>Fechado?</th>
-      <th>Ações</th>
+      <th><%= I18n.t('.day')%></th>
+      <th><%= I18n.t('operating_hours.open_hour')%></th>
+      <th><%= I18n.t('operating_hours.close_hour')%></th>
+      <th><%= I18n.t('operating_hours.closed')%>?</th>
+      <th><%= I18n.t('.action')%></th>
     </tr>
   </thead>
   <tbody>
@@ -20,13 +20,13 @@
         <td><%= hour.close_time.strftime("%H:%M") %></td>
         <td><%= hour.closed ? 'Sim' : 'Não' %></td>
         <td>
-          <%= link_to 'Editar', edit_restaurant_operating_hour_path(current_user.restaurant, hour) %>
-          <%= button_to 'Excluir', restaurant_operating_hour_path(current_user.restaurant,hour), method: :delete %>
+          <%= link_to I18n.t('.edit'), edit_restaurant_operating_hour_path(current_user.restaurant, hour) %>
+          <%= button_to I18n.t('.exclude'), restaurant_operating_hour_path(current_user.restaurant,hour), method: :delete %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% else %>
-  <p>Não há horários Cadastrados</p>
+  <p><%= I18n.t('operating_hours.no_hour')%></p>
 <% end %>

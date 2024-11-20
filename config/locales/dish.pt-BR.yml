@@ -32,10 +32,7 @@ pt-BR:
       update_success: 'Prato atualizado com sucesso'
       portions_list: 'Porções Cadastradas Para este prato'
       no_portion: 'Nenhuma porção cadastrada para este prato'
-
-
-# I18n.t('.')
-# I18n.t('dishes.')
-#<%= I18n.t('.')%>
-#<%= I18n.t('dishes.')%>
-#<%= Dish.human_attribute_name(:)%>
+      all_dish: 'Pratos Cadastrados'
+      search_dishes: 'Buscar-Prato'
+      search_dish: 'Buscar Prato'
+      add_dishes: 'Adicionar pratos'

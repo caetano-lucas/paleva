@@ -1,7 +1,7 @@
 <div>
-  <%= link_to 'Cadastrar Cardápio', new_restaurant_menu_path(current_user.restaurant) %>
-  <%= link_to 'Novo Pedido', new_restaurant_order_path(current_user.restaurant) %>
-  <%= link_to 'Histórico de Pedidos', restaurant_orders_path(current_user.restaurant) %>
+  <%= link_to I18n.t('menus.new_menus'), new_restaurant_menu_path(current_user.restaurant) %>
+  <%= link_to I18n.t('orders.new_order'), new_restaurant_order_path(current_user.restaurant) %>
+  <%= link_to I18n.t('orders.order_history'), restaurant_orders_path(current_user.restaurant) %>
 </div>
 
 <% if @menus.present?%>
@@ -9,15 +9,15 @@
     <ul>
       <% @menus.each do |menu| %>
         <li>
-          <h3> <%= menu.name %> <%= link_to "Adicionar item ao #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %></h3>
+          <h3> <%= menu.name %> <%= link_to "#{I18n.t('menus.add_item_to')} #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %></h3>
          
           <% menu.dishes.each do |dish| %>
             <table>
               <thead>
                 <tr>
                   <h4><%= dish.name %></h4>
-                  <th>Descrição da Porção</th>
-                  <th>Preço</th>
+                  <th><%= I18n.t('portions.description_of')%></th>
+                  <th><%= I18n.t('.price')%></th>
                 </tr>
               </thead>
               <tbody>
@@ -37,8 +37,8 @@
               <thead>
                 <tr>
                   <h4><%= drink.name %></h4>
-                  <th>Descrição da Porção</th>
-                  <th>Preço</th>
+                  <th><%= I18n.t('portions.description_of')%></th>
+                  <th><%= I18n.t('.price')%></th>
                 </tr>
               </thead>
               <tbody>
@@ -57,6 +57,6 @@
     </ul>
   </div>
 <% else %>
-  <p><%= t '.no_menus' %></p>
+  <p><%= I18n.t('menus.no_menus') %></p>
 <% end %>
 

@@ -12,8 +12,17 @@ pt-BR:
   edit: 'Editar'
   price: 'Preço'
   go_back: 'Voltar'
+  join: 'Entrar'
+  exit: 'Sair'
   yes: 'Sim'
   no: 'Não'
+  save: 'Salvar'
+  exclude: 'Excluir'
+  day: 'Dia'
+  add: 'Adicionar'
+  no_autorization: 'Você não possui acesso a esta função'
+  no_permition: 'Você não tem permissão para acessar esse restaurante.'
+  restaurant: 'Restaurante'
   activerecord:
     errors:
       messages:

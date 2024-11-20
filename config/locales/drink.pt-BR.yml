@@ -30,10 +30,7 @@ pt-BR:
       drinks_not_found: 'Nenhuma bebida encontrada'
       no_portion: 'Nenhuma porção cadastrada para esta bebida'
       portions_list: 'Porções Cadastradas Para esta bebida'
-
-      
-# I18n.t('.')
-# I18n.t('drinks.')
-#<%= I18n.t('.')%>
-#<%= I18n.t('drinks.')%>
-#<%= Drink.human_attribute_name(:)%>
+      all_drink: 'Bebidas Cadastradas'
+      search_drinks: 'Buscar-Bebida'
+      search_drink: 'Buscar Bebida'
+      add_drinks: 'Adicionar bebidas'

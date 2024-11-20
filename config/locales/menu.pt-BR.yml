@@ -6,11 +6,14 @@ pt-BR:
       menu:
         name: "Nome do Cardápio"
   menus:
-    index:
       title: "Cardápios"
       no_menus: "Não há cardápios cadastrados para este restaurante"
-    create:
-      success: "Cardápio cadastrado com sucesso"
-    new:
+      create_success: "Cardápio cadastrado com sucesso"
+      create_fail: "ERRO Cardápio já cadastrado"
       new_menu: "Cadastrar novo cardápio"
+      new_menus: "Cadastrar Cardápio"
       save_menu: "Salvar Cardápio"
+      update_sucess: 'Cardápio atualizado com sucesso'
+      update_fail: "Não foi possível atualizar o cardápio"
+      edit_menu: 'EDITAR CARDÁPIO'
+      add_item_to: 'Adicionar item ao'

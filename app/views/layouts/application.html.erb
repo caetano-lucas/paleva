@@ -24,34 +24,34 @@
         
         <% if user_signed_in? %>          
           <% if current_user.restaurant&.persisted? %>
-            <%= link_to 'Restaurante', restaurant_path(current_user.restaurant) %>
-            <%= link_to 'Pratos Cadastrados', restaurant_dishes_path(current_user.restaurant) %>
-            <%= link_to 'Bebidas Cadastradas', restaurant_drinks_path(current_user.restaurant) %>
-            <%= link_to 'Horários Cadastrados', restaurant_operating_hours_path(current_user.restaurant) %> 
+            <%= link_to I18n.t('.restaurant'), restaurant_path(current_user.restaurant) %>
+            <%= link_to I18n.t('dishes.all_dish'), restaurant_dishes_path(current_user.restaurant) %>
+            <%= link_to I18n.t('drinks.all_drink'), restaurant_drinks_path(current_user.restaurant) %>
+            <%= link_to I18n.t('operating_hours.hours_list'), restaurant_operating_hours_path(current_user.restaurant) %> 
 
             <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
-              <%= f.label :query, 'Buscar Prato'%>
+              <%= f.label :query, I18n.t('dishes.search_dish')%>
               <%= f.text_field :query, id: 'search_dish'%>
-              <%= f.submit 'Buscar-Prato'%>
+              <%= f.submit I18n.t('dishes.search_dishes')%>
             <% end %>
 
             <%= form_with(url:  search_restaurant_drinks_path(current_user.restaurant), method: :get ) do |f| %>
-              <%= f.label :query, 'Buscar Bebida'%>
+              <%= f.label :query, I18n.t('drinks.search_drink')%>
               <%= f.text_field :query, id: 'search_drink'%>
-              <%= f.submit 'Buscar-Bebida'%>
+              <%= f.submit I18n.t('drinks.search_drinks')%>
             <% end %>
 
           <% else %>
-            <%= link_to 'Cadastrar Restaurante', new_restaurant_path %>
+            <%= link_to I18n.t('restaurants.new_restaurant'), new_restaurant_path %>
           <% end %>
 
           <p>Olá, <%= current_user.first_name %> </p>
-          <%= button_to 'Sair',  destroy_user_session_path, method: :delete%>
+          <%= button_to I18n.t('.exit'),  destroy_user_session_path, method: :delete%>
           
          
 
         <% else %>
-          <%= link_to 'Entrar', new_user_session_path%>
+          <%= link_to I18n.t('.join'), new_user_session_path%>
         <% end %>
       </nav>
     </header>

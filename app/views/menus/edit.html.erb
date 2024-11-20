@@ -1,6 +1,6 @@
-<h1>EDITAR CARDÁPIO: <%=@menu.name%></h1>
+<h1><%= I18n.t('menus.edit_menu')%>: <%=@menu.name%></h1>
 
-<p>Adicionar pratos</p>
+<p><%= I18n.t('dishes.add_dishes')%></p>
 <%= form_with(model: [current_user.restaurant, @menu], local: true) do |f| %>
 
   <div>
@@ -11,7 +11,7 @@
       </div>
     <% end %>
   </div>
-<p>Adicionar bebidas</p>
+<p><%= I18n.t('drinks.add_drinks')%></p>
   <div>
     <% @drinks.each do |drink| %>
       <div>
@@ -21,5 +21,5 @@
     <% end %>
   </div>
 
-  <td><%= f.submit 'Salvar Cardápio' %></td>
+  <td><%= f.submit I18n.t('menus.save_menu') %></td>
 <% end %>

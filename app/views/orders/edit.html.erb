@@ -1,10 +1,10 @@
-<h1>Adicionar itens ao Pedido de: <%=@order.client_name%></h1>
-<h2>Número Pedido: <%= @order.id %></h2>
+<h1><%= I18n.t('orders.add_items_to')%>: <%=@order.client_name%></h1>
+<h2><%= Order.human_attribute_name(:id)%>: <%= @order.id %></h2>
 
 </div>
 <p></p>
 <%= form_with(model: [current_user.restaurant, @order], local: true) do |f| %>
-  <p><%= f.submit 'Salvar Pedido' %></p>
+  <p><%= f.submit I18n.t('orders.save_order') %></p>
   <div>
     <ul>
       <% @menus.each do |menu| %>
@@ -14,11 +14,11 @@
             <table>
               <thead>
                 <tr>
-                  <th>Descrição da Porção</th>
-                  <th>Preço</th>
-                  <th>Adicionar</th>
-                  <th>Quantidade</th>
-                  <th>Observação</th>
+                  <th><%= I18n.t('portions.description_of')%></th>
+                  <th><%= I18n.t('.price')%></th>
+                  <th><%= I18n.t('.add')%></th>
+                  <th><%= OrderItem.human_attribute_name(:quantity)%></th>
+                  <th><%= OrderItem.human_attribute_name(:note)%></th>
                 </tr>
               </thead>
               <tbody>
@@ -44,11 +44,11 @@
             <table>
               <thead>
                 <tr>
-                  <th>Descrição da Porção</th>
-                  <th>Preço</th>
-                  <th>Adicionar</th>
-                  <th>Quantidade</th>
-                  <th>Observação</th>
+                  <th><%= I18n.t('portions.description_of')%></th>
+                  <th><%= I18n.t('.price')%></th>
+                  <th><%= I18n.t('.add')%></th>
+                  <th><%= OrderItem.human_attribute_name(:quantity)%></th>
+                  <th><%= OrderItem.human_attribute_name(:note)%></th>
                 </tr>
               </thead>
               <tbody>

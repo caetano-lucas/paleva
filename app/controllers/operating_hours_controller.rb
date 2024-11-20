@@ -17,9 +17,9 @@ class OperatingHoursController < ApplicationController
   def create
     @operating_hour = @restaurant.operating_hours.new(operating_hour_params)
     if @operating_hour.save
-      redirect_to restaurant_operating_hours_path(@restaurant), notice: 'Horário de funcionamento criado com sucesso.'
+      redirect_to restaurant_operating_hours_path(@restaurant), notice: I18n.t('operating_hours.create_success')
     else
-      flash.now[:notice] = "Horário de Abertura deve ser menor que o de fechamento"
+      flash.now[:notice] = I18n.t('operating_hours.create_fail')
       render :new
     end
   end
@@ -31,7 +31,7 @@ class OperatingHoursController < ApplicationController
   def update
     @operating_hour = @restaurant.operating_hours.find(params[:id])
     if @operating_hour.update(operating_hour_params)
-      redirect_to restaurant_operating_hours_path(@restaurant), notice: 'Horário de funcionamento atualizado com sucesso.'
+      redirect_to restaurant_operating_hours_path(@restaurant), notice: I18n.t('operating_hours.update_success')
     else
       render :edit
     end
@@ -40,20 +40,20 @@ class OperatingHoursController < ApplicationController
   def destroy
     @operating_hour = @restaurant.operating_hours.find(params[:id])
     @operating_hour.destroy
-    redirect_to restaurant_operating_hours_path(@restaurant), notice: 'Horário de funcionamento excluído com sucesso.'
+    redirect_to restaurant_operating_hours_path(@restaurant), notice: I18n.t('operating_hours.destroy_success')
   end
   
   private
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
 
@@ -63,7 +63,7 @@ class OperatingHoursController < ApplicationController
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('.no_permition')
       redirect_to new_restaurant_path
     end
   end

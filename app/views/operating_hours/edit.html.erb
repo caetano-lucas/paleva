@@ -1,4 +1,4 @@
-<h1>Editar Horário de Funcionamento</h1>
+<h1><%= I18n.t('operating_hours.edit_operating_hour')%></h1>
 
 <%= form_with(model: [@restaurant, @operating_hour]) do |form| %>
   <div>
@@ -15,9 +15,9 @@
   </div>
   <div>
     <%= form.check_box :closed %>
-    <%= form.label :closed, 'Fechado?' %>
+    <%= form.label :closed, "#{I18n.t('operating_hours.closed')}?" %>
   </div>
   <div>
-    <%= form.submit 'Salvar' %>
+    <%= form.submit I18n.t('.save') %>
   </div>
 <% end %>
