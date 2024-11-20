@@ -1,10 +1,10 @@
 <h1>Características adicionais</h1>
-<p><%= link_to 'Cadastrar nova característica', new_restaurant_feature_path %></p>
+<p><%= link_to I18n.t('features.new_feature'), new_restaurant_feature_path %></p>
 <% if @features.present? %> 
   <table>
     <thead>
     <tr>
-        <th> Nome da característica </th>
+        <th> <%= Feature.human_attribute_name(:name)%> </th>
     </tr>
     </thead>
     <tbody>
@@ -17,5 +17,5 @@
     </tbody>
   </table>
 <% else %>
-  <p>Não há Características cadastradas para este restaurante, cadastre!</p>
+  <p><%= I18n.t('features.no_feature')%></p>
 <% end %>

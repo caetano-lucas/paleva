@@ -30,8 +30,8 @@ describe 'usuario cadastra uma característica' do
       click_on 'Pratos Cadastrados'
     end
     click_on 'Características adicionais'
-    click_on 'Cadastrar nova característica'
-    fill_in 'Nome da característica', with: 'Glúten'
+    click_on 'Cadastrar Nova característica'
+    fill_in 'Nome da Característica', with: 'Glúten'
     click_on 'Salvar Característica'
 
     expect(page).to have_content 'Glúten'
@@ -59,7 +59,7 @@ describe 'usuario cadastra uma característica' do
       click_on 'Buscar-Prato'
     end
     click_on 'Características adicionais'
-    click_on 'Cadastrar nova característica'
+    click_on 'Cadastrar Nova característica'
 
     expect(current_path).to eq new_restaurant_feature_path(restaurant)
   end
@@ -145,6 +145,6 @@ describe 'usuario cadastra uma característica' do
 
     expect(current_path).not_to eq new_restaurant_feature_path(restaurant_user_two)
     expect(current_path).to eq restaurant_menus_path(restaurant_user_one)
-    expect(page).to have_content "Você não possui acesso a esta lista"
+    expect(page).to have_content "Você não possui acesso a esta função"
   end
 end

@@ -1,4 +1,4 @@
-<h1>Adicione as informações da Característica:</h1>
+<h1><%= I18n.t('features.add_info')%>:</h1>
 
 <% if @feature.errors.any? %>
   <ul>
@@ -9,7 +9,7 @@
 <% end %>
 
 <%= form_with(model: [@restaurant, @feature], local: true) do |f| %>
-  <%= f.label :name, 'Nome da característica' %>
+  <%= f.label :name %>
   <%= f.text_field :name, required: true %>
-  <%= f.submit 'Salvar Característica' %>
+  <%= f.submit I18n.t('features.save_feature') %>
 <% end %>

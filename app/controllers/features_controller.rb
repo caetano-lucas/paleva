@@ -20,9 +20,9 @@ class FeaturesController < ApplicationController
   def create
     @feature = @restaurant.features.build(feature_params)
     if @feature.save
-      redirect_to restaurant_features_path(@restaurant), notice: 'Característica cadastrada com sucesso'
+      redirect_to restaurant_features_path(@restaurant), notice: I18n.t('features.create_success')
     else
-      flash.now[:alert] = "ALGO DEU ERRADO, CARACTERÍSTICA NÃO CADASTRADA"
+      flash.now[:alert] = I18n.t('features.create_fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,9 +34,9 @@ class FeaturesController < ApplicationController
   def update
     @feature = @restaurant.features.find(params[:id])
     if @feature.update(feature_params)
-      redirect_to restaurant_features_path(@restaurant), notice: 'Característica atualizada com sucesso'
+      redirect_to restaurant_features_path(@restaurant), notice: I18n.t('features.update_success')
     else
-      flash.now[:alert] = "Não foi possível atualizar a característica"
+      flash.now[:alert] = I18n.t('features.update_fail')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -44,9 +44,9 @@ class FeaturesController < ApplicationController
   def destroy
     @feature = @restaurant.features.find(params[:id])
     if @feature.destroy
-      redirect_to restaurant_features_path(@restaurant), notice: 'Característica deletada com sucesso'
+      redirect_to restaurant_features_path(@restaurant), notice: I18n.t('features.destroy_success')
     else
-      redirect_to restaurant_features_path(@restaurant), alert: 'Erro ao deletar a característica'
+      redirect_to restaurant_features_path(@restaurant), alert: I18n.t('features.destroy_fail')
     end
   end
 
@@ -54,13 +54,13 @@ class FeaturesController < ApplicationController
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('features.no_autorization')
     end
   end
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('features.no_autorization')
     end
   end
 
@@ -70,7 +70,7 @@ class FeaturesController < ApplicationController
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('features.no_permition')
       redirect_to new_restaurant_path
     end
   end
