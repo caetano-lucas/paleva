@@ -11,9 +11,9 @@ class MenusController < ApplicationController
   def create
     @menu = @restaurant.menus.build(menu_params)
     if @menu.save
-      redirect_to restaurant_menu_path(@restaurant, @menu), notice: 'Cardápio cadastrado com sucesso'
+      redirect_to restaurant_menu_path(@restaurant, @menu), notice: I18n.t('menus.create.success')
     else
-      flash.now[:alert] = "ERRO Cardapio já cadastrado"
+      flash.now[:alert] = "ERRO Cardápio já cadastrado"
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,19 +31,19 @@ class MenusController < ApplicationController
     @dishes = @restaurant.dishes.active
     @drinks = @restaurant.drinks.active
   end
- 
+
   def update
     @menu =  @restaurant.menus.find(params[:id])
-  
+
     if @menu.update(menu_params1)
       MenuItem.where(menu_id: @menu.id).delete_all
-      if params[:dish_ids] 
+      if params[:dish_ids]
         params[:dish_ids].each do |dish_id|
           dish = Dish.find(dish_id)
           MenuItem.create!(menu_id: @menu.id, menu_itemable: dish)
         end
       end
-      if params[:drink_ids] 
+      if params[:drink_ids]
         params[:drink_ids].each do |drink_id|
           drink = Drink.find(drink_id)
           MenuItem.create!(menu_id: @menu.id, menu_itemable: drink)
@@ -51,7 +51,7 @@ class MenusController < ApplicationController
       end
       redirect_to restaurant_menus_path(@restaurant), notice: 'Cardápio atualizado com sucesso'
     else
-      flash.now[:notice] = "Não foi possível atualizar o cardapio"
+      flash.now[:notice] = "Não foi possível atualizar o cardápio"
       render 'edit', status: :unprocessable_entity
     end
   end

@@ -2,10 +2,8 @@
   <%= link_to 'Cadastrar Cardápio', new_restaurant_menu_path(current_user.restaurant) %>
   <%= link_to 'Novo Pedido', new_restaurant_order_path(current_user.restaurant) %>
   <%= link_to 'Histórico de Pedidos', restaurant_orders_path(current_user.restaurant) %>
- 
-
 </div>
-<p></p>
+
 <% if @menus.present?%>
   <div>
     <ul>
@@ -59,6 +57,6 @@
     </ul>
   </div>
 <% else %>
-  <p>Não há cardapios cadastrados para este restaurante</p>
+  <p><%= t '.no_menus' %></p>
 <% end %>
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'usuario cadastra um novo cardapio' do
+describe 'usuario cadastra um novo cardápio' do
   it 'se estiver logado' do 
     visit root_path
 
@@ -15,8 +15,8 @@ describe 'usuario cadastra um novo cardapio' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id, position: :owner)
-    dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
-    dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
+    _dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
+    _dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
     dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     drink1 = Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant)
     drink2 = Drink.create!(name: 'Cerveja Bavária', description: '-4°', alcohol: true, restaurant: restaurant)
@@ -24,7 +24,7 @@ describe 'usuario cadastra um novo cardapio' do
     login_as(user)
     visit root_path
     click_on 'Cadastrar Cardápio'
-    fill_in 'Nome do cardápio', with: 'café da manhã'
+    fill_in 'Nome do Cardápio', with: 'café da manhã'
     click_on 'Salvar Cardápio'
 
     expect(page).to have_content 'Cardápio cadastrado com sucesso'
@@ -49,10 +49,10 @@ describe 'usuario cadastra um novo cardapio' do
     login_as(user)
     visit root_path
     click_on 'Cadastrar Cardápio'
-    fill_in 'Nome do cardápio', with: 'Janta'
+    fill_in 'Nome do Cardápio', with: 'Janta'
     click_on 'Salvar Cardápio'
 
-    expect(page).to have_content 'ERRO Cardapio já cadastrado'
+    expect(page).to have_content 'ERRO Cardápio já cadastrado'
     expect(page).not_to have_content 'Janta'
   end
   it 'independente de outros restaurantes' do
@@ -77,10 +77,10 @@ describe 'usuario cadastra um novo cardapio' do
     login_as(user_two)
     visit root_path
     click_on 'Cadastrar Cardápio'
-    fill_in 'Nome do cardápio', with: 'Janta'
+    fill_in 'Nome do Cardápio', with: 'Janta'
     click_on 'Salvar Cardápio'
 
-    expect(page).not_to have_content 'ERRO Cardapio já cadastrado'
+    expect(page).not_to have_content 'ERRO Cardápio já cadastrado'
     expect(page).to have_content 'Cardápio cadastrado com sucesso'
     expect(page).to have_content 'Janta'
   end

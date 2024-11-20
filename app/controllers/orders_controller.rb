@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to edit_restaurant_order_path(@restaurant, @order), notice: 'Pedido iniciado com sucesso..'
     else
-      flash.now[:alert] = "ERRO Cardapio já cadastrado"
+      flash.now[:alert] = "ERRO Cardápio já cadastrado"
       render :new, status: :unprocessable_entity
     end
   end

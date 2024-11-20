@@ -2,10 +2,19 @@ pt-BR:
   active: "Ativo"
   inactive: "Inativo"
   activerecord:
-    dishes:
+    models:
       dish: 'Prato'
     attributes:
       dish:
         name: "Nome do Prato"
         description: "Descrição"
         calories: "Calorias"
+  dishes:
+      update_success: 'Prato atualizado com sucesso'
+      update_fail: "Não foi possível atualizar o Prato"
+      create_success: 'Prato cadastrado com sucesso'
+      create_fail: "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
+      destroy_success: 'Prato deletado com sucesso'
+      destroy_fail: 'Erro ao deletar o prato'
+      no_autorization: 'Você não possui acesso a esta função'
+      no_permition: 'Você não tem permissão para acessar esse restaurante.'

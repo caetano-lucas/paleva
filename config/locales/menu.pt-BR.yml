@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      menu: 'Cardápio'
+    attributes:
+      menu:
+        name: "Nome do Cardápio"
+  menus:
+    index:
+      title: "Cardápios"
+      no_menus: "Não há cardápios cadastrados para este restaurante"
+    create:
+      success: "Cardápio cadastrado com sucesso"
+    new:
+      new_menu: "Cadastrar novo cardápio"
+      save_menu: "Salvar Cardápio"

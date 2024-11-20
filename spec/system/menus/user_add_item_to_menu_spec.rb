@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'usuario adiciona um item ao cardapio' do
+describe 'usuario adiciona um item ao cardápio' do
   it 'se estiver logado' do 
     visit root_path
 

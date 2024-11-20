@@ -66,6 +66,6 @@ describe 'usuario edita um prato já cadastrado' do
     visit edit_restaurant_dish_path(restaurant_user_two, dish3)    
    
     expect(current_path).not_to eq edit_restaurant_dish_path(restaurant_user_two, dish3)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não possui acesso a esta função'
   end
 end

@@ -107,6 +107,6 @@ describe 'usuario ve pratos cadastrados para seu restaurante' do
     visit restaurant_dishes_path(restaurant_user_two)    
    
     expect(current_path).not_to eq restaurant_dishes_path(restaurant_user_two)
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não possui acesso a esta função'
   end
 end

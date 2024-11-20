@@ -1,9 +1,11 @@
-<h1>Cadastrar novo cardápio:</h1>
+<h1><%= I18n.t('menus.new.new_menu')%>:</h1>
 
 <%= form_with(model: [@restaurant, @menu] ) do |f|%>
   <div>
-    <%== f.label :name, 'Nome do cardápio' %>
-    <%= f.text_field :name, required: true%>
-    <%= f.submit 'Salvar Cardápio'%>
+    <dl>
+      <dt><%= f.label :name %></dt>
+      <dd><%= f.text_field :name, required: true%></dd>
+    </dl>
+    <%= f.submit I18n.t('menus.new.save_menu')%>
   </div>
 <% end %>

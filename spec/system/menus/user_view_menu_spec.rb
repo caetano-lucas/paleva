@@ -64,7 +64,7 @@ describe 'usuario ve cadapio' do
     expect(page).to have_content 'Janta'
     expect(page).not_to have_content 'Almoço'
   end
-  it 'e não há cardapios cadastrados' do
+  it 'e não há cardápios cadastrados' do
     cpf = CPF.generate(true).split
     cnpj = CNPJ.generate(true).split
     user = User.create!(email: 'userone@email.com',first_name: 'userone',
@@ -77,7 +77,7 @@ describe 'usuario ve cadapio' do
     login_as(user)
     visit root_path
 
-    expect(page).to have_content "Não há cardapios cadastrados para este restaurante"
+    expect(page).to have_content "Não há cardápios cadastrados para este restaurante"
   end
   it 'e não tem acesso a lista de outros restaurantes' do
     cpf1 = CPF.generate(true).split

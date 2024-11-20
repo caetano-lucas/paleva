@@ -41,9 +41,9 @@ class DishesController < ApplicationController
           ItemFeature.create!(feature: feature, featurable: @dish)
         end
       end
-      redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato atualizado com sucesso'
+      redirect_to restaurant_dishes_path(@restaurant), notice: I18n.t('dishes.update_success')
     else
-      flash.now[:notice] = "Não foi possível atualizar o Prato"
+      flash.now[:notice] = I18n.t('dishes.update_fail')
       render 'edit', status: :unprocessable_entity
     end
   end
@@ -51,9 +51,9 @@ class DishesController < ApplicationController
   def create
     @dish = @restaurant.dishes.build(dish_params)
     if @dish.save
-      redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Prato cadastrado com sucesso'
+      redirect_to restaurant_dish_path(@restaurant, @dish), notice: I18n.t('dishes.create_success')
     else
-      flash.now[ :alert ] = "ALGO DEU ERRADO, PRATO NÃO CADASTRADO"
+      flash.now[ :alert ] = I18n.t('dishes.create_fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -62,9 +62,9 @@ class DishesController < ApplicationController
     @dish = @restaurant.dishes.find(params[:id])
     @dish.features.destroy_all
     if @dish.destroy
-      redirect_to restaurant_dishes_path(@restaurant), notice: 'Prato deletado com sucesso'
+      redirect_to restaurant_dishes_path(@restaurant), notice: I18n.t('dishes.destroy_success')
     else
-      redirect_to restaurant_dishes_path(@restaurant), alert: 'Erro ao deletar o prato'
+      redirect_to restaurant_dishes_path(@restaurant), alert: I18n.t('dishes.destroy_fail')
     end
   end
 
@@ -91,7 +91,7 @@ class DishesController < ApplicationController
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('dishes.no_autorization')
     end
   end
   
@@ -101,13 +101,13 @@ class DishesController < ApplicationController
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('dishes.no_autorization')
     end
   end
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] =  I18n.t('dishes.no_permition')
       redirect_to new_restaurant_path
     end
   end

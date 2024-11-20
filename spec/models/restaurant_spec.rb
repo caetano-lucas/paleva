@@ -43,7 +43,7 @@ RSpec.describe Restaurant, type: :model do
         restaurant.valid?
         expect(restaurant.errors.include? :phone).to be true
       end
-      
+
       it 'email deve ser obrigatório' do
         restaurant = Restaurant.new(trade_name: 'userone@email.com', legal_name: 'userRestaurant',
                                     cnpj: nil, address: 'Restaurant street, 200', phone: '23456789102',
@@ -51,7 +51,7 @@ RSpec.describe Restaurant, type: :model do
         restaurant.valid?
         expect(restaurant.errors.include? :email).to be true
       end
-    
+
     end
 
     context 'uniqueness' do
@@ -64,7 +64,7 @@ RSpec.describe Restaurant, type: :model do
         restaurant_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant-one LTDA',
                                       cnpj: cnpj2, address: 'Restaurant street, 222', phone: '2222222222',
                                       email: 'usertworestaurant@gmail.com')
-      
+
         result = restaurant_two.valid?
 
         expect(result).to eq false
@@ -72,13 +72,13 @@ RSpec.describe Restaurant, type: :model do
 
       it 'falso quando o CNPJ não é único' do
         cnpj1 = CNPJ.generate(true).split
-        restaurant_one = Restaurant.create(trade_name: 'userone-restaurant', legal_name: 'userRestaurant-one LTDA',
+        _restaurant_one = Restaurant.create(trade_name: 'userone-restaurant', legal_name: 'userRestaurant-one LTDA',
                                       cnpj: cnpj1, address: 'Restaurant street, 111', phone: '1111111111',
                                       email: 'useronerestaurant@gmail.com')
         restaurant_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant-two LTDA',
                                       cnpj: cnpj1, address: 'Restaurant street, 222', phone: '2222222222',
                                       email: 'usertworestaurant@gmail.com')
-      
+
         result = restaurant_two.valid?
 
         expect(result).to eq false
@@ -94,7 +94,7 @@ RSpec.describe Restaurant, type: :model do
         restaurant_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant-two LTDA',
                                       cnpj: cnpj2, address: 'Restaurant street, 222', phone: '1111111111',
                                       email: 'usertworestaurant@gmail.com')
-      
+
         result = restaurant_two.valid?
 
         expect(result).to eq false
@@ -103,13 +103,13 @@ RSpec.describe Restaurant, type: :model do
       it 'falso quando o email não é único' do
         cnpj1 = CNPJ.generate(true).split
         cnpj2 = CNPJ.generate(true).split
-        restaurant_one = Restaurant.create(trade_name: 'userone-restaurant', legal_name: 'userRestaurant-one LTDA',
+        _restaurant_one = Restaurant.create(trade_name: 'userone-restaurant', legal_name: 'userRestaurant-one LTDA',
                                       cnpj: cnpj1, address: 'Restaurant street, 111', phone: '1111111111',
                                       email: 'useronerestaurant@gmail.com')
         restaurant_two = Restaurant.new(trade_name: 'usertwo-restaurant', legal_name: 'userRestaurant-two LTDA',
                                       cnpj: cnpj2, address: 'Restaurant street, 222', phone: '2222222222',
                                       email: 'useronerestaurant@gmail.com')
-      
+
         result = restaurant_two.valid?
 
         expect(result).to eq false
