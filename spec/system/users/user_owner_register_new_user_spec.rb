@@ -46,7 +46,7 @@ describe 'um usuário dono registra novos funcionários para seu restaurante' do
     click_on 'Restaurante'
     click_on 'Pré Cadastrar Novo Funcionário'
 
-    expect(page).to have_content 'Você não possui acesso a esta lista'
+    expect(page).to have_content 'Você não possui acesso a esta função'
     expect(page).to have_content 'Novo Pedido'
   end
 end

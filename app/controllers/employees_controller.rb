@@ -18,12 +18,12 @@ class EmployeesController < ApplicationController
       @employee.restaurant =  Restaurant.find(@user.restaurant_id)
       @employee.user = @user
       if @employee.save
-        redirect_to restaurant_employees_path, notice: 'Funcionário criado com sucesso.'
+        redirect_to restaurant_employees_path, notice: I18n.t('employees.create_success')
       else
-        render :new, notice: 'Falha ao criar funcionário.'
+        render :new, notice: I18n.t('employees.create_fail')
       end
     else
-      redirect_to root_path, alert: 'Nenhum usuário encontrado para este restaurante.'
+      redirect_to root_path, alert: I18n.t('employees.no_autorization')
     end
   end
 
@@ -31,7 +31,7 @@ class EmployeesController < ApplicationController
 
   def user_is_owner
     if current_user.employee?
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('employees.no_autorization')
     end
   end
 
@@ -42,13 +42,13 @@ class EmployeesController < ApplicationController
 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta tela'
+      redirect_to root_path, alert: I18n.t('employees.no_permition')
     end
   end
 
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esta função;'
+      flash.now[:notice] =  I18n.t('employees.register_restaurant_first')
       redirect_to new_restaurant_path
     end
   end

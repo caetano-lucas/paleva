@@ -4,7 +4,7 @@
     <thead>
     <tr>
         <th> ID </th>
-        <th> E-mail </th>
+        <th> <%= Dish.human_attribute_name(:email)%> </th>
         <th> CPF </th>
     </tr>
     </thead>
@@ -20,5 +20,5 @@
     </tbody>
   </table>
 <% else %>
-  <p>Não há Características cadastradas para este restaurante, cadastre!</p>
+  <p><%= I18n.t('employees.no_employee')%></p>
 <% end %>

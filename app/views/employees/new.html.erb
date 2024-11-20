@@ -1,4 +1,4 @@
-<h1>Pré cadastre um novo funcionário:</h1>
+<h1><%= I18n.t('employees.new_employee')%>:</h1>
 
 <%= form_with(model:[@restaurant, @employee]) do |f| %>
   <div>
@@ -9,5 +9,5 @@
     <%= f.label :cpf, 'CPF'%>
     <%= f.text_field :cpf %>
   </div>
-  <%= f.submit 'Salvar Funcionário' %>
+  <%= f.submit I18n.t('employees.save_employee') %>
 <% end %>
