@@ -1,4 +1,4 @@
-<h1>Adicione as informações da Porção:</h1>
+<h1><%= I18n.t('portions.add_info')%>:</h1>
 
 <% if @portion.errors.any? %>
   <ul>
@@ -10,21 +10,21 @@
 
 <%= form_with(model: [@restaurant, @portionable, @portion], local: true) do |f| %>
   <div>
-    <%= f.label :description, 'Descrição da Porção' %>
-    <%= f.text_field :description, required: true, placeholder: "Ex.: Meia porção, serve 3 pessoas" %>
+    <%= f.label :description, I18n.t('portions.description_of') %>
+    <%= f.text_field :description, required: true, placeholder: I18n.t('portions.exemple_description') %>
   </div>
 
   <div>
-    <%= f.label :price_whole, 'Preço (Parte Inteira - R$)' %>
+    <%= f.label :price_whole, "#{I18n.t('.price')} (#{I18n.t('portions.price_whole')} - #{I18n.t('.number.currency.format.unit')})" %>
     <%= f.number_field :price_whole, required: true, placeholder: "Ex.: 45" %>
   </div>
 
   <div>
-    <%= f.label :price_cents, 'Preço (Centavos)' %>
-    <%= f.number_field :price_cents, required: true, placeholder: "Ex.: 99" %>
+    <%= f.label :price_cents, "#{I18n.t('.price')} (#{I18n.t('portions.price_cents')})" %>
+    <%= f.number_field :price_cents, required: true, placeholder: I18n.t('portions.exemple_price') %>
   </div>
 
   <div>
-    <%= f.submit 'Salvar Porção' %>
+    <%= f.submit I18n.t('portions.save_portion') %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<h2>Cadastro Restaurante</h2>
+<h2><%= I18n.t('restaurants.new_restaurant')%></h2>
 <% if @restaurant.errors.any? %>
   <ul>
     <% @restaurant.errors.full_messages.each do |msg| %>
@@ -31,5 +31,5 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-  <%= f.submit 'Salvar Restaurante' %>
+  <%= f.submit I18n.t('restaurants.save_restaurant') %>
 <% end %>

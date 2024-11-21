@@ -4,6 +4,6 @@ pt-BR:
       user: 'Usuário'
     attributes:
       user:
-        first_name: "Nome"
-        last_name: "Sobrenome"
-        cpf: "CPF"
+        cpf: 'CPF'
+        first_name: 'Nome'
+        last_name: 'Sobrenome'

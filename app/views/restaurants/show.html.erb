@@ -1,21 +1,21 @@
-<h3>Detalhes do restaurante </h3>
-  <%= link_to 'Pré Cadastrar Novo Funcionário', new_restaurant_employee_path(@restaurant)%>
+<h3><%= I18n.t('restaurants.details')%></h3>
+  <%= link_to I18n.t('restaurants.new_employee'), new_restaurant_employee_path(@restaurant)%>
   
   <h4>Dono: <%= @user.first_name%> <%= @user.last_name%> </h4>
  
   <dl>
-    <dt>Nome Fantasia:</dt>
+    <dt><%= Restaurant.human_attribute_name(:trade_name)%>:</dt>
     <dd><%= @restaurant.trade_name %></dd>
-    <dt>Razão Social:</dt>
+    <dt><%= Restaurant.human_attribute_name(:legal_name)%>:</dt>
     <dd><%= @restaurant.legal_name %></dd>
-    <dt>CNPJ:</dt>
+    <dt><%= Restaurant.human_attribute_name(:cnpj)%>:</dt>
     <dd><%= @restaurant.cnpj %></dd>
-    <dt>Endereço:</dt>
+    <dt><%= Restaurant.human_attribute_name(:address)%>:</dt>
     <dd><%= @restaurant.address %></dd>
-    <dt>Telefone:</dt>
+    <dt><%= Restaurant.human_attribute_name(:phone)%>:</dt>
     <dd><%= @restaurant.phone %></dd>
-    <dt>E-mail:</dt>
+    <dt><%= Restaurant.human_attribute_name(:email)%>:</dt>
     <dd><%= @restaurant.email %></dd>
-    <dt>Código Alfanumérico único:</dt>
+    <dt><%= Restaurant.human_attribute_name(:alphanumeric_code)%>:</dt>
     <dd><%= @restaurant.alphanumeric_code %></dd>
   </dl>

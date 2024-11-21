@@ -4,20 +4,19 @@ pt-BR:
       operating_hour: 'Horário de Funcionamento'
     attributes:
       operating_hour:
-        day: "Dia da semana"
-        open_time: "Abertura"
-        close_time: "Fechamento"
+        close_time: 'Fechamento'
+        day: 'Dia da semana'
+        open_time: 'Abertura'
   operating_hours:
-      hours_list: 'Horários Cadastrados'
+      close_hour: 'Horário de Fechamento'
+      closed: 'Fechado'
+      create_fail: 'Horário de Abertura deve ser menor que o de fechamento'
+      create_new_hour: 'Criar Horário de Funcionamento'
       create_success: 'Horário de funcionamento criado com sucesso.'
-      create_fail: "Horário de Abertura deve ser menor que o de fechamento"
-      update_success: 'Horário de funcionamento atualizado com sucesso.'
       destroy_success: 'Horário de funcionamento excluído com sucesso.'
       edit_operating_hour: 'Editar Horário de Funcionamento'
-      closed: 'Fechado'
       hours_list: 'Horários Cadastrados'
       new_hour: 'Novo Horário'
       no_hour: 'Não há horários Cadastrados'
       open_hour: 'Horário de Abertura'
-      close_hour: 'Horário de Fechamento'
-      create_new_hour: 'Criar Horário de Funcionamento'
+      update_success: 'Horário de funcionamento atualizado com sucesso.'

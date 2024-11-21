@@ -6,15 +6,16 @@ pt-BR:
       portion:
         description: 'Descrição'
   portions:
-      description_of: 'Descrição da Porção'
+      add_info: 'Adicione as informações da Porção'
       add_portion: 'Cadastrar porção'
+      back_to_portions: 'Voltar para todas as porções'
+      description_of: 'Descrição da Porção'
+      details: 'Detalhes da Porção'
       edit_portion: 'Editar porção'
-
-
-  ###
-      
-# I18n.t('.')
-# I18n.t('portions.')
-#<%= I18n.t('.')%>
-#<%= I18n.t('portions.')%>
-#<%= Portion.human_attribute_name(:)%>
+      exemple_description: 'Ex.: Meia porção, serve 3 pessoas'
+      exemple_price: 'Ex.: 99'
+      list_portion_to: 'Porções Cadastradas para'
+      new_portion: 'Cadastrar nova porção'
+      price_cents: 'Centavos'
+      price_whole: 'Parte Inteira'
+      save_portion: 'Salvar Porção'

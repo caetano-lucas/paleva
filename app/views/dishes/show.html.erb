@@ -58,5 +58,4 @@
   <p><%= I18n.t('dishes.no_portion')%>.</p>
 <% end %>
 <p><%= link_to I18n.t('portions.add_portion'),new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
-<p><%= link_to I18n.t('portions.edit_portion'), edit_restaurant_dish_portion_path(@restaurant, @dish) %></p>
 <%= link_to I18n.t('.go_back'), restaurant_dishes_path(@dish.restaurant) %>

@@ -4,17 +4,17 @@ pt-BR:
       feature: 'Característica'
     attributes:
       feature:
-        name: "Nome da Característica"
+        name: 'Nome da Característica'
   features:
-      update_success: 'Característica atualizada com sucesso'
-      update_fail: "Não foi possível atualizar a característica"
-      create_fail: "ALGO DEU ERRADO, CARACTERÍSTICA NÃO CADASTRADA"
-      create_success: 'Característica cadastrada com sucesso'
-      destroy_success: 'Característica deletada com sucesso'
-      destroy_fail: 'Erro ao deletar a característica'
-      no_autorization: 'Você não possui acesso a esta função'
-      no_permition: 'Você não tem permissão para acessar esse restaurante.'
-      new_feature: 'Cadastrar Nova característica'
-      no_feature: 'Não há Características cadastradas para este restaurante, cadastre!'
       add_info: 'Adicione as informações da Característica'
+      create_fail: 'ALGO DEU ERRADO, CARACTERÍSTICA NÃO CADASTRADA'
+      create_success: 'Característica cadastrada com sucesso'
+      destroy_fail: 'Erro ao deletar a característica'
+      destroy_success: 'Característica deletada com sucesso'
+      new_feature: 'Cadastrar Nova característica'
+      no_autorization: 'Você não possui acesso a esta função'
+      no_feature: 'Não há Características cadastradas para este restaurante, cadastre!'
+      no_permition: 'Você não tem permissão para acessar esse restaurante.'
       save_feature: 'Salvar Característica'
+      update_fail: 'Não foi possível atualizar a característica'
+      update_success: 'Característica atualizada com sucesso'

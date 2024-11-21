@@ -19,8 +19,8 @@ describe 'usuario cadastra um novo pedido' do
     
     login_as(user)
     visit root_path
-    click_on 'Novo Pedido'
-    fill_in 'Nome do cliente', with: 'Felipe Marciel'
+    click_on 'Cadastrar novo Pedido'
+    fill_in 'Nome do Cliente', with: 'Felipe Marciel'
     fill_in 'CPF', with: "#{cpf2}"
     fill_in 'E-mail', with: 'felipemarciel@exemple.com'
     click_on 'Iniciar Pedido'
@@ -49,8 +49,8 @@ describe 'usuario cadastra um novo pedido' do
                   restaurant: restaurant, status: 0)
     login_as(user)
     visit root_path
-    click_on 'Novo Pedido'
-    fill_in 'Nome do cliente', with: 'Felipe Marciel'
+    click_on 'Cadastrar novo Pedido'
+    fill_in 'Nome do Cliente', with: 'Felipe Marciel'
     fill_in 'CPF', with: "#{cpf2}"
     fill_in 'E-mail', with: 'felipemarciel@exemple.com'
     click_on 'Iniciar Pedido'

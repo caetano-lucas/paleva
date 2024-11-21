@@ -4,24 +4,21 @@ pt-BR:
       order: 'Pedido'
     attributes:
       order:
-        client_name: 'Nome do Cliente'
-        phone: 'Telefone'
-        email: 'E-mail'
         alphanumeric_code: 'Código Alfanumérico'
+        client_name: 'Nome do Cliente'
+        created_at: 'Hora Pedido'
+        email: 'E-mail'
+        id: 'Número Pedido'
+        phone: 'Telefone'
         status: 'status'
         total_price: 'Total'
-        id: 'Número Pedido'
   orders:
-      new_order: 'Novo Pedido'
-      order_history: 'Histórico de Pedidos'      
-      create_success: 'Pedido iniciado com sucesso'
-      create_fail: "ERRO Cardápio já cadastrado"
-      send_to_kitchen: 'Pedido enviado a cozinha'
-      save_order: 'Salvar Pedido'
       add_items_to: 'Adicionar itens ao Pedido de'
-
-# I18n.t('.')
-# I18n.t('orders.')
-#<%= I18n.t('.')%>
-#<%= I18n.t('orders.')%>
-#<%= Order.human_attribute_name(:)%>
+      client_info: 'Preencha primeiro as informações do cliente'
+      create_fail: 'ERRO Cardápio já cadastrado'
+      create_success: 'Pedido iniciado com sucesso'
+      new_order: 'Cadastrar novo Pedido'
+      order_history: 'Histórico de Pedidos'
+      save_order: 'Salvar Pedido'
+      send_to_kitchen: 'Pedido enviado a cozinha'
+      start_order: 'Iniciar Pedido'

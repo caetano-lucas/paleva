@@ -4,14 +4,20 @@ pt-BR:
       restaurant: 'Restaurante'
     attributes:
       restaurant:
-        trade_name: "Nome Fantasia"
-        legal_name: "Razão Social"
-        cnpj: "CNPJ"
-        address: "Endereço"
-        phone: "Telefone"
-        email: "E-mail"
+        address: 'Endereço'
+        alphanumeric_code: 'Código Alfanumérico único'
+        cnpj: 'CNPJ'
+        email: 'E-mail'
+        legal_name: 'Razão Social'
+        phone: 'Telefone'
+        trade_name: 'Nome Fantasia'
   restaurants: 
-      description_of: 'Descrição da Porção'
       add_portion: 'Cadastrar porção'
+      create_fail: 'Não foi possível cadastrar o restaurante, siga as instruções abaixo.'
+      create_success: 'Restaurante cadastrado com sucesso'
+      description_of: 'Descrição da Porção'
+      details: 'Detalhes do restaurante'
       edit_portion: 'Editar porção'
+      new_employee: 'Pré Cadastrar Novo Funcionário'
       new_restaurant: 'Cadastrar Restaurante'
+      save_restaurant: 'Salvar Restaurante'

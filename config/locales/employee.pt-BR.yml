@@ -6,11 +6,11 @@ pt-BR:
       employee:
         email: 'E-mail'
   employees:
-      create_success: 'Funcionário criado com sucesso.'
       create_fail: 'Falha ao criar funcionário.'
+      create_success: 'Funcionário criado com sucesso.'
+      new_employee: 'Pré cadastre um novo funcionário'
       no_autorization: 'Você não possui acesso a esta função'
       no_permition: 'Você não tem permissão para acessar esse restaurante.'
-      register_restaurant_first: 'Primeiro cadastre um restaurante'
       no_employee: 'Não há funcionários cadastrados para este restaurante, cadastre!'
-      new_employee: 'Pré cadastre um novo funcionário'
+      register_restaurant_first: 'Primeiro cadastre um restaurante'
       save_employee: 'Salvar Funcionário'

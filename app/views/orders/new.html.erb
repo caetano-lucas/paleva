@@ -1,19 +1,18 @@
-<h1>Cadastrar novo Pedido:</h1>
-<p>Preencha primeiro as informações do cliente:</p>
+<h1><%= I18n.t('orders.new_order')%>:</h1>
+<p><%= I18n.t('orders.client_info')%>:</p>
 
 <%= form_with(model: [@restaurant, @order] ) do |f|%>
   <div>
-    <%== f.label :client_name, 'Nome do cliente' %>
-    <%= f.text_field :client_name, required: true%>
-
-    <%== f.label :cpf, 'CPF' %>
-    <%= f.text_field :cpf, required: false%>
-
-    <%== f.label :phone, 'Telefone' %>
-    <%= f.text_field :phone, required: false%>
-
-    <%== f.label :email, 'E-mail' %>
-    <%= f.text_field :email, required: false%>
-    <%= f.submit 'Iniciar Pedido'%>
+    <ul>
+      <li><%= f.label :client_name %>
+      <%= f.text_field :client_name, required: true%></li>
+      <li><%= f.label :cpf, 'CPF' %>
+      <%= f.text_field :cpf, required: false%></li>
+      <li><%= f.label :phone%>
+      <%= f.text_field :phone, required: false%></li>
+      <li><%= f.label :email %>
+      <%= f.text_field :email, required: false%></li>
+    </ul> 
+    <%= f.submit I18n.t('orders.start_order')%>
   </div>
 <% end %>

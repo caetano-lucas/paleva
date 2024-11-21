@@ -31,12 +31,13 @@ describe 'usuario ve pedido' do
     visit root_path
     click_on 'Histórico de Pedidos'
     
+    expect(page).to have_content 'Lista de itens'
     expect(page).to have_content 'Felipe Marciel'
     expect(page).to have_content 'Meia porção - 3 pessoas'
     expect(page).to have_content '45,99'
     expect(page).to have_content 'Macarronada'
     expect(page).to have_content 'Lata 350ml'
     expect(page).to have_content '3,99'
-    expect(page).to have_content 'Preço total'
+    expect(page).to have_content 'Total'
   end
 end

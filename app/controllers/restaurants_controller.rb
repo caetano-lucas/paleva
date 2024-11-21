@@ -20,9 +20,9 @@ class RestaurantsController < ApplicationController
     @restaurant.cnpj.strip
     if @restaurant.save
       @user.update!(restaurant_id: @restaurant.id, position: :owner)
-      redirect_to @restaurant, notice: "Restaurante cadastrado com sucesso"
+      redirect_to @restaurant, notice: I18n.t('restaurants.create_success')
     else
-      flash.now[:notice] = 'Não foi possível cadastrar o restaurante, siga as instruções abaixo.'
+      flash.now[:notice] = I18n.t('restaurants.create_fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,13 +30,13 @@ class RestaurantsController < ApplicationController
   private 
   def user_have_permition
     if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: 'Você não possui acesso a esta lista'
+      redirect_to root_path, alert: I18n.t('.no_autorization')
     end
   end
   
   def redirect_unless_restaurant
     if current_user.restaurant_id.nil?
-      flash.now[:notice] = 'Você não tem permissão para acessar esse restaurante.'
+      flash.now[:notice] = I18n.t('.no_permition')
       redirect_to new_restaurant_path
     end
   end

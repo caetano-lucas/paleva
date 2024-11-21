@@ -1,21 +1,21 @@
 <ul>
   
-  <% @orders.each do |order|%>
+  <% @orders.each do |order|%>    
     <li>  
-      <p>Nome Cliente: <%= order.client_name %> | <%= order.id %></p>
-      <p>Contato: <%= order.email %> | <%= order.phone %></p>
-      <p>Hora Pedido: <%= l order.created_at %></p>
-      <p>Preço total: <%= order.total_price%></p>
-      <p>Status: <%= order.status%></p>
-    <h4>Pratos</h4>
+      <p><%= Order.human_attribute_name(:client_name)%>: <%= order.client_name %> | <%= order.id %></p>
+      <p><%= I18n.t('.contact')%>: <%= order.email %> | <%= order.phone %></p>
+      <p><%= Order.human_attribute_name(:created_at)%>: <%= order.created_at %></p>
+      <p><%= Order.human_attribute_name(:total_price)%>: <%= order.total_price%></p>
+      <p><%= Order.human_attribute_name(:status)%>: <%= order.status%></p>
+    <h4><%= I18n.t('order_items.order_item_list')%></h4>
       <table>
         <thead>
           <tr>
-            <th>Prato</th>
-            <th>Descrição da Porção</th>
-            <th>Preço</th>
-            <th>Observação</th>
-            <th>Quantidade</th>
+            <th><%= I18n.t('.item')%></th>
+            <th><%= I18n.t('portions.description_of')%></th>
+            <th><%= I18n.t('.price')%></th>
+            <th><%= OrderItem.human_attribute_name(:quantity)%></th>
+            <th><%= OrderItem.human_attribute_name(:note)%></th>
           </tr>
         </thead>
         <tbody>
@@ -24,8 +24,8 @@
             <td> <%= order_item.portion.portionable.name%></td>
             <td> <%= order_item.portion.description%></td>
             <td> <%= order_item.price%>,<%= order_item.cents%></td>
-            <td> <%= order_item.note%></td>
             <td> <%= order_item.quantity%></td>
+            <td> <%= order_item.note%></td>
           </tr>
           <% end %>
         </tbody>

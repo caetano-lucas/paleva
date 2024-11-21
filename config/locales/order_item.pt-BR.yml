@@ -4,19 +4,14 @@ pt-BR:
       order_item: 'Item do Pedido'
     attributes:
       order_item:
-        quantity: 'Quantidade'
         note: 'Observação'
+        quantity: 'Quantidade'
   order_items:
-      new_order: 'Novo Pedido'
-      order_history: 'Histórico de Pedidos'      
-      create_success: 'Pedido iniciado com sucesso'
-      create_fail: "ERRO Cardápio já cadastrado"
-      send_to_kitchen: 'Pedido enviado a cozinha'
-      save_order: 'Salvar Pedido'
       add_items_to: 'Adicionar itens ao Pedido de'
-
-# I18n.t('.')
-# I18n.t('orders.')
-#<%= I18n.t('.')%>
-#<%= I18n.t('orders.')%>
-#<%= Order.human_attribute_name(:)%>
+      create_fail: 'ERRO Cardápio já cadastrado'
+      create_success: 'Pedido iniciado com sucesso'
+      new_order: 'Novo Pedido'
+      order_history: 'Histórico de Pedidos'
+      order_item_list: 'Lista de itens'
+      save_order: 'Salvar Pedido'
+      send_to_kitchen: 'Pedido enviado a cozinha'
