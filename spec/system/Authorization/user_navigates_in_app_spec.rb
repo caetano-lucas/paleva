@@ -65,8 +65,9 @@ describe 'usuario nevega pela aplicacao' do
     login_as(user_two)
     visit restaurant_path(restaurant_user_one)
 
-    expect(page).to have_content('usertwo-restaurant')
     expect(page).not_to have_content('userone-restaurant')
+    expect(current_path).to eq restaurant_menus_path(restaurant_user_two)
+    expect(page).to have_content('Você não tem permissão para acessar esse restaurante.')
   end
 end
 

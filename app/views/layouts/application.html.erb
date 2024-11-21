@@ -25,22 +25,23 @@
         <% if user_signed_in? %>          
           <% if current_user.restaurant&.persisted? %>
             <%= link_to I18n.t('.restaurant'), restaurant_path(current_user.restaurant) %>
-            <%= link_to I18n.t('dishes.all_dish'), restaurant_dishes_path(current_user.restaurant) %>
-            <%= link_to I18n.t('drinks.all_drink'), restaurant_drinks_path(current_user.restaurant) %>
-            <%= link_to I18n.t('operating_hours.hours_list'), restaurant_operating_hours_path(current_user.restaurant) %> 
+            <% if current_user.owner? %>
+              <%= link_to I18n.t('dishes.all_dish'), restaurant_dishes_path(current_user.restaurant) %>
+              <%= link_to I18n.t('drinks.all_drink'), restaurant_drinks_path(current_user.restaurant) %>
+              <%= link_to I18n.t('operating_hours.hours_list'), restaurant_operating_hours_path(current_user.restaurant) %> 
 
-            <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
-              <%= f.label :query, I18n.t('dishes.search_dish')%>
-              <%= f.text_field :query, id: 'search_dish'%>
-              <%= f.submit I18n.t('dishes.search_dishes')%>
+              <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
+                <%= f.label :query, I18n.t('dishes.search_dish')%>
+                <%= f.text_field :query, id: 'search_dish'%>
+                <%= f.submit I18n.t('dishes.search_dishes')%>
+              <% end %>
+
+              <%= form_with(url:  search_restaurant_drinks_path(current_user.restaurant), method: :get ) do |f| %>
+                <%= f.label :query, I18n.t('drinks.search_drink')%>
+                <%= f.text_field :query, id: 'search_drink'%>
+                <%= f.submit I18n.t('drinks.search_drinks')%>
+             <% end %>
             <% end %>
-
-            <%= form_with(url:  search_restaurant_drinks_path(current_user.restaurant), method: :get ) do |f| %>
-              <%= f.label :query, I18n.t('drinks.search_drink')%>
-              <%= f.text_field :query, id: 'search_drink'%>
-              <%= f.submit I18n.t('drinks.search_drinks')%>
-            <% end %>
-
           <% else %>
             <%= link_to I18n.t('restaurants.new_restaurant'), new_restaurant_path %>
           <% end %>

@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   require 'cpf_cnpj'
   before_action :authenticate_user!
   before_action :redirect_unless_restaurant, only: [:show]
+  before_action :user_have_permition, only: [:show]
 
 
   def show
@@ -29,8 +30,9 @@ class RestaurantsController < ApplicationController
 
   private 
   def user_have_permition
-    if @restaurant.id != current_user.restaurant_id
-      redirect_to root_path, alert: I18n.t('.no_autorization')
+    r = Restaurant.find(params[:id])
+    if r.id != current_user.restaurant.id
+      redirect_to root_path, notice: I18n.t('.no_permition')
     end
   end
   
@@ -42,6 +44,6 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:trade_name, :legal_name, :cnpj, :address, :phone, :email)
+    params.require(:restaurant).permit(:trade_name, :legal_name, :cnpj, :address, :phone, :email, :id)
   end
 end

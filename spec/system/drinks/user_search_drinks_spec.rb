@@ -361,4 +361,23 @@ describe 'Usuario busca uma bebida' do
     expect(page).not_to have_content 'Macarronada'
     expect(current_path).to eq restaurant_drinks_path(restaurant)
   end
+  it 'somente se for dono do restaurante' do
+    cpf1 = CPF.generate(true).split
+    cpf2 = CPF.generate(true).split
+    cnpj1 = CNPJ.generate(true).split
+    user_one = User.create!(email: 'userone@email.com',first_name: 'userone',
+                            last_name: 'one', password: '12345abcdeF#', cpf: cpf1)
+    restaurant_user_one = Restaurant.create!(trade_name: 'userone-restaurant', legal_name: 'userRestaurant LTDA',
+                                             cnpj: cnpj1, address: 'Restaurant street, 200', phone: '23456789102',
+                                             email: 'useronerestaurant@gmail.com')
+    user_one.update!(restaurant_id: restaurant_user_one.id, position: :owner)
+    user_two = User.create!(email: 'usertwo@email.com',first_name: 'usertwo',
+                            last_name: 'two', password: '22345abcdeF#', cpf: cpf2)
+    user_two.update!(restaurant_id: restaurant_user_one.id, position: :employee)
+
+    login_as(user_two)
+    visit root_path
+
+    expect(page).not_to have_button 'Buscar-Bebida'
+  end
 end

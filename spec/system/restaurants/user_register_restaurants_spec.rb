@@ -118,7 +118,9 @@ describe 'Usuário registra um restaurante' do
     fill_in 'CNPJ', with: cnpj
     click_on 'Salvar Restaurante'
       
-      expect(page).to have_content 'Dono: userone one'
+    expect(page).to have_content 'Dono: userone one'
+    expect(User.last.owner?).to eq true
+    expect(User.last.employee?).to eq false
   end
 
 end

@@ -50,7 +50,11 @@ class OrdersController < ApplicationController
       @order.aguardando_confirmacao_cozinha!
       @order.save
     end
-      redirect_to  restaurant_orders_path(current_user.restaurant), notice: "#{I18n.t('orders.send_to_kitchen')}.."
+      if current_user.owner?
+        redirect_to  restaurant_orders_path(current_user.restaurant), notice: "#{I18n.t('orders.send_to_kitchen')}.."
+      else
+        redirect_to root_path, notice: "#{I18n.t('orders.send_to_kitchen')}.."
+      end
   end
   
   private

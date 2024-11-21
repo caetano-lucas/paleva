@@ -62,6 +62,5 @@ describe 'usuario cadastra um novo pedido' do
     expect(page).to have_content 'felipemarciel@exemple.com'
     expect(page).to have_content 'Macarronada'
     expect(page).to have_content 'Meia porção - 3 pessoas'
-
   end
 end
