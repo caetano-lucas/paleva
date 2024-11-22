@@ -31,3 +31,6 @@ Gems instaladas:
   gem 'validators'
 
 Projeto Feito Por Lucas Soares Caetano.
+
+
+Para acessar api: https://github.com/caetano-lucas/paleva_vue_js

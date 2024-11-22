@@ -18,7 +18,7 @@ describe 'usuario deleta uma bebida' do
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                                              email: 'usertworestaurant@gmail.com')
     user_two.update!(restaurant_id: restaurant_user_two.id)
-    drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant_user_one )
+    _drink1 = Drink.create!(name: 'BebidaPrincipal', description: 'A mais pedido', alcohol: true, restaurant: restaurant_user_one )
     drink2 = Drink.create!(name: 'BebidaSecundaria', description: 'A menos pedida', alcohol: true, restaurant: restaurant_user_two)
                                   
     login_as(user_one)

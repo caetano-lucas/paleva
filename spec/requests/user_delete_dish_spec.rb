@@ -18,7 +18,7 @@ describe 'usuario deleta um prato' do
                                              cnpj: cnpj2, address: 'Restaurant street, 3', phone: '33456789102',
                                              email: 'usertworestaurant@gmail.com')
     user_two.update!(restaurant_id: restaurant_user_two.id)
-    dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one )
+    _dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant: restaurant_user_one )
     dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 6000, restaurant: restaurant_user_two )
                                          
     login_as(user_one)

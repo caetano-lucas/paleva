@@ -19,7 +19,7 @@ describe 'usuario registra porções' do
     user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+    _item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
 
     
     login_as(user)

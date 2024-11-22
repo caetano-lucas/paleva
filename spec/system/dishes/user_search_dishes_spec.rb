@@ -291,10 +291,10 @@ describe 'Usuario busca um prato' do
     user.update!(restaurant_id: restaurant.id, position: :owner)
     
     dish1 = Dish.create!(name: 'PratoPrincipal', description: 'O mais pedido', calories: 1000, restaurant_id: restaurant.id )
-    dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
-    dish3 = Dish.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', calories: 2000, restaurant_id: restaurant.id )
+    _dish2 = Dish.create!(name: 'PratoSecundario', description: 'O menos pedido', calories: 2000, restaurant_id: restaurant.id )
+    _dish3 = Dish.create!(name: 'não encontrar - nome', description: 'não encontrar - descricao', calories: 2000, restaurant_id: restaurant.id )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+    _item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
     
     login_as(user)
     visit root_path

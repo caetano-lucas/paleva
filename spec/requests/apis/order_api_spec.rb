@@ -18,7 +18,7 @@ describe 'Orders API' do
       order = Order.create!(client_name: 'Felipe Marciel', cpf: "#{cpf2}", phone: nil, email: 'felipemarciel@exemple.com',
                     restaurant: restaurant, status: 0)
       
-      order_item = OrderItem.create!(portion: portion1, order: order, quantity: 2, price: portion1.price_whole.to_i, cents: portion1.price_cents.to_i, note: 'sem cebola')
+      _order_item = OrderItem.create!(portion: portion1, order: order, quantity: 2, price: portion1.price_whole.to_i, cents: portion1.price_cents.to_i, note: 'sem cebola')
       order.update!(total_price: 30.15)
       
       get "/api/v1/restaurants/#{restaurant.alphanumeric_code}/orders/#{order.alphanumeric_code}"
@@ -94,7 +94,7 @@ describe 'Orders API' do
       order = Order.create!(client_name: 'Felipe Marciel', cpf: "#{cpf2}", phone: nil, email: 'felipemarciel@exemple.com',
                     restaurant: restaurant, status: 0)
       
-      order_item = OrderItem.create!(portion: portion1, order: order, quantity: 2, price: portion1.price_whole.to_i, cents: portion1.price_cents.to_i, note: 'sem cebola')
+      _order_item = OrderItem.create!(portion: portion1, order: order, quantity: 2, price: portion1.price_whole.to_i, cents: portion1.price_cents.to_i, note: 'sem cebola')
       order.update!(total_price: 30.15)
      
       get "/api/v1/restaurants/#{restaurant.alphanumeric_code}/orders?status=#{order.status.to_i}"
