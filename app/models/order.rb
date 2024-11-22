@@ -1,14 +1,15 @@
 class Order < ApplicationRecord
+  before_create :generate_code
+
   belongs_to :restaurant
+  has_many :order_items
+  has_many :portions, through: :order_items
+  
   validates :client_name, :restaurant, presence: true
   validates :email,
              format: { with: /\A(.+)@(.+)\z/, message: "Email invalid"  }, allow_blank: true
   validates :phone, length: { minimum: 10, maximum: 11 }, allow_blank:  true
   validate :phone_or_email_present
-  has_many :order_items
-  has_many :portions, through: :order_items
-
-  before_create :generate_code
 
   enum status: { aguardando_confirmacao_cozinha: 0, cancelado: 1, preparação: 2, pronto: 3, entregue: 4 }
 

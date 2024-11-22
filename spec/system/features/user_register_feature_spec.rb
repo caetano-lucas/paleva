@@ -17,12 +17,10 @@ describe 'usuario cadastra uma característica' do
                                     cnpj: cnpj, address: 'Restaurant street, 200', phone: '23456789102',
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id, position: :owner)
-    dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
-    dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
-    dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
-    feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+    _dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
+    _dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
+    _dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
+    _feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
 
     login_as(user)
     visit root_path
@@ -46,11 +44,11 @@ describe 'usuario cadastra uma característica' do
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id, position: :owner)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant )
-    dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
-    dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
+    _dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant )
+    _dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant)
-    feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+    _feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant)
+    _item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
 
     
     login_as(user)
@@ -132,12 +130,12 @@ describe 'usuario cadastra uma característica' do
                                              email: 'usertworestaurant@gmail.com')
     user_two.update!(restaurant_id: restaurant_user_two.id)
     dish1 = Dish.create!(name: 'Macarrão', description: 'Alho e óleo', calories: 700, restaurant: restaurant_user_one )
-    dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant_user_one )
-    dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant_user_one )
+    _dish2 = Dish.create!(name: 'Lasanha', description: 'Camarão com catupiry', calories: 600, restaurant: restaurant_user_one )
+    _dish3 = Dish.create!(name: 'Goiabada', description: 'Mineira', calories: 400, restaurant: restaurant_user_one )
     feature1 = Feature.create!(name: 'Glúten', restaurant: restaurant_user_one)
-    feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant_user_one)
+    _feature2 = Feature.create!(name: 'Alto em açucar', restaurant: restaurant_user_one)
     Feature.create!(name: 'Apimentado', restaurant: restaurant_user_one)
-    item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
+    _item_feature = ItemFeature.create!(feature: feature1, featurable: dish1)
 
     
     login_as(user_one)

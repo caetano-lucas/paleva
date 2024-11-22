@@ -18,3 +18,4 @@ pt-BR:
       save_feature: 'Salvar Característica'
       update_fail: 'Não foi possível atualizar a característica'
       update_success: 'Característica atualizada com sucesso'
+      exist: 'ERRO, Característica já cadastrada'

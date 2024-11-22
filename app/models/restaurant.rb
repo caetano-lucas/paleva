@@ -14,7 +14,7 @@ class Restaurant < ApplicationRecord
   validates :email,
 	          format: { with: /\A(.+)@(.+)\z/, message: "Email invalid"  },
             uniqueness: { case_sensitive: false },
-            length: { minimum: 4, maximum: 254 }
+            length: { minimum: 5, maximum: 254 }
   validates :phone, length: { minimum: 10, maximum: 11 }
 
   before_create :generate_code

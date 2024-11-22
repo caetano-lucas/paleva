@@ -2,15 +2,16 @@
 <p><%= link_to I18n.t('dishes.new_dish'), new_restaurant_dish_path%></p>
 
 <%= form_with(url: restaurant_dishes_path(@restaurant), method: :get, local: true) do %>
-  <h3><%= I18n.t('dishes.filter_by_features')%>:</h3>
-  <% @item_features.each do |item_feature| %>
+  <h3><%= I18n.t('dishes.filter_by_features') %>:</h3>
+  <% @item_features.map(&:feature).uniq.each do |feature| %>
     <div>
-      <%= check_box_tag "feature_ids[]", item_feature.feature.id, params[:feature_ids]&.include?(item_feature.id.to_s) %>
-      <%= label_tag "feature_ids_#{item_feature.feature.id}", item_feature.feature.name %>
+      <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
+      <%= label_tag "feature_ids_#{feature.id}", feature.name %>
     </div>
   <% end %>
   <%= submit_tag I18n.t('.filter') %>
 <% end %>
+
 
 <p><%= link_to I18n.t('dishes.feature_list'), restaurant_features_path %></p>
 <% if @dishes.present? %> 

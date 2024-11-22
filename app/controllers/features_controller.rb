@@ -19,12 +19,17 @@ class FeaturesController < ApplicationController
 
   def create
     @feature = @restaurant.features.build(feature_params)
-    if @feature.save
-      redirect_to restaurant_features_path(@restaurant), notice: I18n.t('features.create_success')
-    else
-      flash.now[:alert] = I18n.t('features.create_fail')
+    if Feature.exists?(name: @feature.name)
+      flash.now[:alert] = I18n.t('features.exist')
       render :new, status: :unprocessable_entity
-    end
+    else
+      if @feature.save
+        redirect_to restaurant_features_path(@restaurant), notice: I18n.t('features.create_success')
+      else
+        flash.now[:alert] = I18n.t('features.create_fail')
+        render :new, status: :unprocessable_entity
+      end
+    end 
   end
 
   def edit

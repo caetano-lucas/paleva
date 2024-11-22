@@ -9,7 +9,7 @@ class Dish < ApplicationRecord
   has_many :menu_items, as: :menu_itemable
   has_many :menus, through: :menu_items
 
-  validates :name, :description, presence: true
+  validates :name, :description, :status, presence: true
   
   enum status: { active: 1, inactive: 0 }
 end

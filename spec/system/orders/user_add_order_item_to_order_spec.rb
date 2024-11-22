@@ -39,10 +39,10 @@ describe 'usuario cadastra um novo pedido' do
                                     email: 'useronerestaurant@gmail.com')
     user.update!(restaurant_id: restaurant.id, position: :owner)
     dish = Dish.create!(name: 'Macarronada', description: 'Carne - provolone', calories: 1800, restaurant: restaurant )
-    drink = Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant)
-    portion1 = Portion.create!(description: 'Meia porção - 3 pessoas', price_whole: 45, price_cents: 99, portionable_type: 'Dish', portionable_id: dish.id) 
+    _drink = Drink.create!(name: 'Coca-cola', description: 'Zero', alcohol: false, restaurant: restaurant)
+    _portion1 = Portion.create!(description: 'Meia porção - 3 pessoas', price_whole: 45, price_cents: 99, portionable_type: 'Dish', portionable_id: dish.id) 
     dinner = Menu.create!(name: 'Jantar', restaurant: restaurant)
-    lunch = Menu.create!(name: 'Almoço', restaurant: restaurant)
+    _lunch = Menu.create!(name: 'Almoço', restaurant: restaurant)
     MenuItem.create!(menu_itemable: dish, menu: dinner )
     cpf2 = CPF.generate(true).split
     Order.create!(client_name: 'Felipe Marciel', cpf: cpf2, phone: nil, email: 'felipemarciel@exemple.com',
