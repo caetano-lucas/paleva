@@ -7,29 +7,29 @@
   </ul>
 <% end %>
 <%= form_with(model: @restaurant) do |f| %>
-  <div>
+  <div class="form-group">
     <%= f.label :trade_name %>
-    <%= f.text_field :trade_name %>
+    <%= f.text_field :trade_name, class:"form-control"%>
   </div>
   <div>
     <%= f.label :legal_name %>
-    <%= f.text_field :legal_name %>
+    <%= f.text_field :legal_name, class:"form-control" %>
   </div>
   <div>
     <%= f.label :cnpj %>
-    <%= f.text_field :cnpj %>
+    <%= f.text_field :cnpj, class:"form-control" %>
   </div>
   <div>
     <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, class:"form-control" %>
   </div>
   <div>
     <%= f.label :phone %>
-    <%= f.text_field :phone %>
+    <%= f.text_field :phone, class:"form-control" %>
   </div>
   <div>
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class:"form-control" %>
   </div>
-  <%= f.submit I18n.t('restaurants.save_restaurant') %>
+  <%= f.submit I18n.t('restaurants.save_restaurant'), class:"btn btn-primary"%>
 <% end %>

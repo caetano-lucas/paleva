@@ -1,25 +1,30 @@
-<h1><%= I18n.t('portions.list_portoin_to')%> <%= @dish.name %></h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('portions.list_portoin_to') %> <%= @dish.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= Portion.human_attribute_name(:description)%></th>
-      <th><%= I18n.t('.price')%></th>
-      <th><%= I18n.t('.action')%></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @portions.each do |portion| %>
+  <table class="table table-bordered">
+    <thead>
       <tr>
-        <td><%= portion.description %></td>
-        <td><%= I18n.t('.number.currency.format.unit')%> <%= portion.price_whole %>,<%= portion.price_cents %></td>
-        <td>
-          <%= link_to I18n.t('.show'), restaurant_dish_portion_path(@restaurant, @dish, portion) %>
-          <%= link_to I18n.t('.edit'), edit_restaurant_dish_portion_path(@restaurant, @dish, portion) %>
-          <%= link_to I18n.t('.exclude'), restaurant_dish_portion_path(@restaurant, @dish, portion), method: :delete, data: { confirm: 'Tem certeza?' } %>
-        </td>
+        <th><%= Portion.human_attribute_name(:description) %></th>
+        <th><%= I18n.t('.price') %></th>
+        <th><%= I18n.t('.action') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<p><%= link_to I18n.t('portions.new_portion'), new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
+    </thead>
+    <tbody>
+      <% @portions.each do |portion| %>
+        <tr>
+          <td><%= portion.description %></td>
+          <td><%= I18n.t('.number.currency.format.unit') %> <%= portion.price_whole %>,<%= portion.price_cents %></td>
+          <td>
+            <%= link_to I18n.t('.show'), restaurant_dish_portion_path(@restaurant, @dish, portion), class: "btn btn-info btn-sm" %>
+            <%= link_to I18n.t('.edit'), edit_restaurant_dish_portion_path(@restaurant, @dish, portion), class: "btn btn-warning btn-sm" %>
+            <%= link_to I18n.t('.exclude'), restaurant_dish_portion_path(@restaurant, @dish, portion), method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <p>
+    <%= link_to I18n.t('portions.new_portion'), new_restaurant_dish_portion_path(@restaurant, @dish), class: "btn btn-primary" %>
+  </p>
+</div>

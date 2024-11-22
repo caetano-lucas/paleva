@@ -1,13 +1,15 @@
-<h1><%= I18n.t('employees.new_employee')%>:</h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('employees.new_employee') %>:</h1>
 
-<%= form_with(model:[@restaurant, @employee]) do |f| %>
-  <div>
-    <%= f.label :email, 'E-mail'%>
-    <%= f.text_field :email %>
-  </div>
-  <div>
-    <%= f.label :cpf, 'CPF'%>
-    <%= f.text_field :cpf %>
-  </div>
-  <%= f.submit I18n.t('employees.save_employee') %>
-<% end %>
+  <%= form_with(model: [@restaurant, @employee]) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, 'E-mail' %>
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :cpf, 'CPF' %>
+      <%= f.text_field :cpf, class: 'form-control' %>
+    </div>
+    <%= f.submit I18n.t('employees.save_employee'), class: 'btn btn-primary' %>
+  <% end %>
+</div>

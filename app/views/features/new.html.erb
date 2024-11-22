@@ -1,15 +1,24 @@
-<h1><%= I18n.t('features.add_info')%>:</h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('features.add_info') %>:</h1>
 
-<% if @feature.errors.any? %>
-  <ul>
-    <% @feature.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @feature.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @feature.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= form_with(model: [@restaurant, @feature], local: true) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, required: true %>
-  <%= f.submit I18n.t('features.save_feature') %>
-<% end %>
+  <%= form_with(model: [@restaurant, @feature], local: true) do |f| %>
+    <div class="form-group mb-3">
+      <%= f.label :name, class: 'form-label' %>
+      <%= f.text_field :name, required: true, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.submit I18n.t('features.save_feature'), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

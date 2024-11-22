@@ -279,7 +279,7 @@ describe 'usuario vê características extras' do
     end
     click_on 'Editar BebidaPrincipal'
 
-    expect(page).to have_content 'Contém: Lactose'
+    expect(page).to have_content 'Lactose'
     expect(page).to have_content 'Adicionar característica'
   end
 end

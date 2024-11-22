@@ -1,24 +1,24 @@
-
-<% if @employees.present? %> 
-  <table>
-    <thead>
-    <tr>
-        <th> ID </th>
-        <th> <%= Dish.human_attribute_name(:email)%> </th>
-        <th> CPF </th>
-    </tr>
-    </thead>
-    <tbody>
-      <% @employees.each do |employee| %>
-      
+<div class="container mt-5">
+  <% if @employees.present? %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= employee.id %> </td>
-          <td><%= employee.email %> </td>
-          <td><%= employee.cpf %> </td>
+          <th>ID</th>
+          <th><%= Dish.human_attribute_name(:email) %></th>
+          <th>CPF</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p><%= I18n.t('employees.no_employee')%></p>
-<% end %>
+      </thead>
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.id %></td>
+            <td><%= employee.email %></td>
+            <td><%= employee.cpf %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= I18n.t('employees.no_employee') %></p>
+  <% end %>
+</div>

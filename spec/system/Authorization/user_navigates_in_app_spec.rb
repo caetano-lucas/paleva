@@ -24,7 +24,7 @@ describe 'usuario nevega pela aplicacao' do
     login_as(user)
     visit root_path
     within('nav') do
-      click_on 'PaLevá'
+      click_on 'userone-restaurant'
     end
 
     expect(current_path).to eq restaurant_menus_path(restaurant)
@@ -38,7 +38,7 @@ describe 'usuario nevega pela aplicacao' do
     login_as(user)
     visit root_path
     within('nav') do
-      click_on 'PaLevá'
+      click_on 'Cadastrar Restaurante'
     end
 
     expect(current_path).to eq new_restaurant_path

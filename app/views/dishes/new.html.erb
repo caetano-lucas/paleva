@@ -1,26 +1,41 @@
-<h1><%= I18n.t('dishes.add_info') %>: </h1>
+<div class="container mt-5">
+  <h1 class="mb-4"><%= I18n.t('dishes.add_info') %>:</h1>
 
-<% if @dish.errors.any? %>
-  <ul>
-    <% @dish.errors.full_messages.each do |msg | %>
-    <li> <%= msg %> </li>
-    <% end %>
-  </ul>
-<% end %>
-
-
-<div>
-  <%= form_with(model: [current_user.restaurant, @dish], local: true) do  |f|  %>
-    <dl>
-      <dt><%= f.label :name%></dt>
-      <dl><%= f.text_field :name %></dl>
-      <dt><%= f.label :description%></dt>
-      <dl><%= f.text_field :description %></dl>
-      <dt><%= f.label :calories%></dt>
-      <dl><%= f.text_field :calories %></dl>
-      <dt><%= f.label :image %></dt>
-      <dl><%= f.file_field :image %></dl>
-    </dl>
-    <%= f.submit I18n.t('dishes.save_dish') %>
+  <% if @dish.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @dish.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+
+  <div class="card p-4 shadow">
+    <%= form_with(model: [current_user.restaurant, @dish], local: true, class: "needs-validation") do |f| %>
+      <div class="form-group">
+        <%= f.label :name, nil, class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, nil, class: "form-label" %>
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :calories, nil, class: "form-label" %>
+        <%= f.text_field :calories, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :image, nil, class: "form-label" %>
+        <%= f.file_field :image, class: "form-control-file" %>
+      </div>
+
+      <div class="mt-3">
+        <%= f.submit I18n.t('dishes.save_dish'), class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
 </div>

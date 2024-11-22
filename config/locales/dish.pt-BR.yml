@@ -13,6 +13,7 @@ pt-BR:
       add_info: 'Adicione as informações do prato'
       add_dishes: 'Adicionar pratos'
       all_dish: 'Pratos Cadastrados'
+      change_status: 'Alterar Status'
       create_fail: 'ALGO DEU ERRADO, PRATO NÃO CADASTRADO'
       create_success: 'Prato cadastrado com sucesso'
       del_dish: 'Deletar prato'
@@ -36,3 +37,4 @@ pt-BR:
       update_dish: 'Alterar Status'
       update_fail: 'Não foi possível atualizar o Prato'
       update_success: 'Prato atualizado com sucesso'
+      select_dishes: 'Adicionar pratos'

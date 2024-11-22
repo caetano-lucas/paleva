@@ -1,35 +1,39 @@
-<ul>
-  
-  <% @orders.each do |order|%>    
-    <li>  
-      <p><%= Order.human_attribute_name(:client_name)%>: <%= order.client_name %> | <%= order.id %></p>
-      <p><%= I18n.t('.contact')%>: <%= order.email %> | <%= order.phone %></p>
-      <p><%= Order.human_attribute_name(:created_at)%>: <%= order.created_at %></p>
-      <p><%= Order.human_attribute_name(:total_price)%>: <%= order.total_price%></p>
-      <p><%= Order.human_attribute_name(:status)%>: <%= order.status%></p>
-    <h4><%= I18n.t('order_items.order_item_list')%></h4>
-      <table>
-        <thead>
-          <tr>
-            <th><%= I18n.t('.item')%></th>
-            <th><%= I18n.t('portions.description_of')%></th>
-            <th><%= I18n.t('.price')%></th>
-            <th><%= OrderItem.human_attribute_name(:quantity)%></th>
-            <th><%= OrderItem.human_attribute_name(:note)%></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% order.order_items.each do |order_item| %>
-          <tr>
-            <td> <%= order_item.portion.portionable.name%></td>
-            <td> <%= order_item.portion.description%></td>
-            <td> <%= order_item.price%>,<%= order_item.cents%></td>
-            <td> <%= order_item.quantity%></td>
-            <td> <%= order_item.note%></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </li>
-  <% end %>
-</ul>
+<div class="container mt-5">
+  <ul class="list-unstyled">
+    <% @orders.each do |order| %>
+      <li class="mb-4">
+        <div class="order-header">
+          <p><strong><%= Order.human_attribute_name(:client_name) %>:</strong> <%= order.client_name %> | <%= order.id %></p>
+          <p><strong><%= I18n.t('.contact') %>:</strong> <%= order.email %> | <%= order.phone %></p>
+          <p><strong><%= Order.human_attribute_name(:created_at) %>:</strong> <%= order.created_at.strftime('%B %d, %Y %H:%M') %></p>
+          <p><strong><%= Order.human_attribute_name(:total_price) %>:</strong> <%= number_to_currency(order.total_price) %></p>
+          <p><strong><%= Order.human_attribute_name(:status) %>:</strong> <%= order.status %></p>
+        </div>
+
+        <h4><%= I18n.t('order_items.order_item_list') %></h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= I18n.t('.item') %></th>
+              <th><%= I18n.t('portions.description_of') %></th>
+              <th><%= I18n.t('.price') %></th>
+              <th><%= OrderItem.human_attribute_name(:quantity) %></th>
+              <th><%= OrderItem.human_attribute_name(:note) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.order_items.each do |order_item| %>
+              <tr>
+                <td><%= order_item.portion.portionable.name %></td>
+                <td><%= order_item.portion.description %></td>
+                <td><%= order_item.price %>,<%= order_item.cents %></td>
+                <td><%= order_item.quantity %></td>
+                <td><%= order_item.note %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,23 +1,29 @@
-<h1><%= I18n.t('operating_hours.create_new_hour')%></h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('operating_hours.create_new_hour') %></h1>
 
-<%= form_with(model: [@restaurant, @operating_hour]) do |form| %>
-  <div>
-    <%= form.label :day %>
-    <%= form.select :day, options_for_select(%w[segunda-feira terça-feira quarta-feira quinta-feira sexta-feira sábado domingo]) %>
-  </div>
-  <div>
-    <%= form.label :open_time %>
-    <%= form.time_select :open_time %>
-  </div>
-  <div>
-    <%= form.label :close_time %>
-    <%= form.time_select :close_time %>
-  </div>
-  <div>
-    <%= form.check_box :closed %>
-    <%= form.label :closed, "#{I18n.t('operating_hours.closed')}" %>
-  </div>
-  <div>
-    <%= form.submit I18n.t('.save') %>
-  </div>
-<% end %>
+  <%= form_with(model: [@restaurant, @operating_hour], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :day, class: "form-label" %>
+      <%= form.select :day, options_for_select(%w[segunda-feira terça-feira quarta-feira quinta-feira sexta-feira sábado domingo]), class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :open_time, class: "form-label" %>
+      <%= form.time_select :open_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :close_time, class: "form-label" %>
+      <%= form.time_select :close_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.check_box :closed, class: "form-check-input" %>
+      <%= form.label :closed, "#{I18n.t('operating_hours.closed')}", class: "form-check-label" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit I18n.t('.save'), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

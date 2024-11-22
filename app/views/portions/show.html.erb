@@ -1,7 +1,16 @@
-<h1><%= I18n.t('portions.datails')%></h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('portions.details') %></h1>
 
-<p><strong><%= Portion.human_attribute_name(:description)%>:</strong> <%= @portion.description %></p>
-<p><strong><%= I18n.t('.price')%>:</strong><%= I18n.t('.number.currency.format.unit')%> <%= @portion.price_whole %>,<%= @portion.price_cents %></p>
+  <div class="mb-3">
+    <p><strong><%= Portion.human_attribute_name(:description) %>:</strong> <%= @portion.description %></p>
+  </div>
 
-<%= link_to I18n.t('.edit'), edit_restaurant_dish_portion_path(@restaurant, @dish, @portion) %>
-<%= link_to I18n.t('portions.back_to_portions'), restaurant_dish_portions_path(@restaurant, @dish) %>
+  <div class="mb-3">
+    <p><strong><%= I18n.t('.price') %>:</strong> <%= I18n.t('.number.currency.format.unit') %> <%= @portion.price_whole %>,<%= @portion.price_cents %></p>
+  </div>
+
+  <div>
+    <%= link_to I18n.t('.edit'), edit_restaurant_dish_portion_path(@restaurant, @dish, @portion), class: 'btn btn-warning btn-sm' %>
+    <%= link_to I18n.t('portions.back_to_portions'), restaurant_dish_portions_path(@restaurant, @dish), class: 'btn btn-secondary btn-sm' %>
+  </div>
+</div>

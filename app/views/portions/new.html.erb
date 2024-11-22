@@ -1,30 +1,34 @@
-<h1><%= I18n.t('portions.add_info')%>:</h1>
+<div class="container mt-5">
+  <h1><%= I18n.t('portions.add_info') %>:</h1>
 
-<% if @portion.errors.any? %>
-  <ul>
-    <% @portion.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @portion.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @portion.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= form_with(model: [@restaurant, @portionable, @portion], local: true) do |f| %>
-  <div>
-    <%= f.label :description, I18n.t('portions.description_of') %>
-    <%= f.text_field :description, required: true, placeholder: I18n.t('portions.exemple_description') %>
-  </div>
+  <%= form_with(model: [@restaurant, @portionable, @portion], local: true) do |f| %>
+    <div class="mb-3">
+      <%= f.label :description, I18n.t('portions.description_of'), class: 'form-label' %>
+      <%= f.text_field :description, required: true, class: 'form-control', placeholder: I18n.t('portions.exemple_description') %>
+    </div>
 
-  <div>
-    <%= f.label :price_whole, "#{I18n.t('.price')} (#{I18n.t('portions.price_whole')} - #{I18n.t('.number.currency.format.unit')})" %>
-    <%= f.number_field :price_whole, required: true, placeholder: "Ex.: 45" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :price_whole, "#{I18n.t('.price')} (#{I18n.t('portions.price_whole')} - #{I18n.t('.number.currency.format.unit')})", class: 'form-label' %>
+      <%= f.number_field :price_whole, required: true, class: 'form-control', placeholder: "Ex.: 45" %>
+    </div>
 
-  <div>
-    <%= f.label :price_cents, "#{I18n.t('.price')} (#{I18n.t('portions.price_cents')})" %>
-    <%= f.number_field :price_cents, required: true, placeholder: I18n.t('portions.exemple_price') %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :price_cents, "#{I18n.t('.price')} (#{I18n.t('portions.price_cents')})", class: 'form-label' %>
+      <%= f.number_field :price_cents, required: true, class: 'form-control', placeholder: I18n.t('portions.exemple_price') %>
+    </div>
 
-  <div>
-    <%= f.submit I18n.t('portions.save_portion') %>
-  </div>
-<% end %>
+    <div>
+      <%= f.submit I18n.t('portions.save_portion'), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

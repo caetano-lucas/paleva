@@ -1,69 +1,70 @@
-<div>
-  <%= link_to I18n.t('orders.new_order'), new_restaurant_order_path(current_user.restaurant) %>
-  <% if current_user.owner? %>
-    <%= link_to I18n.t('menus.new_menus'), new_restaurant_menu_path(current_user.restaurant) %>
-    <%= link_to I18n.t('orders.order_history'), restaurant_orders_path(current_user.restaurant) %>
+<div class="container mt-5">
+  <div class="mb-4">
+    <%= link_to I18n.t('orders.new_order'), new_restaurant_order_path(current_user.restaurant), class: "btn btn-primary" %>
+    <% if current_user.owner? %>
+      <%= link_to I18n.t('menus.new_menus'), new_restaurant_menu_path(current_user.restaurant), class: "btn btn-success" %>
+      <%= link_to I18n.t('orders.order_history'), restaurant_orders_path(current_user.restaurant), class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+
+  <% if @menus.present? %>
+    <div>
+      <ul class="list-unstyled">
+        <% @menus.each do |menu| %>
+          <li class="mb-4">
+            <h3 class="d-inline"><%= menu.name %></h3>
+            <% if current_user.owner? %>
+              <%= link_to "#{I18n.t('menus.add_item_to')} #{menu.name}", edit_restaurant_menu_path(current_user.restaurant, menu.id), class: "btn btn-link" %>
+            <% end %>
+
+            <% menu.dishes.each do |dish| %>
+              <table class="table table-bordered mt-3">
+                <thead class="thead-light">
+                  <tr>
+                    <th colspan="2"><h4><%= dish.name %></h4></th>
+                  </tr>
+                  <tr>
+                    <th><%= I18n.t('portions.description_of') %></th>
+                    <th><%= I18n.t('.price') %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% dish.portions.each do |portion| %>
+                    <tr>
+                      <td><%= portion.description %></td>
+                      <td><%= number_to_currency(portion.price_whole + (portion.price_cents / 100.0)) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+            
+            <% menu.drinks.each do |drink| %>
+              <table class="table table-bordered mt-3">
+                <thead class="thead-light">
+                  <tr>
+                    <th colspan="2"><h4><%= drink.name %></h4></th>
+                  </tr>
+                  <tr>
+                    <th><%= I18n.t('portions.description_of') %></th>
+                    <th><%= I18n.t('.price') %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% drink.portions.each do |portion| %>
+                    <tr>
+                      <td><%= portion.description %></td>
+                      <td><%= number_to_currency(portion.price_whole + (portion.price_cents / 100.0)) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <p><%= I18n.t('menus.no_menus') %></p>
   <% end %>
 </div>
-
-<% if @menus.present?%>
-  <div>
-    <ul>
-      <% @menus.each do |menu| %>
-        <li>
-          <h3> 
-            <%= menu.name %>
-            <% if current_user.owner? %>
-              <%= link_to "#{I18n.t('menus.add_item_to')} #{menu.name}", edit_restaurant_menu_path( current_user.restaurant, menu.id) %>
-            <% end %>
-          </h3>
-         
-          <% menu.dishes.each do |dish| %>
-            <table>
-              <thead>
-                <tr>
-                  <h4><%= dish.name %></h4>
-                  <th><%= I18n.t('portions.description_of')%></th>
-                  <th><%= I18n.t('.price')%></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% dish.portions.each do |portion| %>
-                  <tr>
-                    <td><%= portion.description %></td>
-                    <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <br>
-          <% end %>
-          <br>
-          <% menu.drinks.each do |drink| %>            
-            <table>
-              <thead>
-                <tr>
-                  <h4><%= drink.name %></h4>
-                  <th><%= I18n.t('portions.description_of')%></th>
-                  <th><%= I18n.t('.price')%></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% drink.portions.each do |portion| %>
-                  <tr>
-                    <td><%= portion.description %></td>
-                    <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <br>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% else %>
-  <p><%= I18n.t('menus.no_menus') %></p>
-<% end %>
-

@@ -1,62 +1,64 @@
-<table>
-    <thead>
+<h1><%= @drink.name %> - <%= I18n.t('drinks.details') %></h1>
+
+<table class="table table-bordered">
+  <thead>
     <tr>
-        <th><%= I18n.t('.picture')%> </th>
-        <th><%= Drink.human_attribute_name(:name)%></th>
-        <th><%= Drink.human_attribute_name(:description)%></th>
-        <th><%= I18n.t('drinks.have_alcohol')%></th>
-        <th><%= I18n.t('.contains')%></th>
-        <th><%= Drink.human_attribute_name(:status)%></th>
-        <th><%= I18n.t('.action')%></th>
+      <th><%= I18n.t('.picture') %></th>
+      <th><%= Drink.human_attribute_name(:name) %></th>
+      <th><%= Drink.human_attribute_name(:description) %></th>
+      <th><%= I18n.t('drinks.have_alcohol') %></th>
+      <th><%= I18n.t('.contains') %></th>
+      <th><%= Drink.human_attribute_name(:status) %></th>
+      <th><%= I18n.t('.action') %></th>
     </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>
-            <% if @drink.image.attached? %>
-              <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
-            <% else %>
-              <p><%= I18n.t('.no_img')%></p>
-            <% end %>
-          </td>
-          <td> <%= @drink.name %> </td>
-          <td> <%= @drink.description %> </td>
-          <td> <%= @drink.alcohol ? 'Sim' : 'Não'  %> </td>
-           <td> 
-            <% @drink.features.each do |drink_feature| %>
-              <%= drink_feature.name %>
-            <% end %>
-          </td>
-          <td> <%= I18n.translate(@drink.status) %>
-          </td>
-          <td> <%= button_to 'Alterar Status', change_status_restaurant_drink_path(@restaurant, @drink) %></td>
-          <td> <%= link_to "Editar #{@drink.name}", edit_restaurant_drink_path(current_user.restaurant, @drink) %></td>
-        </tr>
- 
-    </tbody>
-  </table>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <% if @drink.image.attached? %>
+          <%= image_tag @drink.image, size: "100x100", alt: @drink.name, class: 'img-thumbnail' %>
+        <% else %>
+          <p><%= I18n.t('.no_img') %></p>
+        <% end %>
+      </td>
+      <td><%= @drink.name %></td>
+      <td><%= @drink.description %></td>
+      <td><%= @drink.alcohol ? I18n.t('.yes') : I18n.t('.no') %></td>
+      <td>
+        <% @drink.features.each do |drink_feature| %>
+          <%= drink_feature.name %><br>
+        <% end %>
+      </td>
+      <td><%= I18n.t(@drink.status) %></td>
+      <td>
+        <%= button_to I18n.t('drinks.change_status'), change_status_restaurant_drink_path(@restaurant, @drink), class: 'btn btn-warning btn-sm' %>
+        <%= link_to I18n.t('.edit'), edit_restaurant_drink_path(current_user.restaurant, @drink), class: 'btn btn-primary btn-sm' %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <% if @drink.portions.present? %>
-  <h2><%= I18n.t('drinks.portions_list')%>:</h2> 
-    <table>
-      <thead>
+  <h2><%= I18n.t('drinks.portions_list') %>:</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= I18n.t('portions.description_of') %></th>
+        <th><%= I18n.t('.price') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @drink.portions.each do |portion| %>
         <tr>
-          <th><%= I18n.t('portions.description_of')%></th>
-          <th><%= I18n.t('.price')%></th>
+          <td><%= portion.description %></td>
+          <td><%= number_to_currency(portion.price_whole + portion.price_cents / 100.0, unit: I18n.t('.number.currency.format.unit')) %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @drink.portions.each do |portion| %>
-          <tr>
-            <td><%= portion.description %></td>
-            <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
-  <p><%= I18n.t('drinks.no_portion')%>.</p>
+  <p><%= I18n.t('drinks.no_portion') %>.</p>
 <% end %>
 
-<p><%= link_to I18n.t('.portions.add_portion'),new_restaurant_drink_portion_path(@restaurant, @drink) %></p>
-<%= link_to I18n.t('.go_back'), restaurant_drinks_path(@drink.restaurant) %>
+<p><%= link_to I18n.t('.portions.add_portion'), new_restaurant_drink_portion_path(@restaurant, @drink), class: 'btn btn-success' %></p>
+<%= link_to I18n.t('.go_back'), restaurant_drinks_path(@drink.restaurant), class: 'btn btn-secondary' %>

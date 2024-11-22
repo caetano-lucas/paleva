@@ -1,35 +1,65 @@
-<h1><%= I18n.t('drinks.add_info')%>: </h1>
-<% if @drink.errors.any? %>
-  <ul>
-    <% @drink.errors.full_messages.each do |msg | %>
-    <li> <%= msg %> </li>
+<div class="container mt-5">
+  <h1><%= I18n.t('drinks.add_info') %>:</h1>
+
+  <% if @drink.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @drink.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with(model: [current_user.restaurant, @drink], local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, class: "form-label" %>
+      <%= f.text_field :description, class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :alcohol, class: "form-label" %>
+      <%= f.check_box :alcohol, class: "form-check-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label Drink.human_attribute_name(:image), class: "form-label" %>
+      <% if @drink.image.attached? %>
+        <div class="image-preview">
+          <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
+        </div>
+        <%= f.file_field :image, class: "form-control" %>
+      <% else %>
+        <p><%= I18n.t('.no_img') %></p>
+      <% end %>
+    </div>
+
+    <% if @drink.features.any? %>
+      <h5><%= I18n.t('.contains') %>:</h5>
+      <ul>
+        <% @drink.features.each do |drink_feature| %>
+          <li><%= drink_feature.name %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-<%= form_with(model: [current_user.restaurant, @drink]) do |f| %>
-  <ul>
-    <li><%= f.label :name %> <%= f.text_field :name %></li>
-    <li><%= f.label :description%> <%= f.text_field :description %></li>
-    <li><%= f.label :alcohol %> <%= f.check_box :alcohol %></li>
-    <li><%= f.label Drink.human_attribute_name(:image) %> 
-    <% if @drink.image.attached? %> <%= f.file_field :image %>
-      <%= image_tag @drink.image, size: "100x100", alt: @drink.name %>
-    <% else %>
-      <p><%= I18n.t('.no_img')%></p>
-    <% end %></li>
-    <% @drink.features.each do |drink_feature|%>
-      <li><%= I18n.t('.contains')%>: <%= drink_feature.name %></li>
-    <% end %>
-    
-  <p><%= I18n.t('.add_feature')%></p>
-  <div>
-    <% @features.each do |feature| %>
-      <div>
-        <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s) %>
-        <%= label_tag "feature_ids_#{feature.id}", feature.name %>
-      </div>
-    <% end %>
-  </div>
-  <%= f.submit I18n.t('drinks.save_drink')%>
-<% end %>
-  <%= button_to I18n.t('drinks.del_drink'), restaurant_drink_path(current_user.restaurant, @drink ), method: :delete %> 
+
+    <p><%= I18n.t('.add_feature') %>:</p>
+    <div class="form-group">
+      <% @features.each do |feature| %>
+        <div class="form-check">
+          <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s), class: "form-check-input" %>
+          <%= label_tag "feature_ids_#{feature.id}", feature.name, class: "form-check-label" %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= f.submit I18n.t('drinks.save_drink'), class: "btn btn-primary" %>
+  <% end %>
+
+  <%= button_to I18n.t('drinks.del_drink'), restaurant_drink_path(current_user.restaurant, @drink), method: :delete, class: "btn btn-danger mt-3", data: { confirm: I18n.t('drinks.confirm_delete') } %>
+</div>

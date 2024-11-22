@@ -1,24 +1,24 @@
-<h1><%= I18n.t('orders.add_items_to')%>: <%=@order.client_name%></h1>
-<h2><%= Order.human_attribute_name(:id)%>: <%= @order.id %></h2>
+<div class="container mt-5">
+  <h1><%= I18n.t('orders.add_items_to') %>: <%= @order.client_name %></h1>
+  <h2><%= Order.human_attribute_name(:id) %>: <%= @order.id %></h2>
 
-</div>
-<p></p>
-<%= form_with(model: [current_user.restaurant, @order], local: true) do |f| %>
-  <p><%= f.submit I18n.t('orders.save_order') %></p>
-  <div>
-    <ul>
+  <%= form_with(model: [current_user.restaurant, @order], local: true) do |f| %>
+    <p><%= f.submit I18n.t('orders.save_order'), class: 'btn btn-primary' %></p>
+    
+    <div class="menu-list">
       <% @menus.each do |menu| %>
-        <li>
-          <p> <%= menu.name %></p>
+        <div class="menu-item">
+          <p><strong><%= menu.name %></strong></p>
+
           <% menu.dishes.each do |dish| %>
-            <table>
+            <table class="table">
               <thead>
                 <tr>
-                  <th><%= I18n.t('portions.description_of')%></th>
-                  <th><%= I18n.t('.price')%></th>
-                  <th><%= I18n.t('.add')%></th>
-                  <th><%= OrderItem.human_attribute_name(:quantity)%></th>
-                  <th><%= OrderItem.human_attribute_name(:note)%></th>
+                  <th><%= I18n.t('portions.description_of') %></th>
+                  <th><%= I18n.t('.price') %></th>
+                  <th><%= I18n.t('.add') %></th>
+                  <th><%= OrderItem.human_attribute_name(:quantity) %></th>
+                  <th><%= OrderItem.human_attribute_name(:note) %></th>
                 </tr>
               </thead>
               <tbody>
@@ -27,52 +27,52 @@
                     <td><%= dish.name %> <%= portion.description %></td>
                     <td><%= portion.price_whole %>,<%= portion.price_cents %></td>
                     <td>
-                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false %>
+                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false, class: 'form-check-input' %>
                     </td>
                     <td>
-                      <%= number_field_tag "order_item[quantity][#{portion.id}]"%>
+                      <%= number_field_tag "order_item[quantity][#{portion.id}]", nil, class: 'form-control' %>
                     </td>
                     <td>
-                      <%= text_field_tag "order_item[notes][#{portion.id}]" %>
+                      <%= text_field_tag "order_item[notes][#{portion.id}]", nil, class: 'form-control' %>
                     </td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           <% end %>
+
           <% menu.drinks.each do |drink| %>
-            <table>
+            <table class="table">
               <thead>
                 <tr>
-                  <th><%= I18n.t('portions.description_of')%></th>
-                  <th><%= I18n.t('.price')%></th>
-                  <th><%= I18n.t('.add')%></th>
-                  <th><%= OrderItem.human_attribute_name(:quantity)%></th>
-                  <th><%= OrderItem.human_attribute_name(:note)%></th>
+                  <th><%= I18n.t('portions.description_of') %></th>
+                  <th><%= I18n.t('.price') %></th>
+                  <th><%= I18n.t('.add') %></th>
+                  <th><%= OrderItem.human_attribute_name(:quantity) %></th>
+                  <th><%= OrderItem.human_attribute_name(:note) %></th>
                 </tr>
               </thead>
               <tbody>
                 <% drink.portions.each do |portion| %>
                   <tr>
-                    <td> <%= drink.name %><%= portion.description %></td>
+                    <td><%= drink.name %> <%= portion.description %></td>
                     <td><%= portion.price_whole %>,<%= portion.price_cents %></td>
                     <td>
-                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false %>
+                      <%= check_box_tag "order_item[portion_ids][]", portion.id, false, class: 'form-check-input' %>
                     </td>
                     <td>
-                      <%= number_field_tag "order_item[quantity][#{portion.id}]"%>
+                      <%= number_field_tag "order_item[quantity][#{portion.id}]", nil, class: 'form-control' %>
                     </td>
                     <td>
-                      <%= text_field_tag "order_item[notes][#{portion.id}]"%>
+                      <%= text_field_tag "order_item[notes][#{portion.id}]", nil, class: 'form-control' %>
                     </td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           <% end %>
-        </li>
+        </div>
       <% end %>
-    </ul>
-  </div>
-
-<% end %> 
+    </div>
+  <% end %>
+</div>

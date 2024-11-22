@@ -18,50 +18,79 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-        <%= link_to 'PaLevá', root_path%>
-        
-        <% if user_signed_in? %>          
-          <% if current_user.restaurant&.persisted? %>
-            <%= link_to I18n.t('.restaurant'), restaurant_path(current_user.restaurant) %>
-            <% if current_user.owner? %>
-              <%= link_to I18n.t('dishes.all_dish'), restaurant_dishes_path(current_user.restaurant) %>
-              <%= link_to I18n.t('drinks.all_drink'), restaurant_drinks_path(current_user.restaurant) %>
-              <%= link_to I18n.t('operating_hours.hours_list'), restaurant_operating_hours_path(current_user.restaurant) %> 
-
-              <%= form_with(url:  search_restaurant_dishes_path(current_user.restaurant), method: :get ) do |f| %>
-                <%= f.label :query, I18n.t('dishes.search_dish')%>
-                <%= f.text_field :query, id: 'search_dish'%>
-                <%= f.submit I18n.t('dishes.search_dishes')%>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">      
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" 
+              data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" 
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            
+      <div class="navbar-collapse collapse" id="navbarsExampleDefault">
+        <% if user_signed_in? %>
+          <ul class="navbar-nav mr-auto">
+            <% if current_user.restaurant&.persisted? %>
+              <%= link_to "#{current_user.restaurant.trade_name}", root_path, class: "navbar-brand" %>
+              <li class="nav-item active">
+                <%= link_to I18n.t('.restaurant'), restaurant_path(current_user.restaurant), class: "nav-link" %>
+              </li>
+              <% if current_user.owner? %>
+                <li class="nav-item">
+                  <%= link_to I18n.t('dishes.all_dish'), restaurant_dishes_path(current_user.restaurant), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to I18n.t('drinks.all_drink'), restaurant_drinks_path(current_user.restaurant), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to I18n.t('operating_hours.hours_list'), restaurant_operating_hours_path(current_user.restaurant), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= form_with(url: search_restaurant_dishes_path(current_user.restaurant), method: :get, class: "form-inline d-flex") do |f| %>
+                    <%= f.text_field :query, id: 'search_dish', class: "form-control mr-sm-2" %>
+                    <%= f.submit I18n.t('dishes.search_dishes'), class: "btn btn-outline-success my-2 my-sm-0" %>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= form_with(url: search_restaurant_drinks_path(current_user.restaurant), method: :get, class: "form-inline d-flex") do |f| %>
+                    <%= f.text_field :query, id: 'search_drink', class: "form-control mr-sm-2" %>
+                    <%= f.submit I18n.t('drinks.search_drinks'), class: "btn btn-outline-success my-2 my-sm-0" %>
+                  <% end %>
+                </li>
               <% end %>
-
-              <%= form_with(url:  search_restaurant_drinks_path(current_user.restaurant), method: :get ) do |f| %>
-                <%= f.label :query, I18n.t('drinks.search_drink')%>
-                <%= f.text_field :query, id: 'search_drink'%>
-                <%= f.submit I18n.t('drinks.search_drinks')%>
-             <% end %>
+            <% else %>
+              <li class="nav-item active">
+                <%= link_to I18n.t('restaurants.new_restaurant'), new_restaurant_path, class: "nav-link" %>
+              </li>
             <% end %>
-          <% else %>
-            <%= link_to I18n.t('restaurants.new_restaurant'), new_restaurant_path %>
-          <% end %>
-
-          <p>Olá, <%= current_user.first_name %> </p>
-          <%= button_to I18n.t('.exit'),  destroy_user_session_path, method: :delete%>
-          
-         
-
+            <li class="nav-item">
+              <p style="color: #fff; margin: 0; padding: 10px;">
+                <%= "#{I18n.t('.hello')}, #{current_user.first_name}" %>
+              </p>
+            </li>
+            <li class="nav-item">
+              <%= button_to I18n.t('.exit'), destroy_user_session_path, method: :delete, class: "btn btn-outline-success my-2 my-sm-0" %>
+            </li>
+          </ul>
         <% else %>
-          <%= link_to I18n.t('.join'), new_user_session_path%>
+        <%= link_to 'PaLevá', root_path, class: "navbar-brand" %>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to I18n.t('.join'), new_user_session_path, class: "nav-link" %>
+            </li>
+          </ul>
         <% end %>
-      </nav>
-    </header>
-    <main>
-      <div>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
       </div>
+    </nav>
+  </header>
+
+  <main role="main">
+    <div class="jumbotron">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <div class="container">
       <%= yield %>
-    </main>
-  </body>
+    </div>
+  </main>
+</body>
 </html>

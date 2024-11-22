@@ -81,7 +81,7 @@ describe 'usuario registra novas bebidas para seu restaurante' do
     fill_in 'Nome da Bebida', with: 'NomeBebidaTeste'
     fill_in 'Descrição', with: 'DescriçãoBebidaTeste'
     check 'Álcool'
-    click_on 'PaLevá'
+    click_on 'userone-restaurant'
     within('nav') do
       click_on 'Bebidas Cadastradas'
     end

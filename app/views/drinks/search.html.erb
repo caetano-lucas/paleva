@@ -1,27 +1,31 @@
-<h1><%= I18n.t('drinks.drinks_found')%>: <%= @find %></h1>
-<p><%= link_to I18n.t('drinks.new_drink'), new_restaurant_drink_path %></p>
+<h1><%= I18n.t('drinks.drinks_found') %>: <%= @find %></h1>
+
+<p><%= link_to I18n.t('drinks.new_drink'), new_restaurant_drink_path, class: 'btn btn-primary' %></p>
+
 <%= form_with(url: restaurant_drinks_path(@restaurant), method: :get, local: true) do %>
-  <h3><%= I18n.t('drinks.filter_by_features')%>:</h3>
+  <h3><%= I18n.t('drinks.filter_by_features') %>:</h3>
   
   <% @features.each do |feature| %>
-    <div>
-      <%= check_box_tag "feature_ids[]", feature.feature.id, params[:feature_ids]&.include?(feature.feature.id.to_s) %>
-      <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name %>
+    <div class="form-check">
+      <%= check_box_tag "feature_ids[]", feature.feature.id, params[:feature_ids]&.include?(feature.feature.id.to_s), class: 'form-check-input' %>
+      <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name, class: 'form-check-label' %>
     </div>
   <% end %>
-  <%= submit_tag 'Filtrar' %>
+
+  <%= submit_tag I18n.t('.filter'), class: 'btn btn-secondary' %>
 <% end %>
 
-<% if @drinks.present? %> 
-  <table>
+<% if @drinks.present? %>
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= I18n.t('.picture')%> </th>
-        <th><%= Drink.human_attribute_name(:name)%></th>
-        <th><%= Drink.human_attribute_name(:description)%></th>
-        <th><%= I18n.t('.contains')%></th>
-        <th><%= I18n.t('drinks.have_alcohol')%></th>
-        <th><%= Drink.human_attribute_name(:status)%></th>
+        <th><%= I18n.t('.picture') %></th>
+        <th><%= Drink.human_attribute_name(:name) %></th>
+        <th><%= Drink.human_attribute_name(:description) %></th>
+        <th><%= I18n.t('.contains') %></th>
+        <th><%= I18n.t('drinks.have_alcohol') %></th>
+        <th><%= Drink.human_attribute_name(:status) %></th>
+        <th><%= I18n.t('.action') %></th>
       </tr>
     </thead>
     <tbody>
@@ -31,24 +35,26 @@
             <% if drink.image.attached? %>
               <%= image_tag drink.image, size: "100x100", alt: drink.name %>
             <% else %>
-              <p><%= I18n.t('.no_img')%></p>
+              <p><%= I18n.t('.no_img') %></p>
             <% end %>
           </td>
           <td><%= drink.name %></td>
           <td><%= drink.description %></td>
-          <td> 
+          <td>
             <% drink.features.each do |drink_feature| %>
-              <%= drink_feature.name %>
+              <%= drink_feature.name %><br>
             <% end %>
           </td>
-          <td><%= drink.alcohol ? 'Sim': 'Não' %></td>
-          <td> <%= I18n.translate(drink.status) %></td>
-          <td> <%= link_to "#{I18n.t('.details')} #{drink.name}", restaurant_drink_path(current_user.restaurant, drink) %></td>
-          <td><%= link_to " #{I18n.t('.edit')} #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink) %></td>
+          <td><%= drink.alcohol ? I18n.t('.yes') : I18n.t('.no') %></td>
+          <td><%= I18n.t(drink.status) %></td>
+          <td>
+            <%= link_to "#{I18n.t('.details')} #{drink.name}", restaurant_drink_path(current_user.restaurant, drink), class: 'btn btn-info btn-sm' %> |
+            <%= link_to "#{I18n.t('.edit')} #{drink.name}", edit_restaurant_drink_path(current_user.restaurant, drink), class: 'btn btn-warning btn-sm' %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <h1><%= I18n.t('drinks.drinks_not_found')%></h1>
+  <h1><%= I18n.t('drinks.drinks_not_found') %></h1>
 <% end %>

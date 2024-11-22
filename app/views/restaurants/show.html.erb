@@ -1,21 +1,35 @@
-<h3><%= I18n.t('restaurants.details')%></h3>
-  <%= link_to I18n.t('restaurants.new_employee'), new_restaurant_employee_path(@restaurant)%>
+<div class="container mt-5">
   
-  <h4>Dono: <%= @user.first_name%> <%= @user.last_name%> </h4>
- 
-  <dl>
-    <dt><%= Restaurant.human_attribute_name(:trade_name)%>:</dt>
-    <dd><%= @restaurant.trade_name %></dd>
-    <dt><%= Restaurant.human_attribute_name(:legal_name)%>:</dt>
-    <dd><%= @restaurant.legal_name %></dd>
-    <dt><%= Restaurant.human_attribute_name(:cnpj)%>:</dt>
-    <dd><%= @restaurant.cnpj %></dd>
-    <dt><%= Restaurant.human_attribute_name(:address)%>:</dt>
-    <dd><%= @restaurant.address %></dd>
-    <dt><%= Restaurant.human_attribute_name(:phone)%>:</dt>
-    <dd><%= @restaurant.phone %></dd>
-    <dt><%= Restaurant.human_attribute_name(:email)%>:</dt>
-    <dd><%= @restaurant.email %></dd>
-    <dt><%= Restaurant.human_attribute_name(:alphanumeric_code)%>:</dt>
-    <dd><%= @restaurant.alphanumeric_code %></dd>
+  <h3 class="mb-4"><%= I18n.t('restaurants.details') %></h3>
+
+    <div class="mb-3">
+    <%= link_to I18n.t('restaurants.new_employee'), new_restaurant_employee_path(@restaurant), class: "btn btn-primary" %>
+  </div>
+
+    <h4 class="mb-4">
+    <strong><%= I18n.t('restaurants.owner') %>:</strong> <%= @user.first_name %> <%= @user.last_name %>
+  </h4>
+
+    <dl class="row">
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:trade_name) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.trade_name %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:legal_name) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.legal_name %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:cnpj) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.cnpj %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:address) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.address %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:phone) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.phone %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:email) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.email %></dd>
+
+    <dt class="col-sm-4"><%= Restaurant.human_attribute_name(:alphanumeric_code) %>:</dt>
+    <dd class="col-sm-8"><%= @restaurant.alphanumeric_code %></dd>
   </dl>
+</div>

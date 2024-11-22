@@ -1,61 +1,68 @@
-<h1><%= I18n.t('dishes.dish_details')%></h1>
+<div class="container mt-5">
+  <h1 class="mb-4"><%= I18n.t('dishes.dish_details') %></h1>
 
-<table>
-   <thead>
-   <tr>
-       <th><%= Dish.human_attribute_name(:image)%></th>
-       <th><%= Dish.human_attribute_name(:name)%></th>
-       <th><%= Dish.human_attribute_name(:description)%></th>
-       <th><%= Dish.human_attribute_name(:calories)%></th>
-       <th><%= I18n.t('.contains')%></th>
-       <th><%= Dish.human_attribute_name(:status)%></th>
-       <th><%= I18n.t('.action')%></th>
-   </tr>
-   </thead>
-   <tbody>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
       <tr>
-        <td>
-          <% if @dish.image.attached? %>
-            <%= image_tag @dish.image, size: "100x100", alt: @dish.name %>
-          <% else %>
-            <p><%= I18n.t('.no_img')%></p>
-          <% end %>
-        </td>
-        <td> <%= @dish.name %> </td>
-        <td> <%= @dish.description %> </td>
-        <td> <%= @dish.calories %> </td>
-        <td> 
-          <% @dish.features.each do |dish_feature| %>
-            <%= dish_feature.name %>
-          <% end %>
-        </td>
-        <td> <%= I18n.translate(@dish.status) %> </td>
-        <td> <%= button_to I18n.t('dishes.update_dish'), change_status_restaurant_dish_path(@restaurant, @dish) %></td>
-        <td> <%= link_to "#{I18n.t('.edit')} #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish) %></td>
-      </tr>
-   </tbody>
-</table>
-
-<% if @dish.portions.present? %>
-<h2><%= I18n.t('dishes.portions_list')%>:</h2>
-  <table>
-    <thead>
-      <tr>
-        <th><%= I18n.t('.portions.description_of')%></th>
-        <th><%= I18n.t('.price')%></th>
+        <th><%= Dish.human_attribute_name(:image) %></th>
+        <th><%= Dish.human_attribute_name(:name) %></th>
+        <th><%= Dish.human_attribute_name(:description) %></th>
+        <th><%= Dish.human_attribute_name(:calories) %></th>
+        <th><%= I18n.t('.contains') %></th>
+        <th><%= Dish.human_attribute_name(:status) %></th>
+        <th><%= I18n.t('.action') %></th>
       </tr>
     </thead>
     <tbody>
-      <% @dish.portions.each do |portion| %>
-        <tr>
-          <td><%= portion.description %></td>
-          <td><%= portion.price_whole %>,<%= portion.price_cents %> </td>
-        </tr>
-      <% end %>
+      <tr>
+        <td>
+          <% if @dish.image.attached? %>
+            <%= image_tag @dish.image, size: "100x100", alt: @dish.name, class: "img-thumbnail" %>
+          <% else %>
+            <p class="text-muted"><%= I18n.t('.no_img') %></p>
+          <% end %>
+        </td>
+        <td><%= @dish.name %></td>
+        <td><%= @dish.description %></td>
+        <td><%= @dish.calories %></td>
+        <td>
+          <% @dish.features.each do |dish_feature| %>
+            <span class="badge bg-info text-white"><%= dish_feature.name %></span>
+          <% end %>
+        </td>
+        <td><%= I18n.translate(@dish.status) %></td>
+        <td>
+          <%= button_to I18n.t('dishes.update_dish'), change_status_restaurant_dish_path(@restaurant, @dish), class: "btn btn-primary btn-sm" %>
+          <%= link_to "#{I18n.t('.edit')} #{@dish.name}", edit_restaurant_dish_path(current_user.restaurant, @dish), class: "btn btn-warning btn-sm" %>
+        </td>
+      </tr>
     </tbody>
   </table>
-<% else %>
-  <p><%= I18n.t('dishes.no_portion')%>.</p>
-<% end %>
-<p><%= link_to I18n.t('portions.add_portion'),new_restaurant_dish_portion_path(@restaurant, @dish) %></p>
-<%= link_to I18n.t('.go_back'), restaurant_dishes_path(@dish.restaurant) %>
+
+  <% if @dish.portions.present? %>
+    <h2 class="mt-5"><%= I18n.t('dishes.portions_list') %>:</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th><%= I18n.t('.portions.description_of') %></th>
+          <th><%= I18n.t('.price') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @dish.portions.each do |portion| %>
+          <tr>
+            <td><%= portion.description %></td>
+            <td><%= number_to_currency(portion.price_whole + (portion.price_cents / 100.0)) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-muted"><%= I18n.t('dishes.no_portion') %>.</p>
+  <% end %>
+
+  <p>
+    <%= link_to I18n.t('portions.add_portion'), new_restaurant_dish_portion_path(@restaurant, @dish), class: "btn btn-success" %>
+    <%= link_to I18n.t('.go_back'), restaurant_dishes_path(@dish.restaurant), class: "btn btn-secondary" %>
+  </p>
+</div>

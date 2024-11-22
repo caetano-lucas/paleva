@@ -13,6 +13,7 @@ pt-BR:
       add_drinks: 'Adicionar bebidas'
       add_info: 'Adicione as informações da bebida'
       all_drink: 'Bebidas Cadastradas'
+      change_status: 'Alterar Status'
       create_fail: 'ALGO DEU ERRADO, BEBIDA NÃO CADASTRADA'
       create_success: 'Bebida cadastrada com sucesso'
       del_drink: 'Deletar Bebida'
@@ -34,3 +35,4 @@ pt-BR:
       search_drink: 'Buscar Bebida'
       update_fail: 'Não foi possível atualizar a bebida'
       update_success: 'Bebida atualizada com sucesso'
+      select_drinks: 'Adicionar bebidas'
