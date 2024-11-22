@@ -7,7 +7,7 @@
 
   <%= form_with(url: restaurant_dishes_path(@restaurant), method: :get, local: true, class: "mb-4") do %>
     <h3><%= I18n.t('dishes.filter_by_features') %>:</h3>
-    <% @item_features.map(&:feature).uniq.each do |feature| %>
+    <% @item_features.each do |feature| %>
       <div class="form-check">
         <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s), class: "form-check-input" %>
         <%= label_tag "feature_ids_#{feature.id}", feature.name, class: "form-check-label" %>

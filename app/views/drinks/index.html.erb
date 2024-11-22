@@ -8,8 +8,8 @@
     
     <% @features.each do |feature| %>
       <div class="form-check">
-        <%= check_box_tag "feature_ids[]", feature.feature.id, params[:feature_ids]&.include?(feature.feature.id.to_s), class: "form-check-input" %>
-        <%= label_tag "feature_ids_#{feature.feature.id}", feature.feature.name, class: "form-check-label" %>
+        <%= check_box_tag "feature_ids[]", feature.id, params[:feature_ids]&.include?(feature.id.to_s), class: "form-check-input" %>
+        <%= label_tag "feature_ids_#{feature.id}", feature.name, class: "form-check-label" %>
       </div>
     <% end %>
     

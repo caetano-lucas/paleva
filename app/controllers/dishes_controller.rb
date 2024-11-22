@@ -7,7 +7,7 @@ class DishesController < ApplicationController
 
   def index
     @dishes = @restaurant.dishes
-    @item_features = ItemFeature.where(featurable_type: "Dish")
+    @item_features = @restaurant.features
     if params[:feature_ids] 
       @dishes = @dishes.joins(:features).where(features: { id: params[:feature_ids] }).distinct
     end

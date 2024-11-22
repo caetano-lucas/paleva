@@ -36,3 +36,4 @@ pt-BR:
       update_fail: 'Não foi possível atualizar a bebida'
       update_success: 'Bebida atualizada com sucesso'
       select_drinks: 'Adicionar bebidas'
+      details: 'Detalhes'

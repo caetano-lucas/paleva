@@ -6,7 +6,7 @@ class DrinksController < ApplicationController
   before_action :user_is_owner
 
   def index
-    @features = ItemFeature.where(featurable_type: "Drink")
+    @features = @restaurant.features
     @drinks = @restaurant.drinks
     if params[:feature_ids] 
       @drinks = @drinks.joins(:features).where(features: { id: params[:feature_ids] }).distinct
